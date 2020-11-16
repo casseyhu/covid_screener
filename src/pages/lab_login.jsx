@@ -9,8 +9,8 @@ const LabLogin = () => {
             <h1 style={{'margin':'10px'}}>Lab Worker Login</h1>
             <input class='loginInput' type='email' placeholder='email'></input>
             <input class='loginInput' type='password' placeholder='password'></input>
-            <Link to="/lab/collect" className="btn btn-outline-primary" style={{'margin':'10px'}}>Login Collector</Link>
-            <Link to="/lab/home" className="btn btn-outline-primary" style={{'margin':'5px'}}>Lab Login</Link>
+            <Link to="/labtech/collect" className="btn btn-outline-primary" style={{'margin':'10px'}}>Login Collector</Link>
+            <Link to="/labtech/home" className="btn btn-outline-primary" style={{'margin':'5px'}}>Lab Login</Link>
         </div> 
     )
 }

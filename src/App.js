@@ -16,15 +16,15 @@ function App() {
             {/* Let user choose between lab worker login or employee login */}
             <Route exact path="/" component={MainPage}/>
             {/* For lab worker login  */}
-            <Route exact path="/lab" component={LabLogin}/>
+            <Route exact path="/labtech" component={LabLogin}/>
                 {/* When user clicks lab login during login */}
-                <Route exact path="/lab/home" component={LabHome}/>
+                <Route exact path="/labtech/home" component={LabHome}/>
                     {/* When user clicks pool mapping from lab home */}
-                    <Route exact path="/lab/pool" component={PoolMapping}/>
+                    <Route exact path="/labtech/pool" component={PoolMapping}/>
                     {/* When user clicks well testing from lab home */}
-                    <Route exact path="/lab/well" component={WellTesting}/>
+                    <Route exact path="/labtech/well" component={WellTesting}/>
                 {/* When user clicks login collector during login */}
-                <Route exact path="/lab/collect" component={TestCollection}/>
+                <Route exact path="/labtech/collect" component={TestCollection}/>
             {/* For employee login to check results */}
             <Route exact path="/employee" component={EmployeeLogin}/>
                 {/* Display results for employee after login */}
