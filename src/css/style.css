@@ -13,8 +13,7 @@ html, body {
     transition: 0.5s;
 }
 
-
 .loginInput:focus{
-    border: 3px solid #96d2f2;
+    border: 3px solid #91b6ff; /* pretty good blue: #96d2f2 */ 
 }
 
