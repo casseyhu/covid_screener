@@ -7,8 +7,8 @@ const LabLogin = () => {
         <div style={{ 'display':'flex', 'justifyContent':'center', 'alignItems':'center', 
             'height':'100vh', 'flexDirection':'column', 'backgroundColor':'skyblue'}}>
             <h1 style={{'margin':'10px'}}>Lab Worker Login</h1>
-            <input type='email' placeholder='email'></input>
-            <input type='password' placeholder='password'></input>
+            <input class='loginInput' type='email' placeholder='email'></input>
+            <input class='loginInput' type='password' placeholder='password'></input>
             <Link to="/lab/collect" className="btn btn-outline-primary" style={{'margin':'10px'}}>Login Collector</Link>
             <Link to="/lab/home" className="btn btn-outline-primary" style={{'margin':'5px'}}>Lab Login</Link>
         </div> 
