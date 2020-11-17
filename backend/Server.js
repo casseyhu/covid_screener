@@ -44,7 +44,6 @@ app.get('/employee/login', (req, res) => {
             return res.send(result)
         }
     });
-
 })
 
 app.listen(3001, () => {
