@@ -1,13 +1,6 @@
-CREATE SCHEMA covidscreen;
+-- CREATE SCHEMA covidscreen;
 USE covidscreen;
 
-CREATE TABLE User (
-    email VARCHAR(50),
-    pass CHAR(64), -- Using SHA256, always produces 64-len hash
-    employeeID VARCHAR(20),
-    PRIMARY KEY (email, pass),
-    FOREIGN KEY (employeeID) REFERENCES Employee(employeeID)
-)
 
 CREATE TABLE Employee (
 	employeeID VARCHAR(20),
@@ -56,6 +49,16 @@ CREATE TABLE WellTesting (
     CHECK (result IN ('in progress', 'negative', 'positive'))
 );
 
+CREATE TABLE Users (
+    email VARCHAR(50),
+    pass CHAR(64), -- Using SHA256, always produces 64-len hash
+    employeeID VARCHAR(20),
+    PRIMARY KEY (email, pass),
+    FOREIGN KEY (employeeID) REFERENCES Employee(employeeID)
+);
+
+-- USERS
+INSERT INTO Users VALUES ('cassey@gmail.com', 'be178c0543eb17f5f3043021c9e5fcf30285e557a4fc309cce97ff9ca6182912', '101');
 
 -- COLLECTORS
 INSERT INTO Employee VALUES ('200', 'collector1@gmail.com', 'collector1', 'col');
@@ -99,12 +102,3 @@ INSERT INTO PoolMap VALUES ('006', 'P00L3');
 INSERT INTO WellTesting VALUES ('P00L1', 'W001', '2020-11-01 00:00:00', '2020-11-01 23:00:00', 'negative');
 INSERT INTO WellTesting VALUES ('P00L2', 'W002', '2020-11-02 01:00:00', '2020-11-02 10:50:00', 'in progress');
 INSERT INTO WellTesting VALUES ('P00L3', 'W002', '2020-11-05 02:10:00', '2020-11-05 23:50:00', 'positive');
-
-
-
-
-
-
-
-
-
