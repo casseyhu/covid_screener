@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const sha256 = require('js-sha256');
 const app = express();
+
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -29,7 +30,7 @@ app.get('/api/get', (req, res) => {
 app.get('/employee/login', (req, res) => {
     console.log('Email', req.query.email)
     console.log('Password', sha256(req.query.pass))
-    connection.query("SELECT employeeId from User WHERE email = ? AND pass = ?", [
+    connection.query("SELECT employeeId from Users WHERE email = ? AND pass = ?", [
         req.query.email,
         sha256(req.query.pass)  
     ], function(err, result){
