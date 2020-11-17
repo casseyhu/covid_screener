@@ -1,6 +1,14 @@
 CREATE SCHEMA covidscreen;
 USE covidscreen;
 
+CREATE TABLE User (
+    email VARCHAR(50),
+    pass CHAR(64), -- Using SHA256, always produces 64-len hash
+    employeeID VARCHAR(20),
+    PRIMARY KEY (email, pass),
+    FOREIGN KEY (employeeID) REFERENCES Employee(employeeID)
+)
+
 CREATE TABLE Employee (
 	employeeID VARCHAR(20),
     email VARCHAR(50),
