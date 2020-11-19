@@ -24,3 +24,37 @@ html, body {
     align-items: center;
     flex-direction: column;
 }
+
+
+/* TABLES */
+.table-two-col {
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 40px;
+    font-size: 1em;
+    min-width: 700px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+.table-two-col thead tr {
+    background-color: #1bac8f;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+}
+.table-two-col th, td {
+    padding: 10px 15px;
+    vertical-align: middle;
+}
+.table-two-col tbody tr {
+    border-bottom: 1px solid lightgrey;
+}
+.table-two-col tbody tr:nth-of-type(even) {
+    background-color: rgb(250, 250, 250);
+}
+.table-two-col tbody tr:last-of-type {
+    border-bottom: 2px solid #1bac8f;
+}
+
+

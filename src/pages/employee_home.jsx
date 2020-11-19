@@ -26,10 +26,10 @@ class EmployeeHome extends Component {
         var i = 0;
         console.log(employeeID);
         return ( 
-        <div style={{ 'height':'100vh', 'backgroundColor':Constants.BGCOLOR_BLUE, 'textAlign':'center', 'padding':'40px 50px'}}>
+        <div style={{ 'height':'100vh', 'textAlign':'center', 'padding':'40px 50px'}}>
             <h2 > Employee Home </h2>
-            <table style={{'margin':'20px auto', 'marginTop':'40px', 'width':'90%'}} cellPadding='15'>
-                <thead style={{'backgroundColor':'white'}}>
+            <table className='table-two-col'>
+                <thead >
                     <tr>
                         <th scope='col'>Collection Date</th>
                         <th scope='col'>Result</th>

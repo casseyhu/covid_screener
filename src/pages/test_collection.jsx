@@ -22,32 +22,34 @@ const TestCollection = () => {
                 <button type="button" className="btn btn-outline-dark">Add</button>
             </form>
             </div>
-            <table className='table table-hover' style={{'margin':'20px auto', 'width':'90%',}}>
-                <thead style={{'backgroundColor':'#dddcdb'}}>
+            <table className='table-two-col' style={{'margin':'20px auto', 'width':'90%',}}>
+                <thead>
                     <tr>
-                        <th ></th>
+                        <th><button type="button" className="btn btn-outline-light">
+                            {/* Delete */}
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg>
+                        </button></th>
                         <th scope='col'>Employee ID</th>
                         <th scope='col'>Test Barcode</th>
                     </tr>
                 </thead>
                 <tbody style={{'textAlign':'left'}}>
                     <tr>
-                        <td><div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
-                        </div></td>
+                        <td><input type="checkbox" value="" /></td>
                         <td>123</td>
                         <td>456</td>
                     </tr>
                     <tr>
-                        <td><div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
-                        </div></td>
+                        <td><input type="checkbox" value="" /></td>
                         <td>123</td>
                         <td>456</td>
                     </tr>
                 </tbody>
             </table>
-            <button type="button" className="btn btn-outline-danger">Delete</button>
+            {/* <button type="button" className="btn btn-outline-danger">Delete</button> */}
         </div>
         // <div style={{ 'display':'flex', 'justifyContent':'center', 'alignItems':'center', 
         //     'height':'100vh', 'flexDirection':'column', 'backgroundColor':'#c6e3f7'}}>
