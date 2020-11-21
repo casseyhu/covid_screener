@@ -20,29 +20,41 @@ connection.connect(err => {
     if (err) {
         return err
     }
-    console.log('CONNECTED');
+    // console.log('CONNECTED');
 });
 
-app.get('/api/get', (req, res) => {
+app.get('/get/employeeTests', (req, res) => {
+    const SELECT_RESULTS_QUERY = 'SELECT E.collectionTime, W.result \
+        FROM EmployeeTest E, PoolMap P, WellTesting W \
+        WHERE E.testBarcode = P.testBarcode AND P.poolBarcode = W.poolBarcode AND E.employeeID = ?';
+
+    connection.query(SELECT_RESULTS_QUERY, [req.query.employeeID], (err, result) => {
+        if (err) {
+            res.send(null)
+        }
+        else {
+            console.log('Employee results', result)
+            res.send(result)
+        }
+    })
     
 });
 
+// Verify valid login employee login credentials. If valid, return employeeID
 app.get('/employee/login', (req, res) => {
     console.log('Email', req.query.email)
     console.log('Password', sha256(req.query.pass))
     connection.query("SELECT employeeId from Users WHERE email = ? AND pass = ?", [
         req.query.email,
         sha256(req.query.pass)  
-    ], function(err, result){
-        if(err) { 
+    ], (err, result) => {
+        if (err || result === undefined || result.length === 0) { 
             console.log("Error, sending null") 
-            return res.send(null); 
+            res.send(null); 
         } 
-        else{
-            console.log("Result from qry: ", result)
-            if(result === undefined || result.length === 0)
-                return res.send(null)
-            return res.send(result)
+        else {
+            console.log("Employee ID: ", result)
+            res.send(result)
         }
     });
 })

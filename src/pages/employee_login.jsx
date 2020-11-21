@@ -1,4 +1,8 @@
 import React, {Component} from 'react';
+<<<<<<< HEAD
+=======
+import { useForm } from 'react-hook-form';
+>>>>>>> 735fc7af75d0b02c1267b56bd7fc288a68cb8055
 import * as Constants from '../constants';
 import axios from 'axios';
 
@@ -15,6 +19,7 @@ class EmployeeLogin extends Component {
     
     login = (event) => {
         event.preventDefault();
+<<<<<<< HEAD
         console.log("Employee login in with credentials: ", this.state.email, this.state.password);
         axios.get('/employee/login', {params: { email: this.state.email, 
             pass: this.state.password }}).then(response => {
@@ -28,6 +33,25 @@ class EmployeeLogin extends Component {
                     // employee_home page with the correct employee ID from here? 
                     this.props.history.push('/employee/home')
                 }
+=======
+        // console.log("Employee login in with credentials: ", this.state.email, this.state.password);
+        axios.get('/employee/login', {params: { 
+            email: this.state.email, 
+            pass: this.state.password 
+        }}).then(response => {
+            console.log("Query result is: ", response.data[0])
+            if( response.data === '' ){
+                console.log("Null result, can't log in. Make error animation?");
+            }
+            else {
+                // Login was successful, the return should be employee ID. How to load the 
+                // employee_home page with the correct employee ID from here? 
+                this.props.history.push({
+                    pathname: '/employee/home',
+                    employeeID: response.data[0].employeeId
+                })
+            }
+>>>>>>> 735fc7af75d0b02c1267b56bd7fc288a68cb8055
         })
     }
 
