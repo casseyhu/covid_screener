@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import * as Constants from '../constants';
 import axios from 'axios';
 
@@ -10,7 +8,8 @@ class EmployeeLogin extends Component {
         super(props)
         this.state={
             email: '',
-            password: ''
+            password: '',
+            error: 0
         }
     }
     
@@ -20,8 +19,9 @@ class EmployeeLogin extends Component {
         axios.get('/employee/login', {params: { email: this.state.email, 
             pass: this.state.password }}).then(response => {
                 console.log("Query result is: ", response.data[0])
-                if(response.data === '' || response.data.length === undefined || response.data.length === 0){
-                    console.log("Null result, can't log in. Make error animation?");
+                if(response.data === '' || response.data.length === undefined 
+                    || response.data.length === 0){
+                    console.log("memes")
                 }
                 else {
                     // Login was successful, the return should be employee ID. How to load the 
@@ -41,16 +41,32 @@ class EmployeeLogin extends Component {
         this.setState({password : event.target.value});
     }
 
+    backHandler = (event) => {
+        event.preventDefault();
+        console.log("going back!:")
+        this.props.history.goBack();
+    }
+    
     render(){
+        if(this.state.error === 1) {
+
+        }
         return (
             <div style={{ 'display':'flex', 'justifyContent':'center', 'alignItems':'center', 
                 'height':'100vh', 'flexDirection':'column', 'backgroundColor':Constants.BGCOLOR_GREEN}}>
-                <h1 style={{'margin':'10px'}}>Employee Login</h1>
-                <form className='loginForm' onSubmit={this.login}>
-                    <input className='loginInput' type='email' placeholder='email' onChange={this.emailHandler}></input>
-                    <input className='loginInput' type='password' placeholder='password' onChange={this.passwordHandler}></input>
-                    <input type='submit' className="btn btn-outline-primary" value='Login' style={{'margin':'5px'}}></input>
-                </form>
+                <div className="loginBox">
+                    <h1 style={{'margin':'0px 10px 30px 10px'}}>Employee Login</h1>
+                    <form className='loginForm' onSubmit={this.login}>
+                        <input className='loginInput' type='email' placeholder='Email' style={{'margin':'10px'}} onChange={this.emailHandler}></input>
+                        <input className='loginInput' type='password' placeholder='Password' onChange={this.passwordHandler}></input>
+                        <div>
+                            <button type='button' className='btn btn-outline-primary' style={{'margin':'10px', 'width':'80px'}}
+                                onClick={this.backHandler}>Back</button>
+                            <input type='submit' className='btn btn-outline-primary' value='Sign In' 
+                                style={{'margin':'10px', 'width':'80px'}}></input>
+                        </div>    
+                    </form>
+                </div>
             </div> 
         )
     }
