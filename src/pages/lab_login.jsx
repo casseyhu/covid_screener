@@ -19,7 +19,7 @@ class LabLogin extends Component {
         }}).then(response => {
             console.log("Query result is: ", response.data[0])
             if( response.data === '' ){
-                console.log("Null result, can't log in. Make error animation?");
+                this.setState({error : 1});
             }
             else {
                 labID = response.data[0].labID
@@ -60,10 +60,25 @@ class LabLogin extends Component {
         this.props.history.goBack();
     }
 
+    alertDismiss = (event) => { 
+        event.preventDefault();
+        this.setState({error : 0});
+    }
+    
+    renderAlert = () => {
+        if(this.state.error === 0) return null;
+        return (
+            <div className='loginError'>
+                <p style={{'padding':'3px 0px 0px'}}>Invalid email or password.</p>
+                <button style={{'height':'30px', 'width':'25px', 'padding':'0px', 'margin':'0px'}} className='btn btn-outline-light' onClick={this.alertDismiss}>x</button>
+            </div>
+        )
+    }
     render(){
         return (
             <div style={{ 'display':'flex', 'justifyContent':'center', 'alignItems':'center', 
             'height':'100vh', 'flexDirection':'column', 'backgroundColor':Constants.BGCOLOR_GREEN}}>
+                {this.renderAlert()}
                 <div className="loginBox">
                     <h1 style={{'margin':'0px 10px 30px 10px'}}>Lab Worker Login</h1>
                     <form className='loginForm' onSubmit={this.login}>
