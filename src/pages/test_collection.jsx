@@ -10,7 +10,6 @@ class TestCollection extends Component {
 
     componentDidMount() {
         const { labID } = this.props.location
-        console.log(labID)
         axios.get('/get/testCollection', {params: {
             labID: labID
         }}).then((response) => {
