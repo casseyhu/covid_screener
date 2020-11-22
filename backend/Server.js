@@ -42,7 +42,7 @@ app.get('/get/employeeTests', (req, res) => {
 app.get('/employee/login', (req, res) => {
     console.log('Email', req.query.email)
     console.log('Password', sha256(req.query.pass))
-    connection.query("SELECT employeeId from Users WHERE email = ? AND pass = ?", [
+    connection.query("SELECT employeeId from employee WHERE email = ? AND password = ?", [
         req.query.email,
         sha256(req.query.pass)  
     ], (err, result) => {
