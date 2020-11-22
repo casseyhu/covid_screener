@@ -12,37 +12,36 @@ class LabLogin extends Component {
 
     login = (event) => {
         event.preventDefault();
-        // console.log(event.value, event.name, this.state.loginType)
-        const type = this.state.loginType;
-        switch (type) {
-            case 'home':
-                console.log('home login')
-                break
-            case 'collector':
-                console.log('collector login')
-                break
-            default:
-                break
-        }
-
-        // console.log("Employee login in with credentials: ", this.state.email, this.state.password);
-        // axios.get('/employee/login', {params: { 
-        //     email: this.state.email, 
-        //     pass: this.state.password 
-        // }}).then(response => {
-        //     console.log("Query result is: ", response.data[0])
-        //     if( response.data === '' ){
-        //         console.log("Null result, can't log in. Make error animation?");
-        //     }
-        //     else {
-        //         // Login was successful, the return should be employee ID. How to load the 
-        //         // employee_home page with the correct employee ID from here? 
-        //         this.props.history.push({
-        //             pathname: '/labtech/collect',
-        //             employeeID: response.data[0].employeeId
-        //         })
-        //     }
-        // })
+        var labID = '';
+        axios.get('/labemployee/login', {params: { 
+            email: this.state.email, 
+            pass: this.state.password 
+        }}).then(response => {
+            console.log("Query result is: ", response.data[0])
+            if( response.data === '' ){
+                console.log("Null result, can't log in. Make error animation?");
+            }
+            else {
+                labID = response.data[0].labID
+                switch (this.state.loginType) {
+                    case 'home':
+                        console.log(labID)
+                        this.props.history.push({
+                            pathname: '/labtech/home',
+                            labID: labID
+                        })
+                        break
+                    case 'collector':
+                        this.props.history.push({
+                            pathname: '/labtech/collect',
+                            labID: labID
+                        })
+                        break
+                    default:
+                        break
+                }
+            }
+        })
     }
 
 
@@ -63,16 +62,6 @@ class LabLogin extends Component {
 
     render(){
         return (
-            // <div style={{ 'display':'flex', 'justifyContent':'center', 'alignItems':'center', 
-            //     'height':'100vh', 'flexDirection':'column', 'backgroundColor':Constants.BGCOLOR_GREEN}}>
-            //     <div className="loginBox">
-            //         <h1 style={{'margin':'10px'}}>Lab Worker Login</h1>
-            //         <input className='loginInput' type='email' placeholder='Email'></input>
-            //         <input className='loginInput' type='password' placeholder='Password'></input>
-            //         {/* <Link to="/labtech/collect" className="btn btn-outline-primary" style={{'margin':'10px'}}>Login Collector</Link>
-            //         <Link to="/labtech/home" className="btn btn-outline-primary" style={{'margin':'5px'}}>Lab Login</Link> */}
-            //     </div> 
-            // </div>
             <div style={{ 'display':'flex', 'justifyContent':'center', 'alignItems':'center', 
             'height':'100vh', 'flexDirection':'column', 'backgroundColor':Constants.BGCOLOR_GREEN}}>
                 <div className="loginBox">

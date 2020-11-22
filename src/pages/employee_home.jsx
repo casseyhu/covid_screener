@@ -5,26 +5,25 @@ import axios from 'axios';
 
 class EmployeeHome extends Component {
     state = { 
+        employeeID: '',
         results: []
     }
 
     componentDidMount() {
+        const { employeeID } = this.props.location
         axios.get('/get/employeeTests', {params: {
-            // employeeID: this.props.location
-            employeeID: '102'
+            employeeID: employeeID
         }}).then((response) => {
             this.setState({
+                employeeID: employeeID,
                 results: response.data
             })
         });
     }
 
     render() { 
-        // const { employeeID } = this.props.location;
-        const { employeeID } = '102';
-        const { results } = this.state;
+        const { employeeID, results } = this.state;
         var i = 0;
-        console.log(employeeID);
         return ( 
         <div style={{ 'height':'100vh', 'textAlign':'center', 'padding':'40px 50px'}}>
             <h2 > Employee Home </h2>
