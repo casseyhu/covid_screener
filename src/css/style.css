@@ -41,7 +41,7 @@ html, body {
 }
 
 .loginError {
-    background-color: #ff4545;
+    background-color: #ff2e2e;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
