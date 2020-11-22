@@ -20,14 +20,12 @@ connection.connect(err => {
     if (err) {
         return err
     }
-    // console.log('CONNECTED');
 });
 
 app.get('/get/employeeTests', (req, res) => {
     const SELECT_RESULTS_QUERY = 'SELECT E.collectionTime, W.result \
         FROM EmployeeTest E, PoolMap P, WellTesting W \
         WHERE E.testBarcode = P.testBarcode AND P.poolBarcode = W.poolBarcode AND E.employeeID = ?';
-
     connection.query(SELECT_RESULTS_QUERY, [req.query.employeeID], (err, result) => {
         if (err) {
             res.send(null)

@@ -47,7 +47,6 @@ class EmployeeLogin extends Component {
 
     backHandler = (event) => {
         event.preventDefault();
-        console.log("going back!:")
         this.props.history.goBack();
     }
     
@@ -61,10 +60,10 @@ class EmployeeLogin extends Component {
                 <div className="loginBox">
                     <h1 style={{'margin':'0px 10px 30px 10px'}}>Employee Login</h1>
                     <form className='loginForm' onSubmit={this.login}>
-                        <input className='loginInput' type='email' placeholder='Email' style={{'margin':'10px'}} onChange={this.emailHandler}></input>
+                        <input className='loginInput' type='email' placeholder='Email' onChange={this.emailHandler}></input>
                         <input className='loginInput' type='password' placeholder='Password' onChange={this.passwordHandler}></input>
                         <div>
-                            <button type='button' className='btn btn-outline-primary' style={{'margin':'10px', 'width':'80px'}}
+                            <button type='button' className='btn btn-outline-primary' style={{'width':'80px'}}
                                 onClick={this.backHandler}>Back</button>
                             <input type='submit' className='btn btn-outline-primary' value='Sign In' 
                                 style={{'margin':'10px', 'width':'80px'}}></input>
