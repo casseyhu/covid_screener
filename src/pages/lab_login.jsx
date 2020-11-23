@@ -70,7 +70,7 @@ class LabLogin extends Component {
         return (
             <div className='loginError'>
                 <p style={{'padding':'3px 0px 0px'}}>Invalid email or password.</p>
-                <button style={{'height':'30px', 'width':'25px', 'padding':'0px', 'margin':'0px'}} className='btn btn-outline-light' onClick={this.alertDismiss}>x</button>
+                <button style={{'height':'30px', 'width':'30px', 'padding':'0px', 'margin':'0px'}} className='btn btn-outline-light' onClick={this.alertDismiss}>{Constants.DELETE_ICON}</button>
             </div>
         )
     }
@@ -80,7 +80,7 @@ class LabLogin extends Component {
             'height':'100vh', 'flexDirection':'column', 'backgroundColor':Constants.BGCOLOR_GREEN}}>
                 {this.renderAlert()}
                 <div className="loginBox">
-                    <h1 style={{'margin':'0px 10px 30px 10px'}}>Lab Worker Login</h1>
+                    <h1 >Lab Worker Login</h1>
                     <form className='loginForm' onSubmit={this.login}>
                         <input className='loginInput' type='email' placeholder='Email' onChange={this.emailHandler}></input>
                         <input className='loginInput' type='password' placeholder='Password' onChange={this.passwordHandler}></input>

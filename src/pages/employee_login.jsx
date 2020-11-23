@@ -61,7 +61,7 @@ class EmployeeLogin extends Component {
         return (
             <div className='loginError'>
                 <p style={{'padding':'3px 0px 0px'}}>Invalid email or password.</p>
-                <button style={{'height':'30px', 'width':'25px', 'padding':'0px', 'margin':'0px'}} className='btn btn-outline-light' onClick={this.alertDismiss}>x</button>
+                <button style={{'height':'30px', 'width':'30px', 'padding':'0px', 'margin':'0px'}} className='btn btn-outline-light' onClick={this.alertDismiss}>{Constants.DELETE_ICON}</button>
             </div>
         )
     }
@@ -71,15 +71,15 @@ class EmployeeLogin extends Component {
                 'height':'100vh', 'flexDirection':'column', 'backgroundColor':Constants.BGCOLOR_GREEN}}>
                 {this.renderAlert()}
                 <div className="loginBox">
-                    <h1 style={{'margin':'0px 10px 30px 10px'}}>Employee Login</h1>
+                    <h1>Employee Login</h1>
                     <form className='loginForm' onSubmit={this.login}>
                         <input className='loginInput' type='email' placeholder='Email' onChange={this.emailHandler}></input>
                         <input className='loginInput' type='password' placeholder='Password' onChange={this.passwordHandler}></input>
                         <div>
-                            <button type='button' className='btn btn-outline-primary' style={{'width':'80px'}}
+                            <button type='button' className='btn btn-outline-primary' style={{'width':'90px'}}
                                 onClick={this.backHandler}>Back</button>
                             <input type='submit' className='btn btn-outline-primary' value='Sign In' 
-                                style={{'margin':'10px', 'width':'80px'}}></input>
+                                style={{'margin':'10px', 'width':'90px'}}></input>
                         </div>    
                     </form>
                 </div>
