@@ -17,7 +17,6 @@ class LabLogin extends Component {
             email: this.state.email, 
             pass: this.state.password 
         }}).then(response => {
-            console.log("Query result is: ", response.data[0])
             if( response.data === '' ){
                 this.setState({error : 1});
             }

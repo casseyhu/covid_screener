@@ -51,7 +51,7 @@ html, body {
     border-radius: 5px;
     width: 450px;
 
-    /* animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     perspective: 1000px;
@@ -72,7 +72,7 @@ html, body {
   
     40%, 60% {
       transform: translate3d(4px, 0, 0);
-    } */
+    }
 }
 
 .testCollectionForm {
