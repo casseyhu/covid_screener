@@ -24,10 +24,8 @@ class TestCollection extends Component {
             if(labID) labID = JSON.parse(labID);
         }
 
-        axios.get('/get/testCollection', {params: {
-            labID: labID
-        }}).then((response) => {
-            console.log(labID, response.data)
+        axios.get('/get/testCollection').then((response) => {
+            // console.log(labID, response.data)
             this.setState({
                 labID: labID,
                 results: response.data

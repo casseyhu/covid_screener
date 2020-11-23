@@ -93,11 +93,11 @@ app.get('/get/employeeTests', (req, res) => {
     
 });
 
-// Get all tests collected by labID
+// Get all tests collected from the DB.
 app.get('/get/testCollection', (req, res) => {
     if (req.session.loggedin) {
-        const SELECT_RESULTS_QUERY = 'SELECT employeeID, testBarcode FROM EmployeeTest WHERE collectedBy = ?';
-        console.log(SELECT_RESULTS_QUERY, req.query.labID)
+        const SELECT_RESULTS_QUERY = 'SELECT employeeID, testBarcode FROM EmployeeTest';
+        // console.log(SELECT_RESULTS_QUERY, req.query.labID)
         connection.query(SELECT_RESULTS_QUERY, [req.session.user], (err, result) => {
             if (err) {
                 res.send(null)
