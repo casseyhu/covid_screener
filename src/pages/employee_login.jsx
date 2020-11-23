@@ -63,7 +63,8 @@ class EmployeeLogin extends Component {
     }
     render(){
         return (
-            <div className='verticalFlex' style={{ 'height':'100vh', 'backgroundColor':Constants.BGCOLOR_GREEN}}>
+            <div className='verticalFlex main-container' style={{ 'height':'100vh', 'backgroundColor':Constants.BGCOLOR_GREEN}}>
+                <div className='labLogin background'></div>
                 {this.renderAlert()}
                 <div className="loginBox">
                     <h1>Employee Login</h1>

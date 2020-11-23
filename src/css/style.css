@@ -3,12 +3,14 @@ html, body {
     font-family: 'Heebo';
 }
 
-.verticalFlex {
+.verticalFlex, .loginForm, .loginBox, .testCollectionForm {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
+
+
 
 /* Login input styling */
 .loginInput{
@@ -28,18 +30,32 @@ html, body {
 }
 
 .loginForm {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     padding: 10px
 }
 
-.loginBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.main-container {
+    position: relative;
+}
+.main-container .background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.4;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.main {
+    background: url(../images/main.jpg);
+}
+.employeeLogin, .labLogin {
+    background: url(../images/graph.jpg);
+}
+
+.main-container .loginBox {
+    position: relative;
+    z-index: 1;
     width: 450px;
     height: 430px;
     background-color: #f5f5f5;
@@ -84,13 +100,11 @@ html, body {
 }
 
 .testCollectionForm {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     width: 450px;
     height: 180px;
 }
+
+
 
 /* TABLES */
 .table-two-col {

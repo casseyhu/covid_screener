@@ -75,8 +75,8 @@ class LabLogin extends Component {
     }
     render(){
         return (
-            <div style={{ 'display':'flex', 'justifyContent':'center', 'alignItems':'center', 
-            'height':'100vh', 'flexDirection':'column', 'backgroundColor':Constants.BGCOLOR_GREEN}}>
+            <div className='verticalFlex main-container' style={{ 'height':'100vh', 'backgroundColor':Constants.BGCOLOR_GREEN}}>
+                <div className='employeeLogin background'></div>
                 {this.renderAlert()}
                 <div className="loginBox">
                     <h1 >Lab Worker Login</h1>
@@ -87,7 +87,7 @@ class LabLogin extends Component {
                             <button type='button' className='btn btn-outline-primary' style={{'width':'70px'}}
                                 onClick={this.backHandler}>Back</button>
                             <input type='submit' className='btn btn-outline-primary' onClick={() => {
-                                this.setState({loginType:'collector'})}} value='Login Collector' 
+                                this.setState({loginType:'collector'})}} value='Collector Login' 
                                 style={{'margin':'10px', 'width':'130px'}}></input>
                             <input type='submit' className='btn btn-outline-primary' onClick={() => {
                                 this.setState({loginType:'home'})}} 
