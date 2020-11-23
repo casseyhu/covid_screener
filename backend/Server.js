@@ -41,8 +41,7 @@ app.get('/employee/login', (req, res) => {
     ], (err, result) => {
         if (err || result === undefined || result.length === 0) { 
             res.send(null); 
-        } 
-        else {
+        } else {
             req.session.loggedin = true;
             req.session.user = result[0].employeeId;
             console.log("Employee ID: ", req.session.user )
@@ -61,8 +60,7 @@ app.get('/labemployee/login', (req, res) => {
     ], (err, result) => {
         if (err || result === undefined || result.length === 0) { 
             res.send(null); 
-        } 
-        else {
+        } else {
             req.session.loggedin = true;
             req.session.user = result[0].labID;
             console.log("Collector ID: ", req.session.user )
@@ -84,14 +82,12 @@ app.get('/get/employeeTests', (req, res) => {
         connection.query(SELECT_RESULTS_QUERY, [req.session.user], (err, result) => {
             if (err) {
                 res.send(null)
-            }
-            else {
+            } else {
                 console.log('Employee results', result)
                 res.send(result)
             }
         })
-    }
-    else {
+    } else {
         res.send(null)
     }
     
@@ -105,38 +101,54 @@ app.get('/get/testCollection', (req, res) => {
         connection.query(SELECT_RESULTS_QUERY, [req.session.user], (err, result) => {
             if (err) {
                 res.send(null)
-            }
-            else {
+            } else {
                 console.log('Collection results', result)
                 res.send(result)
             }
         })
-    }
-    else {
+    } else {
         res.send(null)
     }
 });
 
 // Adds new test under user with labID
-app.get('/labtect/collect/add', (req, res) => {
-    // console.log("Trying to add new test");
-    if(req.session.loggedin){ // Might not be necessary. Have to be logged in to click add anyways.
-        // console.log("Session is logged in");
+app.post('/labtech/collect/add', (req, res) => {
+    if(req.session.loggedin){ 
         const ADD_TEST_QUERY = 'INSERT INTO EmployeeTest VALUES (?, ?, ?, ?)';
-        connection.query(ADD_TEST_QUERY, [req.query.testBarcode, req.query.employeeID, 
-            req.query.collectionTime, req.query.collectedBy], (err, result) => {
-                if(err) {
-                    res.send(null)
-                }
-                else {
-                    res.send(result)
-                }
-            })
-    }
-    else {
+        connection.query(ADD_TEST_QUERY, [req.body.testBarcode, req.body.employeeID, 
+            req.body.collectionTime, req.body.collectedBy], (err, result) => {
+            if(err) {
+                res.send(null)
+            } else {
+                res.send(result)
+            }
+        })
+    } else {
         res.send(null)
     }
 })
+
+// Removes a test from user with labID
+app.delete('/labtech/collect/delete', (req, res) => {
+    console.log(req.body, req.query, req.data)
+    
+    console.log('loggedin', req.body.employeeID, req.body.testBarcode)
+    const DELETE_TEST_QUERY = 'DELETE FROM EmployeeTest WHERE employeeID = ? AND testBarcode = ?'
+    connection.query(DELETE_TEST_QUERY, [req.body.employeeID, req.body.testBarcode], (err, result) => {
+        if(err) {
+            console.log('error')
+            res.send(null)
+        } else {
+            console.log('DELETED', result)
+            res.send(result)
+        }
+    })
+    // } else {
+    //     console.log('not loggedin')
+    //     res.send(null)
+    // }
+})
+
 
 app.listen(3001, () => {
     console.log('Listening on port 3001');

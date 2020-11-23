@@ -8,25 +8,22 @@ class TestCollection extends Component {
         labID: '',
         results: [],
         employeeID: '',
-        testBarcode: ''
+        testBarcode: '',
+        testsToDelete: []
     }
 
     componentDidMount() {
         let labID = '';
         /* Save the labID to local storage on the first load. */
         if(this.props.location.labID){
-            // console.log("First session load, saving labID to local storage");
             localStorage.setItem('labID', JSON.stringify(this.props.location.labID));
             labID = this.props.location.labID;
-            console.log(labID);
         }
         else {
             labID = localStorage.getItem('labID');
             if(labID) labID = JSON.parse(labID);
-            // console.log("Saved labID load: ", labID);
         }
 
-        // const { labID } = this.props.location
         axios.get('/get/testCollection', {params: {
             labID: labID
         }}).then((response) => {
@@ -38,15 +35,26 @@ class TestCollection extends Component {
         });
     }
 
-    employeeIdHandler = (event) => {
-        event.preventDefault();
-        this.setState({employeeID: event.target.value});
-        console.log(this.state.employeeID)
+    inputHandler = (event) => {
+        switch (event.target.id) {
+            case ('employeeID'):
+                this.setState({employeeID: event.target.value});
+                break
+            case ('testBarcode'):
+                this.setState({testBarcode: event.target.value});
+                break
+            default:
+                break
+        }
     }
 
-    testBarcodeHandler = (event) => {
-        event.preventDefault();
-        this.setState({testBarcode: event.target.value});
+    checkHandler = (event) => {
+        if (event.target.checked) {
+            this.state.testsToDelete.push(event.target.name)
+        } else {
+            this.state.testsToDelete = this.state.testsToDelete.filter(obj => obj !== event.target.name);
+        }
+        console.log(this.state.testsToDelete)
     }
 
     /* Adding new Test Collection to EmployeeTest and display */
@@ -54,15 +62,12 @@ class TestCollection extends Component {
     /* testBarcode && employeeId: User input | collectionTime: day.now() | collectedBy: this.state.labId */
     addTest = (event) => {
         event.preventDefault();
-        console.log(moment().format('YYYY-MM-DD hh:mm:ss'));
-        axios.get('/labtect/collect/add', {params: {
+        axios.post('/labtech/collect/add', {
             testBarcode: this.state.testBarcode,
             employeeID: this.state.employeeID,
             collectionTime: moment().format('YYYY-MM-DD hh:mm:ss'),
             collectedBy: this.state.labID
-        }}).then((response) => {
-            console.log(response);
-
+        }).then((response) => {
             /* RELOAD AND RERENDER THE PAGE TO SHOW THE NEWLY ADDED TEST */
             axios.get('/get/testCollection', {params: {
                 labID: this.state.labID
@@ -72,9 +77,32 @@ class TestCollection extends Component {
                     results: response.data
                 })
             });
-            
         })
+    }
 
+    removeTest = (event) => {
+        const tests = this.state.testsToDelete;
+        for (var i = 0; i < tests.length; i++) {
+            const testField = tests[i].split(" ");
+            console.log(testField[0].toString(), testField[1])
+            axios.delete('/labtech/collect/delete', { data: {
+                employeeID: testField[0].toString(),
+                testBarcode: testField[1]
+            }}).then((response) => {
+                console.log('...')
+            })
+        }
+        this.setState({
+            testsToDelete: []
+        })
+        axios.get('/get/testCollection', {params: {
+            labID: this.state.labID
+        }}).then((response) => {
+            this.setState({
+                labID: this.state.labID,
+                results: response.data
+            })
+        });
     }
 
     render() {
@@ -87,22 +115,22 @@ class TestCollection extends Component {
                     <div className='form-group row' >
                         <label htmlFor='employeeID' className="form-label" style={{'minWidth':'30%'}}>Employee ID</label>
                         <div className="col" >
-                            <input type='text' className="form-control" id='employeeID' placeholder='000' onChange={this.employeeIdHandler}/>
+                            <input type='text' className="form-control" id='employeeID' placeholder='000' onChange={this.inputHandler}/>
                         </div>
                     </div>
                     <div className='form-group row'>
                         <label htmlFor='testBarcode' className="form-label" style={{'minWidth':'30%'}}>Test Barcode</label>
                         <div className="col" >
-                            <input type='text' className="form-control" id='testBarcode' placeholder='000' onChange={this.testBarcodeHandler}/>
+                            <input type='text' className="form-control" id='testBarcode' placeholder='000' onChange={this.inputHandler}/>
                         </div>
                     </div>
                     <input type="submit" className="btn btn-outline-dark" onClick={this.addTest} value="Add"></input>
                 </form>
                 </div>
-                <table className='table-two-col' style={{'margin':'20px auto', 'width':'90%',}}>
+                <table className='table-two-col' style={{'margin':'20px auto'}}>
                     <thead>
                         <tr>
-                            <th><button type="button" className="btn btn-outline-light">
+                            <th><button type="button" className="btn btn-outline-light" onClick={this.removeTest}>
                                 {Constants.TRASH_ICON}
                             </button></th>
                             <th scope='col'>Employee ID</th>
@@ -112,8 +140,8 @@ class TestCollection extends Component {
                     <tbody style={{'textAlign':'left'}}>
                         {results.map(res => {
                             return (
-                                <tr key={res.employeeID+res.testBarcode}>
-                                    <td><input type="checkbox" value="" /></td>
+                                <tr key={`${res.employeeID} ${res.testBarcode}`}>
+                                    <td><input type="checkbox" name={`${res.employeeID} ${res.testBarcode}`} onChange={this.checkHandler}/></td>
                                     <td>{res.employeeID}</td>
                                     <td>{res.testBarcode}</td>
                                 </tr>

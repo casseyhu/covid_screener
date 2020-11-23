@@ -42,15 +42,15 @@ html, body {
     right: 0;
     bottom: 0;
     left: 0;
-    opacity: 0.4;
     background-size: cover;
     background-repeat: no-repeat;
 }
 .main {
-    background: url(../images/main.jpg);
+    background: url(../images/polygon.jpg);
 }
 .employeeLogin, .labLogin {
     background: url(../images/graph.jpg);
+    opacity: 0.4;
 }
 
 .main-container .loginBox {
@@ -112,10 +112,11 @@ html, body {
     margin: auto;
     margin-top: 40px;
     font-size: 1em;
-    min-width: 700px;
-    border-radius: 8px;
+    width: 800px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 .table-two-col thead tr {
     /* c4adc9 */
