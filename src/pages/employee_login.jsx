@@ -15,7 +15,6 @@ class EmployeeLogin extends Component {
     
     login = (event) => {
         event.preventDefault();
-        // console.log("Employee login in with credentials: ", this.state.email, this.state.password);
         axios.get('/employee/login', {params: { 
             email: this.state.email, 
             pass: this.state.password 
@@ -67,8 +66,7 @@ class EmployeeLogin extends Component {
     }
     render(){
         return (
-            <div style={{ 'display':'flex', 'justifyContent':'center', 'alignItems':'center', 
-                'height':'100vh', 'flexDirection':'column', 'backgroundColor':Constants.BGCOLOR_GREEN}}>
+            <div className='verticalFlex' style={{ 'height':'100vh', 'backgroundColor':Constants.BGCOLOR_GREEN}}>
                 {this.renderAlert()}
                 <div className="loginBox">
                     <h1>Employee Login</h1>

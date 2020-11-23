@@ -4,14 +4,10 @@ import * as Constants from '../constants';
 
 
 class MainPage extends Component {
-    checkLoginStatus() {
-
-    }
 
     render() {
         return (
-            <div style={{ 'display':'flex', 'justifyContent':'center', 'alignItems':'center', 
-                'height':'100vh', 'flexDirection':'column', 'backgroundColor':Constants.BGCOLOR_MILKCOFFEE}}>
+            <div className='verticalFlex' style={{ 'height':'100vh', 'backgroundColor':Constants.BGCOLOR_MILKCOFFEE}}>
                 <div className="loginBox">
                     <h1 style={{'margin':'10px'}}>I AM ...</h1>
                     <Link to="/labtech" className="btn btn-outline-primary" style={{'margin':'10px', 'width':'130px'}}>Lab Worker</Link>

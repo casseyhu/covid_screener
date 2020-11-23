@@ -3,6 +3,13 @@ html, body {
     font-family: 'Heebo';
 }
 
+.verticalFlex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 /* Login input styling */
 .loginInput{
     margin: 10px;
@@ -97,7 +104,8 @@ html, body {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 .table-two-col thead tr {
-    background-color: #1bac8f;
+    /* c4adc9 */
+    background-color: #6bc2c5;
     color: white;
     text-align: left;
     font-weight: bold;
@@ -113,5 +121,5 @@ html, body {
     background-color: rgb(250, 250, 250);
 }
 .table-two-col tbody tr:last-of-type {
-    border-bottom: 2px solid #b7dadd;
+    border-bottom: 2px solid #6bc2c5;
 }

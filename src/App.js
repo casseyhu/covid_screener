@@ -11,14 +11,7 @@ import EmployeeHome from './pages/employee_home';
 
 
 class App extends Component {
-    state = {
-        loggedIn: 'NOT_LOGGED_IN',
-        user: {}
-    }
-    checkLoginStatus() {
-
-    }
-
+    
     render() {
         return (
         <BrowserRouter>
