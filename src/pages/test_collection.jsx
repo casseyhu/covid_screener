@@ -9,15 +9,39 @@ class TestCollection extends Component {
     }
 
     componentDidMount() {
-        const { labID } = this.props.location
+        let labID = '';
+        /* Save the labID to local storage on the first load. */
+        if(this.props.location.labID){
+            // console.log("First session load, saving labID to local storage");
+            localStorage.setItem('labID', JSON.stringify(this.props.location.labID));
+            labID = this.props.location.labID;
+            console.log(labID);
+        }
+        else {
+            labID = localStorage.getItem('labID');
+            if(labID) labID = JSON.parse(labID);
+            // console.log("Saved labID load: ", labID);
+        }
+
+        // const { labID } = this.props.location
         axios.get('/get/testCollection', {params: {
             labID: labID
         }}).then((response) => {
+            console.log(labID, response.data)
             this.setState({
                 labID: labID,
                 results: response.data
             })
         });
+    }
+
+    /* Adding new Test Collection to EmployeeTest and display */
+    /* EmployeeTest values: testBarcode, employeeID, collectionTime, collectedBy */
+    /* testBarcode && employeeId: User input | collectionTime: day.now() | collectedBy: this.state.labId */
+    addTest = (event) => {
+        event.preventDefault();
+        console.log(this.state.labID) 
+
     }
 
     render() {
@@ -39,7 +63,7 @@ class TestCollection extends Component {
                             <input type='text' className="form-control" id='testBarcode' placeholder='000'/>
                         </div>
                     </div>
-                    <button type="button" className="btn btn-outline-dark">Add</button>
+                    <input type="submit" className="btn btn-outline-dark" onClick={this.addTest} value="Add"></input>
                 </form>
                 </div>
                 <table className='table-two-col' style={{'margin':'20px auto', 'width':'90%',}}>
