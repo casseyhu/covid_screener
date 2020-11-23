@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import * as Constants from '../constants';
 import axios from 'axios';
+import moment from 'moment';
 
 class TestCollection extends Component {
     state = {
         labID: '',
-        results: []
+        results: [],
+        employeeID: '',
+        testBarcode: ''
     }
 
     componentDidMount() {
@@ -35,12 +38,42 @@ class TestCollection extends Component {
         });
     }
 
+    employeeIdHandler = (event) => {
+        event.preventDefault();
+        this.setState({employeeID: event.target.value});
+        console.log(this.state.employeeID)
+    }
+
+    testBarcodeHandler = (event) => {
+        event.preventDefault();
+        this.setState({testBarcode: event.target.value});
+    }
+
     /* Adding new Test Collection to EmployeeTest and display */
     /* EmployeeTest values: testBarcode, employeeID, collectionTime, collectedBy */
     /* testBarcode && employeeId: User input | collectionTime: day.now() | collectedBy: this.state.labId */
     addTest = (event) => {
         event.preventDefault();
-        console.log(this.state.labID) 
+        console.log(moment().format('YYYY-MM-DD hh:mm:ss'));
+        axios.get('/labtect/collect/add', {params: {
+            testBarcode: this.state.testBarcode,
+            employeeID: this.state.employeeID,
+            collectionTime: moment().format('YYYY-MM-DD hh:mm:ss'),
+            collectedBy: this.state.labID
+        }}).then((response) => {
+            console.log(response);
+
+            /* RELOAD AND RERENDER THE PAGE TO SHOW THE NEWLY ADDED TEST */
+            axios.get('/get/testCollection', {params: {
+                labID: this.state.labID
+            }}).then((response) => {
+                this.setState({
+                    labID: this.state.labID,
+                    results: response.data
+                })
+            });
+            
+        })
 
     }
 
@@ -54,13 +87,13 @@ class TestCollection extends Component {
                     <div className='form-group row' >
                         <label htmlFor='employeeID' className="form-label" style={{'minWidth':'30%'}}>Employee ID</label>
                         <div className="col" >
-                            <input type='text' className="form-control" id='employeeID' placeholder='000'/>
+                            <input type='text' className="form-control" id='employeeID' placeholder='000' onChange={this.employeeIdHandler}/>
                         </div>
                     </div>
                     <div className='form-group row'>
                         <label htmlFor='testBarcode' className="form-label" style={{'minWidth':'30%'}}>Test Barcode</label>
                         <div className="col" >
-                            <input type='text' className="form-control" id='testBarcode' placeholder='000'/>
+                            <input type='text' className="form-control" id='testBarcode' placeholder='000' onChange={this.testBarcodeHandler}/>
                         </div>
                     </div>
                     <input type="submit" className="btn btn-outline-dark" onClick={this.addTest} value="Add"></input>

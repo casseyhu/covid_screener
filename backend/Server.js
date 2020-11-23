@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const sha256 = require('js-sha256');
 const session = require('express-session');
+const e = require('express');
 const app = express();
 
 app.use(express.json());
@@ -116,7 +117,26 @@ app.get('/get/testCollection', (req, res) => {
     }
 });
 
-
+// Adds new test under user with labID
+app.get('/labtect/collect/add', (req, res) => {
+    // console.log("Trying to add new test");
+    if(req.session.loggedin){ // Might not be necessary. Have to be logged in to click add anyways.
+        // console.log("Session is logged in");
+        const ADD_TEST_QUERY = 'INSERT INTO EmployeeTest VALUES (?, ?, ?, ?)';
+        connection.query(ADD_TEST_QUERY, [req.query.testBarcode, req.query.employeeID, 
+            req.query.collectionTime, req.query.collectedBy], (err, result) => {
+                if(err) {
+                    res.send(null)
+                }
+                else {
+                    res.send(result)
+                }
+            })
+    }
+    else {
+        res.send(null)
+    }
+})
 
 app.listen(3001, () => {
     console.log('Listening on port 3001');
