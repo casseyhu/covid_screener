@@ -118,6 +118,7 @@ app.post('/labtech/collect/add', (req, res) => {
         connection.query(ADD_TEST_QUERY, [req.body.testBarcode, req.body.employeeID, 
             req.body.collectionTime, req.body.collectedBy], (err, result) => {
             if(err) {
+                console.log(err)
                 res.send(null)
             } else {
                 res.send(result)

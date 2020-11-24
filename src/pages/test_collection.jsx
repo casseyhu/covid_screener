@@ -66,6 +66,7 @@ class TestCollection extends Component {
             collectionTime: moment().format('YYYY-MM-DD hh:mm:ss'),
             collectedBy: this.state.labID
         }).then((response) => {
+            console.log(response)
             /* RELOAD AND RERENDER THE PAGE TO SHOW THE NEWLY ADDED TEST */
             axios.get('/get/testCollection', {params: {
                 labID: this.state.labID
@@ -106,20 +107,20 @@ class TestCollection extends Component {
     render() {
         const { results } = this.state;
         return (
-            <div style={{'height':'100vh', 'backgroundColor':'white', 'textAlign':'center', 'padding':'40px 50px'}}>
+            <div style={{'height':'100vh', 'backgroundColor':'white', 'textAlign':'center', 'padding':'30px 50px'}}>
                 <h2> Test Collection </h2>
                 <div className='loginForm' >
                 <form className='testCollectionForm'>
-                    <div className='form-group row' >
-                        <label htmlFor='employeeID' className="form-label" style={{'minWidth':'30%'}}>Employee ID</label>
-                        <div className="col" >
-                            <input type='text' className="form-control" id='employeeID' placeholder='000' onChange={this.inputHandler}/>
+                    <div className='form-group row' style={{'margin':'0px', 'padding':'0px'}} >
+                        <div className='input-field col s6' style={{'width':'300px'}}>
+                            <input type='text' className='validate' id='employeeID' autoComplete='off' placeholder='000' onChange={this.inputHandler}/>
+                            <label htmlFor='employeeID' className='active' style={{'minWidth':'30%'}}>Employee ID</label>
                         </div>
                     </div>
-                    <div className='form-group row'>
-                        <label htmlFor='testBarcode' className="form-label" style={{'minWidth':'30%'}}>Test Barcode</label>
-                        <div className="col" >
-                            <input type='text' className="form-control" id='testBarcode' placeholder='000' onChange={this.inputHandler}/>
+                    <div className='form-group row' style={{'margin':'0px', 'padding':'0px'}}>
+                        <div className='input-field col s6' style={{'width':'300px'}}>
+                            <input type='text' className='validate' id='testBarcode' autoComplete='off' placeholder='000' onChange={this.inputHandler}/>
+                            <label htmlFor='testBarcode' className='active' style={{'minWidth':'30%'}}>Test Barcode</label>
                         </div>
                     </div>
                     <input type="submit" className="btn btn-outline-dark" onClick={this.addTest} value="Add"></input>
@@ -139,7 +140,12 @@ class TestCollection extends Component {
                         {results.map(res => {
                             return (
                                 <tr key={`${res.employeeID} ${res.testBarcode}`}>
-                                    <td><input type="checkbox" name={`${res.employeeID} ${res.testBarcode}`} onChange={this.checkHandler}/></td>
+                                    <td>
+                                        <label style={{'margin':'10px 10px 0px'}}>
+                                        <input type='checkbox' className='filled-in' name={`${res.employeeID} ${res.testBarcode}`} onChange={this.checkHandler}/>
+                                        <span></span>
+                                        </label>
+                                    </td>
                                     <td>{res.employeeID}</td>
                                     <td>{res.testBarcode}</td>
                                 </tr>

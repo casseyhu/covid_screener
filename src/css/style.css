@@ -3,6 +3,10 @@ html, body {
     font-family: 'Heebo';
 }
 
+h2{
+    font-size: 45px;
+}
+
 .verticalFlex, .loginForm, .loginBox, .testCollectionForm {
     display: flex;
     justify-content: center;
@@ -10,7 +14,9 @@ html, body {
     flex-direction: column;
 }
 
-
+.loginForm{
+    width: 90%;
+}
 
 /* Login input styling */
 .loginInput{
@@ -101,7 +107,8 @@ html, body {
 
 .testCollectionForm {
     width: 450px;
-    height: 180px;
+    height: 200px;
+    margin: 0px;
 }
 
 

@@ -10,7 +10,7 @@ class MainPage extends Component {
             <div className='verticalFlex main-container' style={{ height:'100vh', backgroundColor:Constants.BGCOLOR_MILKCOFFEE}}>
                 <div className='main background'></div>
                 <div className="loginBox">
-                    <h1 style={{'margin':'10px'}}>I AM ...</h1>
+                    <h2 style={{'margin':'10px'}}>I AM ...</h2>
                     <Link to="/labtech" className="btn btn-outline-primary" style={{'margin':'10px', 'width':'130px'}}>Lab Worker</Link>
                     <Link to="/employee" className="btn btn-outline-primary" style={{'margin':'10px', 'width':'130px'}}>Employee</Link>
                 </div>

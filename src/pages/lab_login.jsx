@@ -70,6 +70,7 @@ class LabLogin extends Component {
             <div className='loginError'>
                 <p style={{'padding':'3px 0px 0px'}}>Invalid email or password.</p>
                 <button style={{'height':'30px', 'width':'30px', 'padding':'0px', 'margin':'0px'}} className='btn btn-outline-light' onClick={this.alertDismiss}>{Constants.DELETE_ICON}</button>
+                {/* <a class="waves-effect waves-light btn" style={{'height':'30px', 'width':'30px', 'padding':'0px', 'margin':'0px'}} onClick={this.alertDismiss}>X</a> */}
             </div>
         )
     }
@@ -79,19 +80,25 @@ class LabLogin extends Component {
                 <div className='employeeLogin background'></div>
                 {this.renderAlert()}
                 <div className="loginBox">
-                    <h1 >Lab Worker Login</h1>
+                    <h2>Lab Worker Login</h2>
                     <form className='loginForm' onSubmit={this.login}>
-                        <input className='loginInput' type='email' placeholder='Email' onChange={this.emailHandler}></input>
-                        <input className='loginInput' type='password' placeholder='Password' onChange={this.passwordHandler}></input>
+                        <div class="input-field col s12">
+                            <input className='loginInput' id='email' type='email' onChange={this.emailHandler}></input>
+                            <label htmlFor='email'>Email</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input className='loginInput' id='password' type='password' onChange={this.passwordHandler}></input>
+                            <label htmlFor='password'>Password</label>
+                        </div>
                         <div>
                             <button type='button' className='btn btn-outline-primary' style={{'width':'70px'}}
                                 onClick={this.backHandler}>Back</button>
                             <input type='submit' className='btn btn-outline-primary' onClick={() => {
                                 this.setState({loginType:'collector'})}} value='Collector Login' 
-                                style={{'margin':'10px', 'width':'130px'}}></input>
+                                style={{'margin':'10px'}}></input>
                             <input type='submit' className='btn btn-outline-primary' onClick={() => {
                                 this.setState({loginType:'home'})}} 
-                                value='Lab Login' style={{'width':'100px'}}></input>
+                                value='Lab Login'></input>
                         </div>    
                     </form>
                 </div>
