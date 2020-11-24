@@ -17,14 +17,12 @@ class LabLogin extends Component {
             email: this.state.email, 
             pass: this.state.password 
         }}).then(response => {
-            if( response.data === '' ){
+            if ( response.data === '' ){
                 this.setState({error : 1});
-            }
-            else {
+            } else {
                 labID = response.data[0].labID
                 switch (this.state.loginType) {
                     case 'home':
-                        console.log(labID)
                         this.props.history.push({
                             pathname: '/labtech/home',
                             labID: labID
@@ -45,12 +43,10 @@ class LabLogin extends Component {
 
 
     emailHandler = (event) => {
-        event.preventDefault();
         this.setState({email : event.target.value});
     }
 
     passwordHandler = (event) => {
-        event.preventDefault();
         this.setState({password : event.target.value});
     }
 
@@ -70,35 +66,26 @@ class LabLogin extends Component {
             <div className='loginError'>
                 <p style={{'padding':'3px 0px 0px'}}>Invalid email or password.</p>
                 <button style={{'height':'30px', 'width':'30px', 'padding':'0px', 'margin':'0px'}} className='btn btn-outline-light' onClick={this.alertDismiss}>{Constants.DELETE_ICON}</button>
-                {/* <a class="waves-effect waves-light btn" style={{'height':'30px', 'width':'30px', 'padding':'0px', 'margin':'0px'}} onClick={this.alertDismiss}>X</a> */}
             </div>
         )
     }
     render(){
         return (
-            <div className='verticalFlex main-container' style={{ 'height':'100vh', 'backgroundColor':Constants.BGCOLOR_GREEN}}>
-                <div className='employeeLogin background'></div>
+            <div className='verticalFlex main-container'>
+                <div className='LoginBackground background'></div>
                 {this.renderAlert()}
                 <div className="loginBox">
                     <h2>Lab Worker Login</h2>
                     <form className='loginForm' onSubmit={this.login}>
-                        <div class="input-field col s12">
-                            <input className='loginInput' id='email' type='email' onChange={this.emailHandler}></input>
-                            <label htmlFor='email'>Email</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <input className='loginInput' id='password' type='password' onChange={this.passwordHandler}></input>
-                            <label htmlFor='password'>Password</label>
-                        </div>
+                        <input className='loginInput' type='email' placeholder='Email' onChange={this.emailHandler}></input>
+                        <input className='loginInput' type='password' placeholder='Password' onChange={this.passwordHandler}></input>
                         <div>
-                            <button type='button' className='btn btn-outline-primary' style={{'width':'70px'}}
-                                onClick={this.backHandler}>Back</button>
+                            <button type='button' className='btn btn-outline-primary' onClick={this.backHandler}>Back</button>
                             <input type='submit' className='btn btn-outline-primary' onClick={() => {
                                 this.setState({loginType:'collector'})}} value='Collector Login' 
                                 style={{'margin':'10px'}}></input>
                             <input type='submit' className='btn btn-outline-primary' onClick={() => {
-                                this.setState({loginType:'home'})}} 
-                                value='Lab Login'></input>
+                                this.setState({loginType:'home'})}} value='Lab Login'></input>
                         </div>    
                     </form>
                 </div>

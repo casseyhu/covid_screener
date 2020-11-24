@@ -5,8 +5,7 @@ import * as Constants from '../constants';
 
 const LabHome = () => {
     return (
-        <div style={{ 'display':'flex', 'justifyContent':'center', 'alignItems':'center', 
-            'height':'100vh', 'flexDirection':'column', 'backgroundColor':Constants.BGCOLOR_BLUE}}>
+        <div className='verticalFlex main-container'>
             <h1 style={{'margin':'10px'}}>Lab Home</h1>
             <Link to="/labtech/pool" className="btn btn-outline-primary" style={{'margin':'10px'}}>Pool Mapping</Link>
             <Link to="/labtech/well" className="btn btn-outline-primary" style={{'margin':'10px'}}>Well Testing</Link>

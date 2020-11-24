@@ -63,22 +63,16 @@ class EmployeeLogin extends Component {
     }
     render(){
         return (
-            <div className='verticalFlex main-container' style={{ 'height':'100vh', 'backgroundColor':Constants.BGCOLOR_GREEN}}>
-                <div className='labLogin background'></div>
+            <div className='verticalFlex main-container'>
+                <div className='LoginBackground background'></div>
                 {this.renderAlert()}
                 <div className="loginBox">
                     <h2>Employee Login</h2>
                     <form className='loginForm' onSubmit={this.login}>
-                        <div class="input-field col s12">
-                            <input className='validate' id='email' type='email' onChange={this.emailHandler}></input>
-                            <label htmlFor='email'>Email</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <input className='validate' id='password' type='password' onChange={this.passwordHandler}></input>
-                            <label htmlFor='password'>Password</label>
-                        </div>
+                        <input className='loginInput' type='email' placeholder='Email' onChange={this.emailHandler}></input>
+                        <input className='loginInput' type='password' placeholder='Password' onChange={this.passwordHandler}></input>
                         <div>
-                            <button type='button' className='btn btn-outline-primary' style={{'margin':'10px', 'width':'100px'}}
+                            <button type='button' className='btn btn-outline-primary' style={{'width':'100px'}}
                                 onClick={this.backHandler}>Back</button>
                             <input type='submit' className='btn btn-outline-primary' value='Sign In' 
                                 style={{'margin':'10px', 'width':'100px'}}></input>

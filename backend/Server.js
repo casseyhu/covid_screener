@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const sha256 = require('js-sha256');
 const session = require('express-session');
-const e = require('express');
 const app = express();
 
 app.use(express.json());
@@ -52,8 +51,7 @@ app.get('/employee/login', (req, res) => {
 
 // Verify valid lab employee login credentials. If valid, return labID
 app.get('/labemployee/login', (req, res) => {
-    console.log('Email', req.query.email)
-    console.log('Password', sha256(req.query.pass))
+    console.log('Email', req.query.email, 'Password', sha256(req.query.pass))
     connection.query("SELECT labID from LabEmployee WHERE email = ? AND password = ?", [
         req.query.email,
         sha256(req.query.pass)  
@@ -93,7 +91,7 @@ app.get('/get/employeeTests', (req, res) => {
     
 });
 
-// Get all tests collected from the DB.
+// Get all tests collected from the DB
 app.get('/get/testCollection', (req, res) => {
     if (req.session.loggedin) {
         const SELECT_RESULTS_QUERY = 'SELECT employeeID, testBarcode FROM EmployeeTest';
@@ -118,7 +116,6 @@ app.post('/labtech/collect/add', (req, res) => {
         connection.query(ADD_TEST_QUERY, [req.body.testBarcode, req.body.employeeID, 
             req.body.collectionTime, req.body.collectedBy], (err, result) => {
             if(err) {
-                console.log(err)
                 res.send(null)
             } else {
                 res.send(result)
@@ -129,25 +126,19 @@ app.post('/labtech/collect/add', (req, res) => {
     }
 })
 
-// Removes a test from user with labID
-app.delete('/labtech/collect/delete', (req, res) => {
-    console.log(req.body, req.query, req.data)
-    
+// Removes a test with employeeID and testBarcode
+app.delete('/labtech/collect/delete', (req, res) => {    
     console.log('loggedin', req.body.employeeID, req.body.testBarcode)
     const DELETE_TEST_QUERY = 'DELETE FROM EmployeeTest WHERE employeeID = ? AND testBarcode = ?'
     connection.query(DELETE_TEST_QUERY, [req.body.employeeID, req.body.testBarcode], (err, result) => {
         if(err) {
-            console.log('error')
+            console.log(err)
             res.send(null)
         } else {
             console.log('DELETED', result)
             res.send(result)
         }
     })
-    // } else {
-    //     console.log('not loggedin')
-    //     res.send(null)
-    // }
 })
 
 
