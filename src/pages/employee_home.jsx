@@ -11,7 +11,7 @@ class EmployeeHome extends Component {
 
     componentDidMount() {
         const { employeeID } = this.props.location
-        axios.get('/get/employeeTests', {params: {
+        axios.get('/tests/for', {params: {
             employeeID: employeeID
         }}).then((response) => {
             this.setState({
@@ -40,7 +40,7 @@ class EmployeeHome extends Component {
                         i += 1;
                         return (
                             <tr key={i}>
-                                <td>&nbsp;{datetime.getMonth()+'/'+datetime.getDate()+'/'+datetime.getFullYear()}</td>
+                                <td>&nbsp;{datetime.toLocaleDateString()}&nbsp;&nbsp;{datetime.toLocaleTimeString()}</td>
                                 <td>{res.result}</td>
                             </tr>
                         )

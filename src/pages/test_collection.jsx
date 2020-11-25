@@ -4,13 +4,23 @@ import axios from 'axios';
 import moment from 'moment';
 
 class TestCollection extends Component {
-    state = {
-        labID: '',
-        results: [],
-        employeeID: '',
-        testBarcode: '',
-        testsToDelete: []
+    constructor(props) {
+        super(props);
+        this.state = {
+            labID: '',
+            results: [],
+            employeeID: '',
+            testBarcode: '',
+            testsToDelete: []
+        }
     }
+    // state = {
+    //     labID: '',
+    //     results: [],
+    //     employeeID: '',
+    //     testBarcode: '',
+    //     testsToDelete: []
+    // }
 
     componentDidMount() {
         let labID = '';
@@ -24,7 +34,7 @@ class TestCollection extends Component {
             if(labID) labID = JSON.parse(labID);
         }
 
-        axios.get('/get/testCollection').then((response) => {
+        axios.get('/tests/all').then((response) => {
             this.setState({
                 labID: labID,
                 results: response.data
@@ -60,64 +70,56 @@ class TestCollection extends Component {
     /* testBarcode && employeeId: User input | collectionTime: day.now() | collectedBy: this.state.labId */
     addTest = (event) => {
         event.preventDefault();
-        axios.post('/labtech/collect/add', {
+        axios.post('/tests/add', {
             testBarcode: this.state.testBarcode,
             employeeID: this.state.employeeID,
             collectionTime: moment().format('YYYY-MM-DD hh:mm:ss'),
             collectedBy: this.state.labID
         }).then((response) => {
             /* RELOAD AND RERENDER THE PAGE TO SHOW THE NEWLY ADDED TEST */
-            axios.get('/get/testCollection', {params: {
-                labID: this.state.labID
-            }}).then((response) => {
+            axios.get('/tests/all').then((response) => {
                 this.setState({
-                    labID: this.state.labID,
                     results: response.data
                 })
             });
         })
     }
 
-    removeTest = (event) => {
+    removeTest = (e) => {
         const tests = this.state.testsToDelete;
+        const testsToDelete = [];
         console.log(tests)
         for (var i = 0; i < tests.length; i++) {
-            const testField = tests[i].split(" ");
-            axios.delete('/labtech/collect/delete', { data: {
-                employeeID: testField[0].toString(),
-                testBarcode: testField[1]
-            }}).then((response) => {
-                console.log('deleted test')
-            })
+            testsToDelete.push(tests[i].split(" "));
         }
-        this.setState({
-            testsToDelete: []
-        })
-        axios.get('/get/testCollection', {params: {
-            labID: this.state.labID
+        console.log(testsToDelete)
+        axios.delete('/tests/delete', { data: {
+            testsToDelete: testsToDelete
         }}).then((response) => {
-            this.setState({
-                labID: this.state.labID,
-                results: response.data
-            })
-        });
+            console.log('deleted tests')
+            axios.get('/tests/all').then((response) => {
+                this.setState({
+                    results: response.data
+                })
+            });
+        })
     }
 
     render() {
         const { results } = this.state;
         return (
-            <div style={{'height':'100vh', 'backgroundColor':'white', 'textAlign':'center', 'padding':'40px 50px'}}>
+            <div style={{height:'100vh', backgroundColor:'white', textAlign:'center', padding:'40px 50px'}}>
                 <h2> Test Collection </h2>
                 <div className='loginForm' >
                 <form className='testCollectionForm'>
                     <div className='form-group row' >
-                        <label htmlFor='employeeID' className="form-label" style={{'minWidth':'30%'}}>Employee ID</label>
+                        <label htmlFor='employeeID' className="form-label" style={{minWidth:'30%'}}>Employee ID</label>
                         <div className="col" >
                             <input type='text' className="form-control" id='employeeID' placeholder='000' onChange={this.inputHandler}/>
                         </div>
                     </div>
                     <div className='form-group row'>
-                        <label htmlFor='testBarcode' className="form-label" style={{'minWidth':'30%'}}>Test Barcode</label>
+                        <label htmlFor='testBarcode' className="form-label" style={{minWidth:'30%'}}>Test Barcode</label>
                         <div className="col" >
                             <input type='text' className="form-control" id='testBarcode' placeholder='000' onChange={this.inputHandler}/>
                         </div>
@@ -125,23 +127,30 @@ class TestCollection extends Component {
                     <input type="submit" className="btn btn-outline-dark" onClick={this.addTest} value="Add"></input>
                 </form>
                 </div>
-                <table className='table-two-col' style={{'margin':'20px auto'}}>
+                <table className='table-two-col' style={{margin:'auto'}}>
                     <thead>
                         <tr>
                             <th><button type="button" className="btn btn-outline-light" onClick={this.removeTest}>
                                 {Constants.TRASH_ICON}
                             </button></th>
+                            <th scope='col'>Collection Time</th>
                             <th scope='col'>Employee ID</th>
                             <th scope='col'>Test Barcode</th>
+                            <th scope='col'>Lab ID</th>
                         </tr>
                     </thead>
                     <tbody style={{'textAlign':'left'}}>
                         {results.map(res => {
+                            const datetime = new Date(res.collectionTime);
+                            const date = datetime.toLocaleDateString();
+                            const time = datetime.toLocaleTimeString();
                             return (
                                 <tr key={`${res.employeeID} ${res.testBarcode}`}>
                                     <td><input type="checkbox" name={`${res.employeeID} ${res.testBarcode}`} onChange={this.checkHandler}/></td>
+                                    <td>{date.slice(0,-4) + date.slice(-2)} &nbsp;&nbsp;{time.slice(0,-6) + time.slice(-3)} </td>
                                     <td>{res.employeeID}</td>
                                     <td>{res.testBarcode}</td>
+                                    <td>{res.collectedBy}</td>
                                 </tr>
                             )
                         })}

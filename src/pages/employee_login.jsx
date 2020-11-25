@@ -15,7 +15,7 @@ class EmployeeLogin extends Component {
     
     login = (event) => {
         event.preventDefault();
-        axios.get('/employee/login', {params: { 
+        axios.get('/login/employee', {params: { 
             email: this.state.email, 
             pass: this.state.password 
         }}).then(response => {
@@ -33,12 +33,10 @@ class EmployeeLogin extends Component {
     }
 
     emailHandler = (event) => {
-        event.preventDefault();
         this.setState({email : event.target.value});
     }
 
     passwordHandler = (event) => {
-        event.preventDefault();
         this.setState({password : event.target.value});
     }
 
@@ -75,7 +73,7 @@ class EmployeeLogin extends Component {
                             <button type='button' className='btn btn-outline-primary' style={{'width':'100px'}}
                                 onClick={this.backHandler}>Back</button>
                             <input type='submit' className='btn btn-outline-primary' value='Sign In' 
-                                style={{'margin':'10px', 'width':'100px'}}></input>
+                                style={{margin:'10px', width:'100px'}}></input>
                         </div>    
                     </form>
                 </div>

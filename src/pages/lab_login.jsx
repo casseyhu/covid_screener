@@ -13,7 +13,7 @@ class LabLogin extends Component {
     login = (event) => {
         event.preventDefault();
         var labID = '';
-        axios.get('/labemployee/login', {params: { 
+        axios.get('/login/labemployee', {params: { 
             email: this.state.email, 
             pass: this.state.password 
         }}).then(response => {
@@ -21,22 +21,10 @@ class LabLogin extends Component {
                 this.setState({error : 1});
             } else {
                 labID = response.data[0].labID
-                switch (this.state.loginType) {
-                    case 'home':
-                        this.props.history.push({
-                            pathname: '/labtech/home',
-                            labID: labID
-                        })
-                        break
-                    case 'collector':
-                        this.props.history.push({
-                            pathname: '/labtech/collect',
-                            labID: labID
-                        })
-                        break
-                    default:
-                        break
-                }
+                this.props.history.push({
+                    pathname: '/labtech/home',
+                    labid: labID
+                })
             }
         })
     }
@@ -80,12 +68,10 @@ class LabLogin extends Component {
                         <input className='loginInput' type='email' placeholder='Email' onChange={this.emailHandler}></input>
                         <input className='loginInput' type='password' placeholder='Password' onChange={this.passwordHandler}></input>
                         <div>
-                            <button type='button' className='btn btn-outline-primary' onClick={this.backHandler}>Back</button>
+                            <button type='button' className='btn btn-outline-primary' onClick={this.backHandler}
+                            style={{width:'100px'}}>Back</button>
                             <input type='submit' className='btn btn-outline-primary' onClick={() => {
-                                this.setState({loginType:'collector'})}} value='Collector Login' 
-                                style={{'margin':'10px'}}></input>
-                            <input type='submit' className='btn btn-outline-primary' onClick={() => {
-                                this.setState({loginType:'home'})}} value='Lab Login'></input>
+                                this.setState({loginType:'home'})}} value='Lab Login' style={{margin:'10px', width:'100px'}}></input>
                         </div>    
                     </form>
                 </div>
