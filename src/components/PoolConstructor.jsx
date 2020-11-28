@@ -76,7 +76,7 @@ class PoolConstructor extends Component {
         return(
             <div className='poolConstructor'>
                 <div className='divTitle'>
-                        <h3> New Pool </h3>
+                    <h3> New Pool </h3>
                 </div>
                 <form className='poolAdditionForm' id='poolAdditionForm'>
                     <div className='form-group row' style={{width:'inherit'}}>
@@ -106,8 +106,7 @@ class PoolConstructor extends Component {
                                     <tr key={` ${res} ${ctr-1}`}>
                                         <td style={{width:'100px'}}>{ctr}</td>
                                         <td style={{width:'250px'}}>{res}</td>
-                                        <td style={{width:'50px'}}><button type='button' className='btn btn-danger' 
-                                            onClick={this.deleteHandler}>{Constants.TRASH_ICON}</button></td> 
+                                        <td style={{width:'50px'}}><a href="/#" style={{color:'red'}} onClick={this.deleteHandler}>{Constants.TRASH_ICON}</a></td> 
                                     </tr>
                                 )
                             })}
