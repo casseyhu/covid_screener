@@ -106,7 +106,7 @@ class PoolConstructor extends Component {
                                     <tr key={` ${res} ${ctr-1}`}>
                                         <td style={{width:'100px'}}>{ctr}</td>
                                         <td style={{width:'250px'}}>{res}</td>
-                                        <td style={{width:'50px'}}><button type='button' className='btn btn-danger' 
+                                        <td style={{width:'50px'}}><button type='button' className='btn btn-danger' style={{backgroundColor:'transparent', border:'none'}}
                                             onClick={this.deleteHandler}>{Constants.TRASH_ICON}</button></td> 
                                     </tr>
                                 )
