@@ -23,13 +23,9 @@ h2{
 }
 
 .poolAdditionForm {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     width: 450px;
     /* height: 200px; */
-    margin: 20px;
+    margin: 20px 20px 0 20px;
 }
 
 /* .loginForm{
@@ -140,8 +136,7 @@ h2{
     /* margin: 10px; */
     background-color: #fafafa;
     border-radius: 30px;
-    -webkit-box-shadow: 0px 6px 15px -2px rgba(0,0,0,0.45); 
-    box-shadow: 0px 6px 15px -2px rgba(0,0,0,0.35);
+    box-shadow: 0px 6px 15px -2px rgba(0,0,0,0.15);
     align-self: flex-start;
     position: absolute;
     top: 100px;

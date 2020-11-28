@@ -73,39 +73,27 @@ class PoolConstructor extends Component {
     }
 
     render() {
-        let ctr = 0;
         return(
             <div className='poolConstructor'>
                 <div className='divTitle'>
                     <h3> New Pool </h3>
                 </div>
-                <form className='poolAdditionForm' id='poolAdditionForm'>
+                <form className='poolAdditionForm verticalFlex' id='poolAdditionForm'>
                     <div className='form-group row' style={{width:'inherit'}}>
                         <label htmlFor='poolBarcode' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Pool Barcode</label>
-                        <div className="col" >
-                            <input type='text' className="form-control" id='poolBarcode' placeholder='000' onChange={this.inputHandler}/>
+                        <div className="col" style={{paddingRight:'0'}}>
+                            <input type='text' className="form-control" id='poolBarcode' placeholder='Ex. POOL01' onChange={this.inputHandler}/>
                         </div>
                     </div>
-                    <div className='form-group row' style={{width:'inherit'}}>
-                        <label htmlFor='testBarcode' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Test Barcode</label>
-                        <div className="col">
-                            <input type='text' className="form-control" id='testBarcode' style={{width:'100%'}} placeholder='000' onChange={this.inputHandler}/>
-                        </div>
-                        <button type='button' onClick={this.addTestBarcode} className='btn btn-success'>Add</button>
-                    </div>
-                    <table className='table-two-col' id='newPoolTable' style={{margin:'auto', width:'inherit', borderTopLeftRadius: '0px', 
-                        borderTopRightRadius: '0px', borderTop: '2px solid #6bc2c5' }}>
-                        {/* <thead>
-                            <tr>
-                                <th colspan='3' style={{textAlign:'center'}}> Barcodes </th>
-                            </tr>
-                        </thead> */}
+                    <h4>Test Barcodes</h4>
+
+                    <table className='form-group row' id='newPoolTable' style={{margin:'auto', marginBottom:'20px', width:'inherit', 
+                        borderTop: '2px solid #6bc2c5', borderBottom: '2px solid #6bc2c5', overflow:'scroll', maxHeight:'300px' }}>
                         <tbody style={{textAlign:'left'}}>
-                            {this.state.barcodeSet.map(res => {
-                                ctr += 1;
+                            {this.state.barcodeSet.map((res, index) => {
                                 return (
-                                    <tr key={`${res} ${ctr-1}`}>
-                                        <td style={{width:'100px'}}>{ctr}</td>
+                                    <tr key={`${res} ${index}`}>
+                                        <td style={{width:'100px'}}>{index+1}</td>
                                         <td style={{width:'250px'}}>{res}</td>
                                         <td style={{width:'50px'}}><button type='button' className='btn btn-danger' style={{backgroundColor:'transparent', border:'none'}}
                                             onClick={() => {this.deleteHandler(this.state.barcodeSet.indexOf(res))}}>{Constants.TRASH_ICON}</button></td> 
@@ -114,8 +102,16 @@ class PoolConstructor extends Component {
                             })}
                         </tbody>
                     </table>
+
+                    <div className='form-group row' style={{width:'100%', display:'flex', alignContent:'center', alignItems:'center'}}>
+                    <label htmlFor='testBarcode' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Test Barcode</label>
+                        <div className="col" >
+                            <input type='text' className="form-control" id='testBarcode'  placeholder='Ex. 100' onChange={this.inputHandler}/>
+                        </div>
+                        <button type='button' onClick={this.addTestBarcode} className='btn btn-success' >Add</button>
+                    </div>
                 </form>
-                <input type="submit" form='poolAdditionForm' className="btn btn-outline-dark" style={{margin:'15px 5px 15px 5px'}} 
+                <input type="submit" form='poolAdditionForm' className="btn btn-outline-dark" style={{margin:'0 15px 15px 15px'}} 
                     onClick={this.submitHandler} value="Submit Pool"></input>
             </div>
         )

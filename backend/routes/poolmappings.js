@@ -5,7 +5,7 @@ const app = express();
 // Get all the pools from db
 app.get('/all', (req, res) => {
     if (req.session.loggedin) {
-        const SELECT_RESULTS_QUERY = 'SELECT * FROM PoolMap ORDER BY poolBarcode ASC'
+        const SELECT_RESULTS_QUERY = `SELECT poolBarcode, GROUP_CONCAT(testBarcode separator ',') FROM PoolMap GROUP BY poolBarcode`
         connection.query(SELECT_RESULTS_QUERY, (err, result) => {
             if(err) {
                 res.send(null)
