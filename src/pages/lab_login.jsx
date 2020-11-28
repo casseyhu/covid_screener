@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginContainer from '../components/LoginContainer';
 
-const LabLogin = () => {
+const LabLogin = (props) => {
 
     const redirectPath = (response) => {
         this.props.history.push({
@@ -11,7 +11,7 @@ const LabLogin = () => {
     }
 
     return (
-        <LoginContainer history={this.props.history} userType="Lab Worker" path="labemployee" redirectPath={redirectPath}/>
+        <LoginContainer history={props.history} userType="Lab Worker" path="labemployee" redirectPath={redirectPath}/>
     )
 }
 
