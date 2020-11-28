@@ -14,13 +14,6 @@ class TestCollection extends Component {
             testsToDelete: []
         }
     }
-    // state = {
-    //     labID: '',
-    //     results: [],
-    //     employeeID: '',
-    //     testBarcode: '',
-    //     testsToDelete: []
-    // }
 
     componentDidMount() {
         let labID = '';

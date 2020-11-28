@@ -4,7 +4,7 @@ import LoginContainer from '../components/LoginContainer';
 const LabLogin = (props) => {
 
     const redirectPath = (response) => {
-        this.props.history.push({
+        props.history.push({
             pathname: '/labtech/home',
             labid: response.data[0].labID
         })

@@ -4,7 +4,7 @@ import LoginContainer from '../components/LoginContainer';
 const EmployeeLogin = (props) => {
 
     const redirectPath = (response) => {
-        this.props.history.push({
+        props.history.push({
             pathname: '/employee/home',
             employeeID: response.data[0].employeeId
         })
