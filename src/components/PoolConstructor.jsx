@@ -36,7 +36,8 @@ class PoolConstructor extends Component {
                 testBarcode: '',
                 barcodeSet: [],
             });
-            // Passes the 
+            // Passes the data back to parent (pool_mapping page) and then forces
+            // reload of the pool map table component? 
             this.props.callbackFromParent(response.data)
         })
     }
