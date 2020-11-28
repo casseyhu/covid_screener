@@ -123,7 +123,11 @@ class TestCollection extends Component {
                 <table className='table-two-col' style={{margin:'auto'}}>
                     <thead>
                         <tr>
+<<<<<<< HEAD
                             <th><a href="#" style={{color:'white'}} onClick={this.removeTest}>{Constants.TRASH_ICON}</a></th>
+=======
+                            <th><a href="/#" style={{color:'white'}} onClick={this.removeTest}>{Constants.TRASH_ICON}</a></th>
+>>>>>>> bbcea79c16539e83e0200e3378b40bb6b3b3e232
                             <th scope='col'>Collection Time</th>
                             <th scope='col'>Employee ID</th>
                             <th scope='col'>Test Barcode</th>
