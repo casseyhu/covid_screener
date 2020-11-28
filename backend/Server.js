@@ -24,6 +24,8 @@ app.use('/login', [ require('./routes/userlogin') ]);
 
 app.use('/tests', [ require('./routes/employeetests') ]);
 
+app.use('/pools',  [ require('./routes/poolmappings')])
+
 
 app.listen(process.env.PORT || 3001, () => {
     console.log(`Listening on port ${process.env.PORT || 3001}`);

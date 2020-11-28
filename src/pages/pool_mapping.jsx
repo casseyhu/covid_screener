@@ -1,14 +1,51 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import PoolConstructor from '../components/PoolConstructor'
+import PoolTable from '../components/PoolTable'
+import axios from 'axios';
 
-const PoolMapping = () => {
-    return (
-        <div style={{ 'display':'flex', 'justifyContent':'center', 'alignItems':'center', 
-            'height':'100vh', 'flexDirection':'column', 'backgroundColor':'#c6e3f7'}}>
-            <h1 style={{'margin':'10px'}}>Pool Mapping</h1>
-            <h1> BLAH BLAH </h1>
-        </div>   
-    )
+class PoolMapping extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            labID: '',
+            newPool: [],
+            pools: []
+        }
+    }
+
+    componentDidMount() {
+        let labID = '';
+        /* Save the labID to local storage on the first load. */
+        if(this.props.location.labID){
+            localStorage.setItem('labID', JSON.stringify(this.props.location.labID));
+            labID = this.props.location.labID;
+        }
+        else {
+            labID = localStorage.getItem('labID');
+            if(labID) labID = JSON.parse(labID);
+        }
+
+        console.log("Trying to get all pools")
+        axios.get('/pools/all').then((response) => {
+            this.setState({pools: response.data})
+            console.log("Set state of results: ", this.state.pools)
+        });
+    }
+
+    newPoolCallback = (newPool) => {
+        console.log("Back in parent pool_mapping page");
+        this.setState({newPool : newPool});
+        console.log("After recieving new pool: ", this.state.newPool);
+    }
+
+    render() {
+        return (
+            <div className='verticalFlex' style={{height:'100vh',  backgroundColor:'#c6e3f7'}}>
+                <PoolConstructor parentCallback={this.newPoolCallback}/>
+                {/* <PoolTable allPools={this.pools}/> */}
+            </div>   
+        )
+    }
 }
 
 export default PoolMapping;
