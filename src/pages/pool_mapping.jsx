@@ -8,8 +8,8 @@ class PoolMapping extends Component {
         super(props)
         this.state = {
             labID: '',
-            newPool: [],
-            pools: []
+            newPoolSet: [],
+            existingPools: []
         }
     }
 
@@ -27,12 +27,13 @@ class PoolMapping extends Component {
 
         console.log("Trying to get all pools")
         axios.get('/pools/all').then((response) => {
-            this.setState({pools: response.data})
+            this.setState({existingPools: response.data})
             console.log("Set state of results: ", this.state.pools)
         });
     }
 
-    newPoolCallback = (newPool) => {
+
+    newPoolSubmission = (newPool) => {
         console.log("Back in parent pool_mapping page");
         this.setState({newPool : newPool});
         console.log("After recieving new pool: ", this.state.newPool);
@@ -40,8 +41,8 @@ class PoolMapping extends Component {
 
     render() {
         return (
-            <div className='verticalFlex' style={{height:'100vh',  backgroundColor:'#c6e3f7'}}>
-                <PoolConstructor parentCallback={this.newPoolCallback}/>
+            <div className='horizontalFlex' style={{height:'100vh',  backgroundColor:'#c6e3f7'}}>
+                <PoolConstructor parentCallback={this.newPoolSubmission} style={{position:'absolute', top:'100px', left:'50px'}}/>
                 {/* <PoolTable allPools={this.pools}/> */}
             </div>   
         )
