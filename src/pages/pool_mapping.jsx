@@ -33,9 +33,9 @@ class PoolMapping extends Component {
     }
 
 
-    newPoolSubmission = (newPool) => {
+    newPoolSubmission = (newPoolValues) => {
         console.log("Back in parent pool_mapping page");
-        this.setState({newPool : newPool});
+        this.setState({newPool : newPoolValues});
         console.log("After recieving new pool: ", this.state.newPool);
     }
 
@@ -43,7 +43,8 @@ class PoolMapping extends Component {
         return (
             <div className='horizontalFlex' style={{height:'100vh',  backgroundColor:'#c6e3f7'}}>
                 <PoolConstructor parentCallback={this.newPoolSubmission} style={{position:'absolute', top:'100px', left:'50px'}}/>
-                {/* <PoolTable allPools={this.pools}/> */}
+                <PoolTable allPools={this.pools}/>
+                {/* <PoolTable /> */}
             </div>   
         )
     }

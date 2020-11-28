@@ -38,7 +38,7 @@ class PoolConstructor extends Component {
             });
             // Passes the data back to parent (pool_mapping page) and then forces
             // reload of the pool map table component? 
-            this.props.newPoolSubmission(response.data)
+            // this.props.newPoolSubmission(response.data)
         })
     }
 
@@ -95,7 +95,7 @@ class PoolConstructor extends Component {
                                     <tr key={`${res} ${index}`}>
                                         <td style={{width:'100px'}}>{index+1}</td>
                                         <td style={{width:'250px'}}>{res}</td>
-                                        <td style={{width:'50px'}}><button type='button' className='btn btn-danger' style={{backgroundColor:'transparent', border:'none'}}
+                                        <td style={{width:'50px'}}><button type='button' className='btn btn-danger' style={{backgroundColor:'transparent', border:'none', color:'red'}}
                                             onClick={() => {this.deleteHandler(this.state.barcodeSet.indexOf(res))}}>{Constants.TRASH_ICON}</button></td> 
                                     </tr>
                                 )

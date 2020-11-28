@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import * as Constants from '../constants';
 import axios from 'axios';
 import moment from 'moment';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 class TestCollection extends Component {
     constructor(props) {
@@ -59,8 +63,6 @@ class TestCollection extends Component {
     }
 
     /* Adding new Test Collection to EmployeeTest and display */
-    /* EmployeeTest values: testBarcode, employeeID, collectionTime, collectedBy */
-    /* testBarcode && employeeId: User input | collectionTime: day.now() | collectedBy: this.state.labId */
     addTest = (event) => {
         event.preventDefault();
         axios.post('/tests/add', {
@@ -101,29 +103,36 @@ class TestCollection extends Component {
     render() {
         const { results } = this.state;
         return (
-            <div style={{height:'100vh', backgroundColor:'white', textAlign:'center', padding:'40px 50px'}}>
+            <div style={{height:'100vh', backgroundColor:'white', textAlign:'center', margin:'40px'}}>
                 <h2> Test Collection </h2>
-                <div className='loginForm' >
-                <form className='testCollectionForm'>
-                    <div className='form-group row' >
-                        <label htmlFor='employeeID' className="form-label" style={{minWidth:'30%'}}>Employee ID</label>
-                        <div className="col" >
-                            <input type='text' className="form-control" id='employeeID' placeholder='000' onChange={this.inputHandler}/>
-                        </div>
-                    </div>
-                    <div className='form-group row'>
-                        <label htmlFor='testBarcode' className="form-label" style={{minWidth:'30%'}}>Test Barcode</label>
-                        <div className="col" >
-                            <input type='text' className="form-control" id='testBarcode' placeholder='000' onChange={this.inputHandler}/>
-                        </div>
-                    </div>
-                    <input type="submit" className="btn btn-outline-dark" onClick={this.addTest} value="Add"></input>
-                </form>
+                <div className='loginForm' style={{margin:'auto'}}>
+                    <Form className='testCollectionForm'>
+                        <Form.Group as={Row} controlId="formBasicText">
+                            <Form.Label column sm={5}>Employee ID</Form.Label>
+                            <Col sm={7}>
+                                <Form.Control type="text" placeholder='Ex. 100' id='employeeID' onChange={this.inputHandler}/>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formBasicText">
+                            <Form.Label column sm={5}>Test Barcode</Form.Label>
+                            <Col sm={7}>
+                                <Form.Control type="text" placeholder='Ex. 001' id='testBarcode' onChange={this.inputHandler}/>
+                            </Col>
+                        </Form.Group>
+                        <Button variant="outline-dark" type="submit" onClick={this.addTest} style={{width:'100px'}}>
+                            Add
+                        </Button>
+                    </Form>
+
                 </div>
                 <table className='table-two-col' style={{margin:'auto'}}>
                     <thead>
                         <tr>
-                            <th><a href="#" style={{color:'white'}} onClick={this.removeTest}>{Constants.TRASH_ICON}</a></th>
+                            <th>
+                                <button onClick={this.removeTest} style={{backgroundColor:'transparent', border:'none', color:'white'}}>
+                                {Constants.TRASH_ICON}
+                                </button>
+                            </th>
                             <th scope='col'>Collection Time</th>
                             <th scope='col'>Employee ID</th>
                             <th scope='col'>Test Barcode</th>
