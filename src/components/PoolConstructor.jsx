@@ -38,7 +38,7 @@ class PoolConstructor extends Component {
             });
             // Passes the data back to parent (pool_mapping page) and then forces
             // reload of the pool map table component? 
-            this.props.callbackFromParent(response.data)
+            this.props.newPoolSubmission(response.data)
         })
     }
 
