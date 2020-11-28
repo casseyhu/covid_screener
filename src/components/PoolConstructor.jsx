@@ -55,10 +55,13 @@ class PoolConstructor extends Component {
         }
     }
 
-    deleteHandler = (event) => {
-        event.preventDefault();
+    deleteHandler(index) {
+        // preventDefault();    
         // Delete the specific item from the state of testBarcodes
-        console.log(this.key)
+        console.log(index)
+        let newBarcodeSet = [...this.state.barcodeSet];
+        newBarcodeSet.splice(index, 1);
+        this.setState({barcodeSet: newBarcodeSet});
     }
 
     addTestBarcode = (event) => {
@@ -66,9 +69,7 @@ class PoolConstructor extends Component {
         console.log("Adding new test Barcode")
         let newTestBarcodes = [...this.state.barcodeSet];
         newTestBarcodes.push(this.state.testBarcode)
-        this.setState({barcodeSet: newTestBarcodes}, () => {
-            console.log(this.state.barcodeSet)
-        })
+        this.setState({barcodeSet: newTestBarcodes})
     }
 
     render() {
@@ -103,10 +104,11 @@ class PoolConstructor extends Component {
                             {this.state.barcodeSet.map(res => {
                                 ctr += 1;
                                 return (
-                                    <tr key={` ${res} ${ctr-1}`}>
+                                    <tr key={`${res} ${ctr-1}`}>
                                         <td style={{width:'100px'}}>{ctr}</td>
                                         <td style={{width:'250px'}}>{res}</td>
-                                        <td style={{width:'50px'}}><a href="/#" style={{color:'red'}} onClick={this.deleteHandler}>{Constants.TRASH_ICON}</a></td> 
+                                        <td style={{width:'50px'}}><button type='button' className='btn btn-danger' style={{backgroundColor:'transparent', border:'none'}}
+                                            onClick={() => {this.deleteHandler(this.state.barcodeSet.indexOf(res))}}>{Constants.TRASH_ICON}</button></td> 
                                     </tr>
                                 )
                             })}
