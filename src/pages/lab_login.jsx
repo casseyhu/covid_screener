@@ -1,83 +1,18 @@
-import React, {Component} from 'react';
-import * as Constants from '../constants';
-import axios from 'axios';
+import React from 'react';
+import LoginContainer from '../components/LoginContainer';
 
-class LabLogin extends Component {
-    state = {
-        email: '',
-        password: '',
-        loginType: '',
-        error: 0
-    }
+const LabLogin = () => {
 
-    login = (event) => {
-        event.preventDefault();
-        var labID = '';
-        axios.get('/login/labemployee', {params: { 
-            email: this.state.email, 
-            pass: this.state.password 
-        }}).then(response => {
-            if ( response.data === '' ){
-                this.setState({error : 1});
-            } else {
-                labID = response.data[0].labID
-                this.props.history.push({
-                    pathname: '/labtech/home',
-                    labid: labID
-                })
-            }
+    const redirectPath = (response) => {
+        this.props.history.push({
+            pathname: '/labtech/home',
+            labid: response.data[0].labID
         })
     }
 
-
-    emailHandler = (event) => {
-        this.setState({email : event.target.value});
-    }
-
-    passwordHandler = (event) => {
-        this.setState({password : event.target.value});
-    }
-
-    backHandler = (event) => {
-        event.preventDefault();
-        this.props.history.goBack();
-    }
-
-    alertDismiss = (event) => { 
-        event.preventDefault();
-        this.setState({error : 0});
-    }
-    
-    renderAlert = () => {
-        if(this.state.error === 0) return null;
-        return (
-            <div className='loginError'>
-                <p style={{'padding':'3px 0px 0px'}}>Invalid email or password.</p>
-                <button style={{'height':'30px', 'width':'30px', 'padding':'0px', 'margin':'0px'}} className='btn btn-outline-light' onClick={this.alertDismiss}>{Constants.DELETE_ICON}</button>
-            </div>
-        )
-    }
-    render(){
-        return (
-            <div className='verticalFlex main-container'>
-                <div className='LoginBackground background'></div>
-                {this.renderAlert()}
-                <div className="loginBox">
-                    <h2>Lab Worker Login</h2>
-                    <form className='loginForm' onSubmit={this.login}>
-                        <input className='loginInput' type='email' placeholder='Email' onChange={this.emailHandler}></input>
-                        <input className='loginInput' type='password' placeholder='Password' onChange={this.passwordHandler}></input>
-                        <div>
-                            <button type='button' className='btn btn-outline-primary' onClick={this.backHandler}
-                            style={{width:'100px'}}>Back</button>
-                            <input type='submit' className='btn btn-outline-primary' onClick={() => {
-                                this.setState({loginType:'home'})}} value='Lab Login' style={{margin:'10px', width:'100px'}}></input>
-                        </div>    
-                    </form>
-                </div>
-            </div> 
-        )
-    }
+    return (
+        <LoginContainer history={this.props.history} userType="Lab Worker" path="labemployee" redirectPath={redirectPath}/>
+    )
 }
 
 export default LabLogin;
