@@ -11,6 +11,10 @@ button:focus {
     outline: none;
 }
 
+p{
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
 
 .verticalFlex, .loginForm, .loginBox, .testCollectionForm, .divTitle {
     display: flex;
@@ -43,7 +47,7 @@ button:focus {
     border: 3px solid #e0e0e0;
     border-radius: 5px;
     width: 300px;
-    height: 45px;
+    height: 40px;
     padding: 10px;
     background-color: #fafafa;
     outline: none;
@@ -72,7 +76,8 @@ button:focus {
     background-repeat: no-repeat;
 }
 .mainBackground {
-    background: url(../images/polygon.jpg);
+    /* background: url(../images/polygon.jpg); if u r particularly attached to the bg images lmk lol*/
+    background-color: #bde0fe;
 }
 .LoginBackground {
     background: url(../images/graph.jpg);
@@ -85,9 +90,9 @@ button:focus {
     width: 450px;
     height: 430px;
     background-color: white;
-    border-radius: 30px;
+    border-radius: 10px;
     -webkit-box-shadow: 0px 6px 15px -2px rgba(0,0,0,0.45); 
-    box-shadow: 0px 6px 15px -2px rgba(0,0,0,0.35);
+    box-shadow: 0px 3px 10px -2px rgba(0,0,0,0.35);
 }
 
 .loginError {
@@ -203,3 +208,45 @@ button:focus {
     border-top-right-radius: 0px;
     border-top: 2px solid #6bc2c5;
 } */
+.loginBtn {
+    border-radius: 10px;
+    background-image: linear-gradient(to right, #313a5e, #4049c7, #003cff);
+    background-size: 200%;
+    padding: 10px;
+    width: 370px;
+    height: 50px;
+    text-align: center;
+    outline: none;
+	border: none;
+    transition: .5s;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bolder;
+}
+.loginBtn:hover{
+    background-position: right;
+}
+.loginBox h2 {
+    font-family: Heebo;
+    font-size: 50px;
+    font-weight: 700;
+}
+.footer{
+    z-index: 1;
+    padding:30px;
+    bottom: 0;
+}
+.footer p{
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: rgb(0, 0, 0);
+}
+svg{
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+}
