@@ -3,8 +3,11 @@ import axios from 'axios';
 
 
 class PoolTable extends Component {
-    state = { 
-        pools: []
+    constructor(props){
+        super(props)
+        this.state = { 
+            pools: []
+        }
     }
 
     getPools() {
@@ -19,11 +22,11 @@ class PoolTable extends Component {
         this.getPools()
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if(this.props.allPools !== prevProps.allPools) {
-    //         this.getPools();
-    //     }
-    // } 
+    componentDidUpdate(prevProps) {
+        if(this.props.allPools !== prevProps.allPools) {
+            this.getPools();
+        }
+    } 
     
     render() { 
         return ( 

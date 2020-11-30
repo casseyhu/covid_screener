@@ -37,8 +37,7 @@ class PoolMapping extends Component {
         console.log(this.state.existingPools)
         console.log(newPoolValues)
         this.setState({existingPools : newPoolValues}, () => {
-            console.log("New state after submission:")
-            console.log(this.state.existingPools)
+            this.forceUpdate();
         });
         // shouuld force a new reload of the page after the state changes. 
         // reload should clear te pool constuctor (maybe) then reload the pooltable. 
