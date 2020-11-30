@@ -64,17 +64,16 @@ app.delete('/delete', (req, res) => {
     const tests = req.body.testsToDelete;
     var TESTS_QUERY = ``;
     for (var i = 0; i < tests.length; i++) {
-        TESTS_QUERY += `("${tests[i][0]}", "${tests[i][1]}"),`;
+        TESTS_QUERY += `"${tests[i]}",`;
     }
     TESTS_QUERY = TESTS_QUERY.slice(0,-1);
-    const DELETE_TEST_QUERY = `DELETE FROM EmployeeTest WHERE (employeeID, testBarcode) IN (${TESTS_QUERY})`;
-    console.log(DELETE_TEST_QUERY)
+    const DELETE_TEST_QUERY = `DELETE FROM EmployeeTest WHERE (testBarcode) IN (${TESTS_QUERY})`;
     connection.query(DELETE_TEST_QUERY, (err, result) => {
         if(err) {
             console.log(err)
             res.send(null)
         } else {
-            console.log('DELETED', result)
+            // console.log('DELETED', result)
             res.send(result)
         }
     })

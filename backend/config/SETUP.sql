@@ -46,6 +46,7 @@ CREATE TABLE Well (
 CREATE TABLE PoolMap (
 	testBarcode VARCHAR(50),
     poolBarcode VARCHAR(50),
+    UNIQUE (testBarcode, poolBarcode),
     FOREIGN KEY (testBarcode) REFERENCES EmployeeTest(testBarcode)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
@@ -57,9 +58,10 @@ CREATE TABLE PoolMap (
 CREATE TABLE WellTesting (
 	poolBarcode VARCHAR(50),
     wellBarcode VARCHAR(50),
-    testingStartTime DATETIME,
-    testingEndTime DATETIME,
-    result VARCHAR(20),
+    testingStartTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+    testingEndTime DATETIME DEFAULT NULL,
+    result VARCHAR(20) DEFAULT 'in progress',
+    UNIQUE (poolBarcode, wellBarcode),
     FOREIGN KEY (poolBarcode) REFERENCES Pool(poolBarcode)
     	ON DELETE CASCADE
 		ON UPDATE CASCADE,
@@ -102,6 +104,8 @@ INSERT INTO EmployeeTest VALUES ('010', '101', '2020-10-30 10:25:00', '204');
 INSERT INTO EmployeeTest VALUES ('011', '105', '2020-09-30 08:56:20', '204');
 INSERT INTO EmployeeTest VALUES ('012', '102', '2020-10-29 10:25:00', '202');
 INSERT INTO EmployeeTest VALUES ('013', '105', '2020-09-12 12:56:20', '201');
+INSERT INTO EmployeeTest VALUES ('014', '102', '2020-09-12 12:56:20', '203');
+INSERT INTO EmployeeTest VALUES ('015', '102', '2020-09-12 12:56:20', '204');
 
 -- POOLS
 INSERT INTO Pool VALUES ('POOL01');
@@ -133,29 +137,68 @@ INSERT INTO WellTesting VALUES ('POOL01', 'WELL01', '2020-11-01 00:00:00', '2020
 INSERT INTO WellTesting VALUES ('POOL02', 'WELL02', '2020-11-02 01:00:00', '2020-11-02 10:50:00', 'in progress');
 INSERT INTO WellTesting VALUES ('POOL03', 'WELL03', '2020-11-05 02:10:00', '2020-11-05 23:50:00', 'positive');
 
--- fetch employee data
--- SELECT E.collectionTime, W.result FROM EmployeeTest E, PoolMap P, WellTesting W 
--- WHERE E.testBarcode = P.testBarcode AND P.poolBarcode = W.poolBarcode AND E.employeeID = '101';
 
--- fetch all tests
--- SELECT employeeID, testBarcode FROM EmployeeTest;
+
+
+-- get employee data
+SELECT E.collectionTime, W.result FROM EmployeeTest E, PoolMap P, WellTesting W 
+WHERE E.testBarcode = P.testBarcode AND P.poolBarcode = W.poolBarcode AND E.employeeID = '105';
+
+-- get all tests
+SELECT employeeID, testBarcode FROM EmployeeTest;
+
+-- add a test
+INSERT INTO EmployeeTest VALUES ('014', '107', '2020-011-20 10:15:30', '201');
 
 -- delete a test
--- DELETE FROM EmployeeTest WHERE EmployeeID = '102' AND collectedBy = '202';
+DELETE FROM EmployeeTest WHERE (testBarcode) in ("014", "013");
 
--- create pool mappings
+
+
+-- get all pools with list of test barcodes
+SELECT poolBarcode, GROUP_CONCAT(testBarcode separator ', ') as barcodes FROM PoolMap GROUP BY poolBarcode;
+
+-- add new pool with list of test barcodes
+INSERT INTO Pool VALUES ('POOL05');
+INSERT IGNORE INTO PoolMap VALUES ('001', 'POOL05'), ('016', 'POOL05'), ('014', 'POOL05'), ('004', 'POOL05');
 
 -- delete pool
-DELETE FROM Pool WHERE poolBarcode = 'POOL03';
+DELETE FROM Pool WHERE poolBarcode = 'POOL02';
 
-
-SELECT * FROM PoolMap;
-SELECT * FROM EmployeeTest;
 -- update pool mapping
+DELETE FROM PoolMap WHERE (testBarcode, poolBarcode) IN (('016','POOL05'), ('014','POOL05'));
+INSERT IGNORE 
+
+
+
+-- add new well pool mapping
+INSERT INTO Well VALUES ('WELL04');
+INSERT INTO WellTesting(poolBarcode, wellBarcode, result) VALUES ('POOL05', 'WELL04', 'positive');
 
 -- update well result
+UPDATE WellTesting SET testingEndTime = NOW(), result = 'negative' WHERE poolBarcode = 'POOL05' AND wellBarcode = 'WELL02';
 
 -- delete well result
 
-select * from poolmap;
+
+
+
+
+USE covidscreen;
+SELECT * FROM PoolMap;
+SELECT * FROM Pool;
+SELECT * FROM Well;
+SELECT * FROM WellTesting;
+SELECT * FROM EmployeeTest;
+
+SELECT * FROM Pool, PoolMap;
+
+
+INSERT INTO Pool VALUES ('POOL4');
+INSERT INTO PoolMap VALUES ('120', 'POOL4');
+
+
+SELECT * FROM Employee WHERE employeeID = "101";
+SELECT COUNT(*) FROM EmployeeTest WHERE EmployeeID = '101';
+
 

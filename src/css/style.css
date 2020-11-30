@@ -6,6 +6,11 @@ html, body {
 h2{
     font-size: 45px;
 }
+button:focus {
+    border: none;
+    outline: none;
+}
+
 
 .verticalFlex, .loginForm, .loginBox, .testCollectionForm, .divTitle {
     display: flex;

@@ -81,20 +81,16 @@ class TestCollection extends Component {
     }
 
     removeTest = (e) => {
-        const tests = this.state.testsToDelete;
-        const testsToDelete = [];
-        console.log(tests)
-        for (var i = 0; i < tests.length; i++) {
-            testsToDelete.push(tests[i].split(" "));
-        }
-        console.log(testsToDelete)
+        console.log(this.state.testsToDelete)
+        if (this.state.testsToDelete.length === 0) return
         axios.delete('/tests/delete', { data: {
-            testsToDelete: testsToDelete
+            testsToDelete: this.state.testsToDelete
         }}).then((response) => {
             console.log('deleted tests')
             axios.get('/tests/all').then((response) => {
                 this.setState({
-                    results: response.data
+                    results: response.data,
+                    testsToDelete: []
                 })
             });
         })
@@ -107,13 +103,13 @@ class TestCollection extends Component {
                 <h2> Test Collection </h2>
                 <div className='loginForm' style={{margin:'auto'}}>
                     <Form className='testCollectionForm'>
-                        <Form.Group as={Row} controlId="formBasicText">
+                        <Form.Group as={Row}>
                             <Form.Label column sm={5}>Employee ID</Form.Label>
                             <Col sm={7}>
                                 <Form.Control type="text" placeholder='Ex. 100' id='employeeID' onChange={this.inputHandler}/>
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} controlId="formBasicText">
+                        <Form.Group as={Row}>
                             <Form.Label column sm={5}>Test Barcode</Form.Label>
                             <Col sm={7}>
                                 <Form.Control type="text" placeholder='Ex. 001' id='testBarcode' onChange={this.inputHandler}/>
@@ -133,10 +129,10 @@ class TestCollection extends Component {
                                 {Constants.TRASH_ICON}
                                 </button>
                             </th>
-                            <th scope='col'>Collection Time</th>
                             <th scope='col'>Employee ID</th>
                             <th scope='col'>Test Barcode</th>
                             <th scope='col'>Lab ID</th>
+                            <th scope='col'>Collection Time</th>
                         </tr>
                     </thead>
                     <tbody style={{'textAlign':'left'}}>
@@ -146,11 +142,19 @@ class TestCollection extends Component {
                             const time = datetime.toLocaleTimeString();
                             return (
                                 <tr key={`${res.employeeID} ${res.testBarcode}`}>
-                                    <td><input type="checkbox" name={`${res.employeeID} ${res.testBarcode}`} onChange={this.checkHandler}/></td>
-                                    <td>{date.slice(0,-4) + date.slice(-2)} &nbsp;&nbsp;{time.slice(0,-6) + time.slice(-3)} </td>
+                                    {/* <td><input type="checkbox" name={res.testBarcode} onChange={this.checkHandler}/></td> */}
+                                    <td>
+                                    <Form.Check 
+                                        type={'checkbox'}
+                                        name={res.testBarcode}
+                                        onChange={this.checkHandler}
+                                    /> </td>
                                     <td>{res.employeeID}</td>
                                     <td>{res.testBarcode}</td>
                                     <td>{res.collectedBy}</td>
+                                    <td style={{whiteSpace:'pre-line'}}>
+                                    {(date.slice(0,-4) + date.slice(-2)).padStart(8, '0') + (time.slice(0,-6) + time.slice(-3)).padStart(12, "\u00a0")}
+                                    </td>
                                 </tr>
                             )
                         })}
