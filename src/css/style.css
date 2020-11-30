@@ -208,6 +208,8 @@ p{
     border-top-right-radius: 0px;
     border-top: 2px solid #6bc2c5;
 } */
+
+
 .loginBtn {
     border-radius: 10px;
     background-image: linear-gradient(to right, #313a5e, #4049c7, #003cff);
@@ -244,7 +246,10 @@ p{
     letter-spacing: 1px;
     color: rgb(0, 0, 0);
 }
-svg{
+
+/*  Caused errors with the TRASH_DELETE logo, 
+    editing it to be a class styling. */
+.bkgdSvg{
     z-index: 1;
     position: absolute;
     bottom: 0;

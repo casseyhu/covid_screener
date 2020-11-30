@@ -8,7 +8,6 @@ class PoolMapping extends Component {
         super(props)
         this.state = {
             labID: '',
-            newPoolSet: [],
             existingPools: []
         }
     }
@@ -34,16 +33,22 @@ class PoolMapping extends Component {
 
 
     newPoolSubmission = (newPoolValues) => {
-        console.log("Back in parent pool_mapping page");
-        this.setState({newPool : newPoolValues});
-        console.log("After recieving new pool: ", this.state.newPool);
+        console.log("Back in parent pool_mapping page after submitting new pool");
+        console.log(this.state.existingPools)
+        console.log(newPoolValues)
+        this.setState({existingPools : newPoolValues}, () => {
+            console.log("New state after submission:")
+            console.log(this.state.existingPools)
+        });
+        // shouuld force a new reload of the page after the state changes. 
+        // reload should clear te pool constuctor (maybe) then reload the pooltable. 
     }
 
     render() {
         return (
             <div className='horizontalFlex' style={{height:'100vh',  backgroundColor:'#c6e3f7'}}>
                 <PoolConstructor parentCallback={this.newPoolSubmission} style={{position:'absolute', top:'100px', left:'50px'}}/>
-                <PoolTable allPools={this.pools}/>
+                <PoolTable allPools={this.state.existingPools}/>
                 {/* <PoolTable /> */}
             </div>   
         )

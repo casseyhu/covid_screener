@@ -22,9 +22,9 @@ app.post('/add', (req, res) => {
     connection.query(`INSERT INTO Pool VALUES (?)`, [poolBarcode], (err, result) => {
         if (err) console.log(err)
     })
-    const ADD_POOL_QUERY = `INSERT IGNORE INTO PoolMap VALUES `;
+    let ADD_POOL_QUERY = `INSERT IGNORE INTO PoolMap VALUES `;
     for(let i = 0; i < barcodeSet.length; i++) {
-        ADD_POOL_QUERY += `(${barcodeSet[i]},${poolBarcode}),`;
+        ADD_POOL_QUERY += `('${barcodeSet[i]}','${poolBarcode}'),`;
     }
     connection.query(ADD_POOL_QUERY.slice(0,-1), (err, result) => {
         if(err) console.log(err)

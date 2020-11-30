@@ -30,15 +30,18 @@ class PoolConstructor extends Component {
         axios.post('/pools/add', {
             poolBarcode: this.state.poolBarcode,
             barcodeSet: this.state.barcodeSet
-        }).then(response => {
+        }).then(() => {
             this.setState({
                 poolBarcode: '',
                 testBarcode: '',
                 barcodeSet: [],
             });
-            // Passes the data back to parent (pool_mapping page) and then forces
-            // reload of the pool map table component? 
-            // this.props.newPoolSubmission(response.data)
+            // Gets all the new poolsets AFTER the addition of the new pool into the db.
+            // Passes the data from GET back to parent (pool_mapping page) to force
+            // reload of the pool map table component
+            axios.get('/pools/all').then((response) => {
+                this.props.parentCallback(response.data)
+            })
         })
     }
 
@@ -56,7 +59,6 @@ class PoolConstructor extends Component {
     }
 
     deleteHandler(index) {
-        // preventDefault();    
         // Delete the specific item from the state of testBarcodes
         console.log(index)
         let newBarcodeSet = [...this.state.barcodeSet];

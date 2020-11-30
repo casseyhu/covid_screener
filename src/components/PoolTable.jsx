@@ -19,11 +19,11 @@ class PoolTable extends Component {
         this.getPools()
     }
 
-    componentDidUpdate(prevProps) {
-        if(this.props.allPools !== prevProps.allPools) {
-            this.getPools();
-        }
-    } 
+    // componentDidUpdate(prevProps) {
+    //     if(this.props.allPools !== prevProps.allPools) {
+    //         this.getPools();
+    //     }
+    // } 
     
     render() { 
         return ( 
