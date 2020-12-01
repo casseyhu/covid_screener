@@ -53,6 +53,7 @@ class TestCollection extends Component {
     }
 
     checkHandler = (event) => {
+        console.log(event.target.name)
         if (event.target.checked) {
             this.state.testsToDelete.push(event.target.name)
         } else {
@@ -148,6 +149,7 @@ class TestCollection extends Component {
                                         type={'checkbox'}
                                         name={res.testBarcode}
                                         onChange={this.checkHandler}
+                                        style={{paddingLeft:'30px'}}
                                     /> </td>
                                     <td>{res.employeeID}</td>
                                     <td>{res.testBarcode}</td>

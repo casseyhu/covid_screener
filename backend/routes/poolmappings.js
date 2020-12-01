@@ -36,7 +36,10 @@ app.post('/add', (req, res) => {
 
 // Deletes an entire pool and respective mappings, but employee tests remain
 app.delete('/delete', (req, res) => {    
-    const poolBarcode = req.body.poolBarcode;
+    const pools = req.body.poolsToDelete;
+
+    // TODO: Delete the set of selected pools. 
+    // poolsToDelete = ['POOL01', 'POOL02', 'POOL03', ...]
     var DELETE_QUERY = `DELETE FROM Pool WHERE poolBarcode = ?`;
     connection.query(DELETE_QUERY, poolBarcode, (err, result) => {
         if(err) {
@@ -47,6 +50,9 @@ app.delete('/delete', (req, res) => {
             res.send(result)
         }
     })
+
+
+    
 })
 
 

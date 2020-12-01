@@ -31,17 +31,12 @@ class PoolConstructor extends Component {
             poolBarcode: this.state.poolBarcode,
             barcodeSet: this.state.barcodeSet
         }).then(() => {
+            this.props.parentCallback([this.state.poolBarcode, this.state.barcodeSet])
             this.setState({
                 poolBarcode: '',
                 testBarcode: '',
                 barcodeSet: [],
             });
-            // Gets all the new poolsets AFTER the addition of the new pool into the db.
-            // Passes the data from GET back to parent (pool_mapping page) to force
-            // reload of the pool map table component
-            axios.get('/pools/all').then((response) => {
-                this.props.parentCallback(response.data)
-            })
         })
     }
 
@@ -78,7 +73,7 @@ class PoolConstructor extends Component {
         return(
             <div className='poolConstructor'>
                 <div className='divTitle'>
-                    <h3> New Pool </h3>
+                    <h4><strong> New Pool </strong></h4>
                 </div>
                 <form className='poolAdditionForm verticalFlex' id='poolAdditionForm'>
                     <div className='form-group row' style={{width:'inherit'}}>

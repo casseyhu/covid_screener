@@ -134,18 +134,17 @@ p{
 
 .poolConstructor {
     display: flex;
-    /* position: relative;   */
     flex-direction: column;
     align-items: center;
     overflow: auto;
     min-width: 500px;
-    width: 25%;
+    /* width: 25%; */
     min-height: 270px;
     max-height: 810px;
     height: auto;
     /* margin: 10px; */
     background-color: #fafafa;
-    border-radius: 30px;
+    border-radius: 15px;
     box-shadow: 0px 6px 15px -2px rgba(0,0,0,0.15);
     align-self: flex-start;
     position: absolute;
@@ -153,17 +152,27 @@ p{
     left: 100px;
 }
 
-.divTitle{
-    /* align-items: center; */
-    /* position: absolute; */
-    /* left: 0; */
-    /* top: 0; */
+.poolTable {
+    min-width: 1000px;
+    min-height: 270px;
+    max-height: 810px;
+    position: absolute;
+    top: 100px;
+    left: 800px;
+    overflow: auto;
+
+    /* Uncomment the following to see the maxheight of the div */ 
+    /* height: 810px;
+    background-color: white; */
+}
+
+.divTitle {
     width: 500px;
     height: auto;
     background-color: #6bc2c5;
     color:white;
     padding: 10px 0px 0px 0px;
-    margin-top: px
+    /* margin-top: px */
 }
 
 
