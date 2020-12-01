@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PoolConstructor from '../components/PoolConstructor'
-import PoolTable from '../components/PoolTable'
+import PoolConstructor from '../components/PoolConstructor';
+import PoolTable from '../components/PoolTable';
 import axios from 'axios';
 
 class PoolMapping extends Component {
@@ -45,10 +45,10 @@ class PoolMapping extends Component {
 
     render() {
         return (
-            <div className='horizontalFlex' style={{height:'100vh',  backgroundColor:'#c6e3f7'}}>
-                <PoolConstructor parentCallback={this.newPoolSubmission} style={{position:'absolute', top:'100px', left:'50px'}}/>
-                <PoolTable allPools={this.state.existingPools} style={{position:'absolute', top:'100px', left:'500px'}}/>
-                {/* <PoolTable /> */}
+            <div className='poolContainer' >
+                {/* <h2> Pool Mapping </h2> */}
+                <PoolConstructor parentCallback={this.newPoolSubmission} />
+                <PoolTable allPools={this.state.existingPools} />
             </div>   
         )
     }

@@ -49,7 +49,7 @@ class LoginContainer extends Component {
                 <div className='LoginBackground background'/>
                 
                 {this.state.error === 1 && 
-                <div class="alert alert-danger alert-dismissible" style={{width:'420px'}}>
+                <div class="alert alert-danger alert-dismissible loginError" style={{width:'420px'}}>
                     <a href="#" class="close" data-dismiss="alert" aria-label="close" onClick={this.alertDismiss}>&times;</a>
                     Invalid email or password.
                 </div>}

@@ -60,8 +60,8 @@ class PoolTable extends Component {
     
     render() { 
         return ( 
-            <div className='poolTable'>
-                <table className='table-two-col' style={{margin:'0px', width:'1000px', backgroundColor: 'white'}}>
+            <div className='poolTableContainer'>
+                <table className='table-two-col' >
                     <thead>
                         <tr>
                             <th>

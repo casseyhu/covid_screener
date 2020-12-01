@@ -71,11 +71,12 @@ class PoolConstructor extends Component {
 
     render() {
         return(
+            <>
             <div className='poolConstructor'>
                 <div className='divTitle'>
                     <h4><strong> New Pool </strong></h4>
                 </div>
-                <form className='poolAdditionForm verticalFlex' id='poolAdditionForm'>
+                <form className='poolAdditionForm verticalFlex' >
                     <div className='form-group row' style={{width:'inherit'}}>
                         <label htmlFor='poolBarcode' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Pool Barcode</label>
                         <div className="col" style={{paddingRight:'0'}}>
@@ -111,6 +112,7 @@ class PoolConstructor extends Component {
                 <input type="submit" form='poolAdditionForm' className="btn btn-outline-dark" style={{margin:'0 15px 15px 15px'}} 
                     onClick={this.submitHandler} value="Submit Pool"></input>
             </div>
+            </>
         )
     }
 }
