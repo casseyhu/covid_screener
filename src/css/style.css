@@ -175,24 +175,61 @@ p{
     padding: 10px 0px 0px 0px;
     /* margin-top: px */
 }
-
-
-
+.employeeBody {
+    background-color: #17255a;
+    margin: 0 auto;
+    height: 100vh;
+    width: 100vw;
+}
+.employeeBody h2{
+    font-family: 'Heebo';
+    font-weight: bold;
+    font-size: 50px;
+}
+.employeeWrapper {
+    padding-top: 50px;
+}
+.employeeContainer {
+    background: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 10px;
+    max-width: 60%;
+    max-height: 100%;
+    padding: 50px;
+    border-radius: 18px;
+    align-content: center;
+    justify-content: center;
+    box-shadow: 0px 3px 10px -2px rgba(0,0,0,0.35);
+}
+.employeeTopSvg{
+    position: absolute;
+    z-index: 0;
+    top: 0;
+}
+.employeeSvg{
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+}
 /* TABLES */
 .table-two-col {
     border-collapse: collapse;
-    margin: auto;
+    margin: 0 0 0 0;
     margin-top: 40px;
     font-size: 1em;
-    width: 800px;
+    width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    overflow: hidden;
+    overflow: auto;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 .table-two-col thead tr {
     /* c4adc9 */
-    background-color: #6bc2c5;
+    background-color: #142d70;
     color: white;
     text-align: left;
     font-weight: bold;
@@ -208,7 +245,7 @@ p{
     background-color: rgb(250, 250, 250);
 }
 .table-two-col tbody tr:last-of-type {
-    border-bottom: 2px solid #6bc2c5;
+    border-bottom: 2px solid #142d70;
 }
 
 /* #newPoolTable {
