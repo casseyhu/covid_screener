@@ -1,7 +1,7 @@
 /* ------------------- CONSTANT VARIABLES ------------------- */
 :root {
-    --main-background: #6A81EF;
-    --login-background: #123472;
+    --main-background: #010a38;
+    --login-background: #010a38;
     --login-gradient: linear-gradient(to right, #313a5e, #4049c7, #003cff);
     --button-gradient: linear-gradient(to right, #313a5e, #313bce, #003cff);
 }
@@ -251,16 +251,12 @@ button:focus {
     letter-spacing: 1px;
     color: rgb(0, 0, 0);
 }
-
-/*  Caused errors with the TRASH_DELETE logo, 
-    editing it to be a class styling. */
 .bkgdSvg{
     z-index:0;
     position: absolute;
     bottom: 0;
     max-height: 100%;
     max-width: 100%;
-
 }
 .loginContBtn {
     background-image: var(--button-gradient);
@@ -278,6 +274,7 @@ button:focus {
     background-position: right;
 }
 
+/* ------------------- EMPLOYEE HOME STYLING ------------------- */
 .employeeBody {
     background-color: #17255a;
     margin: 0 auto;
