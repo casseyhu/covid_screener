@@ -60,10 +60,10 @@ class LoginContainer extends Component {
                         <input className='loginInput' type='email' placeholder='Email' onChange={this.emailHandler}></input>
                         <input className='loginInput' type='password' placeholder='Password' onChange={this.passwordHandler}></input>
                         <div>
-                            <button type='button' className='btn btn-outline-primary' style={{'width':'100px'}}
+                            <button type='button' className='loginContBtn'
                                 onClick={this.backHandler}>Back</button>
-                            <input type='submit' className='btn btn-outline-primary' value='Sign In' 
-                                style={{margin:'10px', width:'100px'}}></input>
+                            <input type='submit' className='loginContBtn' value='Sign In' 
+                                style={{ 'margin-left':'20px'}}></input>
                         </div>    
                     </form>
                 </div>
