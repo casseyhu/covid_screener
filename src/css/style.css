@@ -277,3 +277,44 @@ button:focus {
 .loginContBtn:hover{
     background-position: right;
 }
+
+.employeeBody {
+    background-color: #17255a;
+    margin: 0 auto;
+    height: 100vh;
+    width: 100vw;
+}
+.employeeBody h2{
+    font-family: 'Heebo';
+    font-weight: bold;
+    font-size: 50px;
+}
+.employeeWrapper {
+    padding-top: 50px;
+}
+.employeeContainer {
+    background: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 10px;
+    max-width: 60%;
+    max-height: 100%;
+    padding: 50px;
+    border-radius: 18px;
+    align-content: center;
+    justify-content: center;
+    box-shadow: 0px 3px 10px -2px rgba(0,0,0,0.35);
+}
+.employeeTopSvg{
+    position: absolute;
+    z-index: 0;
+    top: 0;
+}
+.employeeSvg{
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+}
