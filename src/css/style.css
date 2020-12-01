@@ -1,28 +1,46 @@
+/* ------------------- CONSTANT VARIABLES ------------------- */
+:root {
+    --main-background: #6A81EF;
+    --login-background: #123472;
+    --login-gradient: linear-gradient(to right, #313a5e, #4049c7, #003cff);
+    --button-gradient: linear-gradient(to right, #313a5e, #313bce, #003cff);
+}
+
+/* ------------------- TAG STYLING ------------------- */
 html, body {
     height: 100vh;
     font-family: 'Heebo';
 }
-
 h2{
     font-size: 45px;
+    text-align: center;
+}
+p{
+    font-size: 15px;
+    letter-spacing: 0.5px;
 }
 button:focus {
     border: none;
     outline: none;
 }
 
-p{
-    font-size: 15px;
-    letter-spacing: 0.5px;
+
+/* ------------------- BACKGROUND STYLING ------------------- */
+.mainBackground {
+    background-color: var(--main-background);
+}
+.LoginBackground {
+    background-color: var(--login-background);
 }
 
+
+/* -------------------  CONTAINER STYLING ------------------- */
 .verticalFlex, .loginForm, .loginBox, .testCollectionForm, .divTitle {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-
 .horizontalFlex {
     display: flex;
     /* justify-content: center; */
@@ -30,40 +48,6 @@ p{
     justify-content: left;
     flex-direction: row;
 }
-
-.poolAdditionForm {
-    width: 450px;
-    /* height: 200px; */
-    margin: 20px 20px 0 20px;
-}
-
-/* .loginForm{
-    width: 90%;
-} */
-
-/* Login input styling */
-.loginInput{
-    margin: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #cacaca;
-    border-radius: 5px;
-    width: 350px;
-    height: 40px;
-    padding: 10px;
-    background-color: #fff;
-    outline: none;
-    transition: 0.5s;
-    letter-spacing: 1px;
-}
-
-.loginInput:focus{
-    border: 2px solid #2865dd; /* pretty good blue: #96d2f2 */ 
-}
-
-.loginForm {
-    padding: 10px
-}
-
 .main-container {
     position: relative;
     height: 100vh;
@@ -74,17 +58,7 @@ p{
     right: 0;
     bottom: 0;
     left: 0;
-    background-size: cover;
-    background-repeat: no-repeat;
 }
-.mainBackground {
-    /* background: url(../images/polygon.jpg); if u r particularly attached to the bg images lmk lol*/
-    background-color: #6A81EF;
-}
-.LoginBackground {
-    background-color: #123472;
-}
-
 .main-container .loginBox {
     position: relative;
     z-index: 1;
@@ -95,126 +69,107 @@ p{
     -webkit-box-shadow: 0px 6px 15px -2px rgba(0,0,0,0.45); 
     box-shadow: 0px 3px 10px -2px rgba(0,0,0,0.35);
 }
-
-.loginError {
-    background-color: #ff4545; /*ff2e2e*/
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    padding: 10px 10px 0px 10px;
-    color: white;
-    border-radius: 5px;
-    width: 450px;
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-  }
-  
-  @keyframes shake {
-    10%, 90% {
-      transform: translate3d(-1px, 0, 0);
-    }
-    20%, 80% {
-      transform: translate3d(2px, 0, 0);
-    }
-    30%, 50%, 70% {
-      transform: translate3d(-4px, 0, 0);
-    }
-    40%, 60% {
-      transform: translate3d(4px, 0, 0);
-    }
+.testCollectionContainer {
+    min-height: 100vh;
+    padding: 2rem 0rem;
 }
-
-.testCollectionForm {
-    width: 450px;
-    height: 200px;
-    margin: 0px;
+.poolContainer {
+    /* display: flex; */
+    /* flex-flow: row wrap; */
+    min-height: 100vh;
+    padding: 2rem;
 }
-
-.poolConstructor {
+.poolConstructor {  /* new pool box */
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: auto;
-    min-width: 500px;
-    /* width: 25%; */
-    min-height: 270px;
-    max-height: 810px;
-    height: auto;
-    /* margin: 10px; */
-    background-color: #fafafa;
     border-radius: 15px;
+    max-height: 75vh;
+    width: 450px;
+    /* margin: 2rem; */
+    margin: auto;
+    background-color: #fafafa;
     box-shadow: 0px 6px 15px -2px rgba(0,0,0,0.15);
-    align-self: flex-start;
-    position: absolute;
-    top: 100px;
-    left: 100px;
 }
-
-.poolTable {
-    min-width: 1000px;
-    min-height: 270px;
+.poolTableContainer {
+    min-width: 500px;
+    /* min-height: 270px;
     max-height: 810px;
-    position: absolute;
-    top: 100px;
-    left: 800px;
-    overflow: auto;
+    overflow: auto; */
 
     /* Uncomment the following to see the maxheight of the div */ 
     /* height: 810px;
     background-color: white; */
 }
+@media screen and (max-width: 1100px){
+/* ... */
+}
+
+
 
 .divTitle {
-    width: 500px;
-    height: auto;
+    width: 100%;
     background-color: #6bc2c5;
     color:white;
     padding: 10px 0px 0px 0px;
-    /* margin-top: px */
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
-.employeeBody {
-    background-color: #17255a;
-    margin: 0 auto;
-    height: 100vh;
-    width: 100vw;
+
+
+/* ------------------- FORM STYLING ------------------- */
+.loginForm {
+    padding: 10px
 }
-.employeeBody h2{
-    font-family: 'Heebo';
-    font-weight: bold;
-    font-size: 50px;
+.testCollectionForm {
+    width: 450px;
+    height: 200px;
+    margin: auto;
 }
-.employeeWrapper {
-    padding-top: 50px;
+.poolAdditionForm {
+    width: 100%;
+    padding: 20px 20px 0 20px;
 }
-.employeeContainer {
-    background: white;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    text-align: center;
-    margin: 0 auto;
-    margin-top: 10px;
-    max-width: 60%;
-    max-height: 100%;
-    padding: 50px;
-    border-radius: 18px;
-    align-content: center;
-    justify-content: center;
-    box-shadow: 0px 3px 10px -2px rgba(0,0,0,0.35);
+.loginInput{
+    margin: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #cacaca;
+    border-radius: 5px;
+    width: 350px;
+    height: 40px;
+    padding: 10px;
+    outline: none;
+    transition: 0.5s;
+    letter-spacing: 1px;
 }
-.employeeTopSvg{
-    position: absolute;
-    z-index: 0;
-    top: 0;
+.loginInput:focus{
+    border: 2px solid #2865dd; 
 }
-.employeeSvg{
-    position: absolute;
-    z-index: 0;
-    bottom: 0;
+
+
+
+/* ------------------- ALERT STYLING ------------------- */
+.loginError {
+    animation: shake .4s linear;
 }
+@keyframes shake {
+    8%, 41% {
+        transform: translateX(-7px);
+    }
+    25%, 58% {
+        transform: translateX(7px);
+    }
+    75% {
+        transform: translateX(-4px);
+    }
+    92% {
+        transform: translateX(4px);
+    }
+    0%, 100% {
+        transform: translateX(0);
+    }
+}
+
 /* TABLES */
 .table-two-col {
     border-collapse: collapse;
@@ -244,6 +199,9 @@ p{
 .table-two-col tbody tr:nth-of-type(even) {
     background-color: rgb(250, 250, 250);
 }
+.table-two-col tbody tr:nth-of-type(odd) {
+    background-color: white;
+}
 .table-two-col tbody tr:last-of-type {
     border-bottom: 2px solid #142d70;
 }
@@ -259,7 +217,7 @@ p{
 
 .loginBtn {
     border-radius: 10px;
-    background-image: linear-gradient(to right, #313a5e, #4049c7, #003cff);
+    background-image: var(--login-gradient);
     background-size: 200%;
     padding: 10px;
     width: 370px;
@@ -279,7 +237,7 @@ p{
     background-position: right;
 }
 .loginBox h2 {
-    font-family: Heebo;
+    /* font-family: Heebo; */
     font-size: 50px;
     font-weight: 700;
 }
@@ -305,7 +263,7 @@ p{
 
 }
 .loginContBtn {
-    background-image: linear-gradient(to right, #313a5e, #313bce, #003cff);
+    background-image: var(--button-gradient);
     background-size: 200%;
     width: 165px;
     height: 40px;
@@ -314,6 +272,7 @@ p{
     outline: none;
     color: white;
     margin-top: 20px;
+    transition: .5s;
 }
 .loginContBtn:hover{
     background-position: right;

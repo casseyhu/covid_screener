@@ -100,28 +100,26 @@ class TestCollection extends Component {
     render() {
         const { results } = this.state;
         return (
-            <div style={{height:'100vh', backgroundColor:'white', textAlign:'center', margin:'40px'}}>
+            <div className="testCollectionContainer">
                 <h2> Test Collection </h2>
-                <div className='loginForm' style={{margin:'auto'}}>
-                    <Form className='testCollectionForm'>
-                        <Form.Group as={Row}>
-                            <Form.Label column sm={5}>Employee ID</Form.Label>
-                            <Col sm={7}>
-                                <Form.Control type="text" placeholder='Ex. 100' id='employeeID' onChange={this.inputHandler}/>
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row}>
-                            <Form.Label column sm={5}>Test Barcode</Form.Label>
-                            <Col sm={7}>
-                                <Form.Control type="text" placeholder='Ex. 001' id='testBarcode' onChange={this.inputHandler}/>
-                            </Col>
-                        </Form.Group>
-                        <Button variant="outline-dark" type="submit" onClick={this.addTest} style={{width:'100px'}}>
-                            Add
-                        </Button>
-                    </Form>
+                <Form className='testCollectionForm verticalFlex'>
+                    <Form.Group as={Row}>
+                        <Form.Label column sm={5}>Employee ID</Form.Label>
+                        <Col sm={7}>
+                            <Form.Control type="text" placeholder='Ex. 100' id='employeeID' onChange={this.inputHandler}/>
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row}>
+                        <Form.Label column sm={5}>Test Barcode</Form.Label>
+                        <Col sm={7}>
+                            <Form.Control type="text" placeholder='Ex. 001' id='testBarcode' onChange={this.inputHandler}/>
+                        </Col>
+                    </Form.Group>
+                    <Button variant="outline-dark" type="submit" onClick={this.addTest} style={{width:'100px'}}>
+                        Add
+                    </Button>
+                </Form>
 
-                </div>
                 <table className='table-two-col' style={{margin:'auto'}}>
                     <thead>
                         <tr>
@@ -143,7 +141,6 @@ class TestCollection extends Component {
                             const time = datetime.toLocaleTimeString();
                             return (
                                 <tr key={`${res.employeeID} ${res.testBarcode}`}>
-                                    {/* <td><input type="checkbox" name={res.testBarcode} onChange={this.checkHandler}/></td> */}
                                     <td>
                                     <Form.Check 
                                         type={'checkbox'}
