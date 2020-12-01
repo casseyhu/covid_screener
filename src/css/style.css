@@ -315,3 +315,49 @@ button:focus {
     z-index: 0;
     bottom: 0;
 }
+
+/* ------------------- LAB HOME STYLING ------------------- */
+/* note: mediaquery's to be added */
+#labHomeCont h1 {
+    font-size: 50px;
+    font-weight: 900;
+}
+#labHomeCont a {
+    text-decoration: none;
+}
+#labHomeCont a:hover{
+    color: rgb(236, 231, 255);
+}
+.labHomeWrap {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    height: 60%;
+    width: 60%;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 18px;
+
+}
+
+#labHomeCont {
+    background-color: #0a1641;
+}
+#labHomeCont .labWave {
+    position: absolute;
+    z-index: 0;
+    max-height: 100%;
+    max-width: 100%;
+    bottom: 0;
+}
+#labHomeCont .labWaveTop {
+    position: absolute;
+    z-index: 0;
+    max-height: 100%;
+    max-width: 100%;
+    top: 0;
+}
