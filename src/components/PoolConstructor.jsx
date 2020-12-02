@@ -101,7 +101,7 @@ class PoolConstructor extends Component {
                         </tbody>
                     </table>
 
-                    <div className='form-group row' style={{width:'100%', display:'flex', alignContent:'center', alignItems:'center'}}>
+                    <div className='form-group row'>
                     <label htmlFor='testBarcode' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Test Barcode</label>
                         <div className="col" >
                             <input type='text' className="form-control" id='testBarcode'  placeholder='Ex. 100' onChange={this.inputHandler}/>
@@ -109,7 +109,7 @@ class PoolConstructor extends Component {
                         <button type='button' onClick={this.addTestBarcode} className='btn btn-success' >Add</button>
                     </div>
                 </form>
-                <input type="submit" form='poolAdditionForm' className="btn btn-outline-dark" style={{margin:'0 15px 15px 15px'}} 
+                <input type="submit" form='poolAdditionForm' className="btn btn-outline-light" style={{margin:'0 15px 15px 15px'}} 
                     onClick={this.submitHandler} value="Submit Pool"></input>
             </div>
             </>
