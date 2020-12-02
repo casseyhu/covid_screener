@@ -8,7 +8,8 @@ const LabHome = (props) => {
         <>
         <div className='verticalFlex main-container' id='labHomeCont'>
             <div className="labHomeWrap">
-                <h1 style={{'margin':'10px'}}>Welcome back to your lab!</h1>
+                <h1>⚗️</h1>
+                <h1 style={{'margin':'10px'}}>Lab Tech Home</h1>
                 <p>Select one to continue.</p>
                 <Link to="/labtech/collect" labid={props.labid} className="loginBtn" style={{margin:'10px'}}>Test Collection</Link>
                 <Link to="/labtech/pool" labid={props.labid} className="loginBtn" style={{margin:'10px'}}>Pool Mapping</Link>
