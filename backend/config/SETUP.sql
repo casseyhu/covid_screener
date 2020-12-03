@@ -158,6 +158,7 @@ DELETE FROM EmployeeTest WHERE (testBarcode) in ("014", "013");
 -- get all pools with list of test barcodes
 SELECT poolBarcode, GROUP_CONCAT(testBarcode separator ', ') as barcodes FROM PoolMap GROUP BY poolBarcode;
 
+
 -- add new pool with list of test barcodes
 INSERT INTO Pool VALUES ('POOL05');
 INSERT IGNORE INTO PoolMap VALUES ('001', 'POOL05'), ('016', 'POOL05'), ('014', 'POOL05'), ('004', 'POOL05');
@@ -166,19 +167,24 @@ INSERT IGNORE INTO PoolMap VALUES ('001', 'POOL05'), ('016', 'POOL05'), ('014', 
 DELETE FROM Pool WHERE poolBarcode = 'POOL02';
 
 -- update pool mapping
-DELETE FROM PoolMap WHERE (testBarcode, poolBarcode) IN (('016','POOL05'), ('014','POOL05'));
-INSERT IGNORE 
+DELETE FROM PoolMap WHERE (testBarcode) IN ('016', '014') AND poolBarcode = 'POOL05';
+INSERT IGNORE INTO PoolMap VALUES ('014', 'POOL05'), ('123','POOL05');
 
 
+
+-- get all well mappings
+SELECT * FROM WellTesting;
 
 -- add new well pool mapping
 INSERT INTO Well VALUES ('WELL04');
 INSERT INTO WellTesting(poolBarcode, wellBarcode, result) VALUES ('POOL05', 'WELL04', 'positive');
 
--- update well result
-UPDATE WellTesting SET testingEndTime = NOW(), result = 'negative' WHERE poolBarcode = 'POOL05' AND wellBarcode = 'WELL02';
-
 -- delete well result
+DELETE FROM WellTesting WHERE wellBarcode = 'WELL04';
+
+-- update well result
+UPDATE WellTesting SET testingEndTime = NOW(), result = 'negative' WHERE poolBarcode = 'POOL05' AND wellBarcode = 'WELL04';
+
 
 
 
@@ -190,8 +196,6 @@ SELECT * FROM Pool;
 SELECT * FROM Well;
 SELECT * FROM WellTesting;
 SELECT * FROM EmployeeTest;
-
-SELECT * FROM Pool, PoolMap;
 
 
 INSERT INTO Pool VALUES ('POOL4');
