@@ -12,21 +12,10 @@ class PoolConstructor extends Component {
         }
     }
 
-    componentDidMount(){
-        // console.log("Pool Constructor mounted:")
-        // this.setState({poolBarcode: 400, barcodeSet: [100,200,300, 4, 5, 6, 7, 8, 9]}, () => {
-        //     console.log("States of pool constructor: ", this.state, "|", this.state.poolBarcode, "|", this.state.testBarcodes)
-        // })
-    }
-
     // Can do some error check where each test barcode must be a number. 
-    // For now, ignoring. 
     submitHandler = (event) => {
         event.preventDefault();
         console.log("Submitting new pool");
-
-        // TODO: Submitting passes in the (1) pool barcode and (2) LIST of test barcodes.
-        //       To be handled in backend when submitting (must INSERT each (PoolBarcode, TestBarcode) pair. )
         axios.post('/pools/add', {
             poolBarcode: this.state.poolBarcode,
             barcodeSet: this.state.barcodeSet
@@ -54,8 +43,6 @@ class PoolConstructor extends Component {
     }
 
     deleteHandler(index) {
-        // Delete the specific item from the state of testBarcodes
-        console.log(index)
         let newBarcodeSet = [...this.state.barcodeSet];
         newBarcodeSet.splice(index, 1);
         this.setState({barcodeSet: newBarcodeSet});
@@ -63,15 +50,14 @@ class PoolConstructor extends Component {
 
     addTestBarcode = (event) => {
         event.preventDefault();
-        console.log("Adding new test Barcode")
+        console.log("Adding new test Barcode");
         let newTestBarcodes = [...this.state.barcodeSet];
-        newTestBarcodes.push(this.state.testBarcode)
-        this.setState({barcodeSet: newTestBarcodes})
+        newTestBarcodes.push(this.state.testBarcode);
+        this.setState({barcodeSet: newTestBarcodes});
     }
 
     render() {
         return(
-            <>
             <div className='poolConstructor'>
                 <div className='divTitle'>
                     <h4><strong> New Pool </strong></h4>
@@ -112,7 +98,6 @@ class PoolConstructor extends Component {
                 <input type="submit" form='poolAdditionForm' className="btn btn-info" style={{margin:'0 15px 15px 15px'}} 
                     onClick={this.submitHandler} value="Submit Pool"></input>
             </div>
-            </>
         )
     }
 }

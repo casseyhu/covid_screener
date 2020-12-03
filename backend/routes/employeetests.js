@@ -4,6 +4,10 @@ const app = express();
 
 
 // Get all test results for specific employee
+
+// TODO: Each EmployeeID can have multiple test barcodes. Fix!
+// https://piazza.com/class/ke1ckdikw1kuz?cid=258
+
 app.get('/for', (req, res) => {
     if (req.session.loggedin){
         const SELECT_RESULTS_QUERY = 'SELECT E.collectionTime, W.result \

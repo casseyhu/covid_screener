@@ -77,7 +77,7 @@ button:focus {
     background-color: var(--main-background);
     color: white;
 }
-.poolContainer {
+.poolContainer, .wellContainer{
     /* display: flex; */
     /* flex-flow: row wrap; */
     min-height: 100vh;
@@ -88,7 +88,7 @@ button:focus {
     position: relative;
     z-index: 1;
 }
-.poolConstructor {  /* new pool box */
+.poolConstructor, .wellConstructor {  /* new pool box */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -122,6 +122,13 @@ button:focus {
 /* ... */
 }
 
+#wellConstructor-btns{
+    width: inherit;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 40px;
+}
 
 
 .divTitle {
@@ -144,7 +151,7 @@ button:focus {
     height: 200px;
     margin: auto;
 }
-.poolAdditionForm {
+.poolAdditionForm, .wellAdditionForm{
     width: 100%;
     padding: 20px 20px 0 20px;
 }

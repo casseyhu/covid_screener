@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import * as Constants from '../constants';
 import Form from 'react-bootstrap/Form';
+import WellConstructor from '../components/WellConstructor'
+import WellTable from '../components/WellTable'
 
 // General info:
 // 1. Only one pool goes into a well. So, we can assume (Well, Pool) is a unique key?
@@ -14,16 +16,15 @@ class WellTesting extends Component {
     constructor(props){
         super(props);
         this.state = {
-            wellTests: []
+            newWell: []
         };
     }
     
     getWells() {
         axios.get('/wells/all').then((response) => {
-            console.log(response.data)
             this.setState({
-                wellTests: response.data
-            })
+                newWell: response.data
+            }, () => {console.log(this.state.newWell)})
         })
     }
 
@@ -32,14 +33,15 @@ class WellTesting extends Component {
     }
     
     
-    
+    newWellSubmission = (newWellValues) => {
+        console.log(newWellValues);
+    }
     
     render () {
         return (
-            <div style={{ 'display':'flex', 'justifyContent':'center', 'alignItems':'center', 
-                'height':'100vh', 'flexDirection':'column', 'backgroundColor':'#c6e3f7'}}>
-                <h1 style={{'margin':'10px'}}>Well Testing</h1>
-                <h1> BLAH BLAH </h1>
+            <div className='wellContainer'>
+                <WellConstructor parentCallback={this.newWellSubmission}/>
+                <WellTable newWell={this.state.newWell}/>
             </div>   
         )
     }
