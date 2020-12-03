@@ -109,7 +109,7 @@ class PoolConstructor extends Component {
                         <button type='button' onClick={this.addTestBarcode} className='btn btn-success' >Add</button>
                     </div>
                 </form>
-                <input type="submit" form='poolAdditionForm' className="btn btn-outline-light" style={{margin:'0 15px 15px 15px'}} 
+                <input type="submit" form='poolAdditionForm' className="btn btn-info" style={{margin:'0 15px 15px 15px'}} 
                     onClick={this.submitHandler} value="Submit Pool"></input>
             </div>
             </>

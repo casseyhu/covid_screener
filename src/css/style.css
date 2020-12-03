@@ -107,7 +107,8 @@ button:focus {
     /* min-height: 270px;
     max-height: 810px;
     overflow: auto; */
-
+    border: inherit;
+    border-radius: 5px;
     /* Uncomment the following to see the maxheight of the div */ 
     /* height: 810px;
     background-color: white; */

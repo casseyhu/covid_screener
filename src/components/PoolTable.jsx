@@ -15,7 +15,8 @@ class PoolTable extends Component {
     getPools() {
         axios.get('/pools/all').then((response) => {
             this.setState({
-                pools: response.data
+                pools: response.data,
+                poolsToDelete: []
             })
         })
     }
@@ -25,30 +26,22 @@ class PoolTable extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        // this.setState({pools: this.props.allPools})
         if(this.props.allPools !== prevProps.allPools) {
             this.getPools();
         }
     } 
 
-    deletePool() {
+    deletePool = (e) => {
         if (this.state.poolsToDelete.length === 0) return
         axios.delete('/pools/delete', { data: {
             poolsToDelete: this.state.poolsToDelete
         }}).then((response) => {
-            console.log('deleted tests')
-            axios.get('/pools/all').then((response) => {
-                this.setState({
-                    results: response.data,
-                    testsToDelete: []
-                })
-            });
+            this.getPools()
         })
 
     }
 
     checkHandler = (event) => {
-        // console.log(event.target.name)
         if (event.target.checked) {
             this.state.poolsToDelete.push(event.target.name)
         } else {
@@ -61,16 +54,17 @@ class PoolTable extends Component {
     render() { 
         return ( 
             <div className='poolTableContainer'>
-                <table className='table-two-col' >
+                <table className='table-two-col' style={{borderColor:'inherit'}}>
                     <thead>
-                        <tr>
-                            <th>
+                        <tr> 
+                            <th scope='col' style={{width:'20%'}}>
                                 <button onClick={this.deletePool} style={{backgroundColor:'transparent', border:'none', color:'white'}}>
                                 {Constants.TRASH_ICON}
                                 </button>
                             </th>
-                            <th scope='col'>Pool Barcode</th>
-                            <th scope='col'>Test Barcodes</th>
+                            <th scope='col' style={{width:'25%'}}>Pool Barcode</th>
+                            <th scope='col' style={{width:'45%'}}>Test Barcodes</th>
+                            <th scope='col' style={{width:'5%'}}></th>
                         </tr>
                     </thead>
                     <tbody style={{textAlign:'left'}}>
@@ -86,6 +80,9 @@ class PoolTable extends Component {
                                     /> </td>
                                     <td>{res.poolBarcode}</td>
                                     <td>{res.barcodes}</td>
+                                    <td style={{alignContent:'center', alignItems:'center'}}>
+                                        <button type='button' className='btn btn-info' style={{width:'inherit'}} value='Edit'>Edit</button>
+                                    </td>
                                 </tr>
                             )
                         })}
