@@ -104,14 +104,8 @@ button:focus {
 }
 .poolTableContainer {
     min-width: 500px;
-    /* min-height: 270px;
-    max-height: 810px;
-    overflow: auto; */
     border: inherit;
     border-radius: 5px;
-    /* Uncomment the following to see the maxheight of the div */ 
-    /* height: 810px;
-    background-color: white; */
 }
 .poolTableContainer .table-two-col {
     border: 1px solid white;
@@ -122,12 +116,14 @@ button:focus {
 /* ... */
 }
 
-#wellConstructor-btns{
-    width: inherit;
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px 40px;
+.dropdown-toggle, .dropdown-menu , .dropdown-toggle:hover {
+    background: white;
+    color: black;
+    width: 100%;
+    text-align: center;
+}
+.dropdown-toggle:focus {
+    background: white;
 }
 
 
@@ -242,13 +238,6 @@ button:focus {
     border: 1px solid white;
 }
 
-/* #newPoolTable {
-    margin: auto;
-    width: inherit;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-top: 2px solid #6bc2c5;
-} */
 
 
 .loginBtn {

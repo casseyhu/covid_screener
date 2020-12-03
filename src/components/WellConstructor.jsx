@@ -1,6 +1,9 @@
 import React, { Component } from 'react'; 
 import axios from 'axios';
 import * as Constants from '../constants'
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 class WellConstructor extends Component {
     constructor(props) {
@@ -8,9 +11,11 @@ class WellConstructor extends Component {
         this.state = {
             wellBarcode: '',
             poolBarcode: '', 
-            result: ''
+            result: '',
+            selected: 'In Progress'
         }
     }
+    
 
     // Adds the new well to the db
     submitHandler = (event) => {
@@ -28,6 +33,13 @@ class WellConstructor extends Component {
             default:
                 break
         }
+    }
+
+    setResult = (e) => {
+        this.setState({
+            result: e.target.id,
+            selected: e.target.innerHTML
+        })
     }
 
     newWellHandler = (event) => {
@@ -68,24 +80,23 @@ class WellConstructor extends Component {
                             <input type='text' className="form-control" id='poolBarcode' placeholder='Ex. POOL01' onChange={this.inputHandler}/>
                         </div>
                     </div>
-
-                    <div id='wellConstructor-btns'>
-
-                        {/* TODO: Plug in functionality for dropbar */}
-                        <div class="dropdown">
-                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Status
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <button class="dropdown-item" type="button">In Progress</button>
-                                <button class="dropdown-item" type="button">Positive</button>
-                                <button class="dropdown-item" type="button">Negative</button>
-                            </div>
+                    <div className='form-group row' style={{width:'inherit'}}>
+                        <label htmlFor='dropdown' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Select Status</label>
+                        <div className="col" style={{paddingRight:'0'}}>
+                            <DropdownButton
+                                // variant='info'
+                                menuAlign="right"
+                                title={this.state.selected}
+                                id="dropdown"
+                            >
+                            <Dropdown.Item href="#/action-1" id='inprogress' onClick={this.setResult}>In Progress</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2" id='positive' onClick={this.setResult}>Positive</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3" id='negative' onClick={this.setResult}>Negative</Dropdown.Item>
+                            </DropdownButton>
                         </div>
-                        
-                        <button className='btn btn-info' type='button' onClick={this.newWellHandler} value='add'>Add</button>
                     </div>
-
+                    <button className='btn btn-info' type='button' style={{marginBottom:'1rem', width:'20%'}}
+                    onClick={this.newWellHandler} value='add'>Add</button>
                 </form>
             </div>
         )
