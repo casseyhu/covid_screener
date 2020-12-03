@@ -6,7 +6,7 @@ const EmployeeLogin = (props) => {
     const redirectPath = (response) => {
         props.history.push({
             pathname: '/employee/home',
-            employeeID: response.data[0].employeeId
+            employeeid: response
         })
     }
 
