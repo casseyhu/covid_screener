@@ -26,7 +26,7 @@ class PoolTable extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if(this.props.allPools !== prevProps.allPools) {
+        if(this.props.refreshToggle !== prevProps.refreshToggle) {
             this.getPools();
         }
     } 
@@ -36,8 +36,6 @@ class PoolTable extends Component {
         // Should we make an alertbox that tells the user that 
         // Deleting 'x' set of pools would delete the corresponding wells
         // in welltesting? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-
         if (this.state.poolsToDelete.length === 0) return
         axios.delete('/pools/delete', { data: {
             poolsToDelete: this.state.poolsToDelete

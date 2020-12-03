@@ -14,18 +14,16 @@ class PoolConstructor extends Component {
 
     // Can do some error check where each test barcode must be a number. 
     submitHandler = (event) => {
-        event.preventDefault();
-        console.log("Submitting new pool");
         axios.post('/pools/add', {
             poolBarcode: this.state.poolBarcode,
             barcodeSet: this.state.barcodeSet
         }).then(() => {
-            this.props.parentCallback([this.state.poolBarcode, this.state.barcodeSet])
             this.setState({
                 poolBarcode: '',
                 testBarcode: '',
                 barcodeSet: [],
             });
+            this.props.refresh();
         })
     }
 
@@ -87,7 +85,7 @@ class PoolConstructor extends Component {
                         </tbody>
                     </table>
 
-                    <div className='form-group row'>
+                    <div className='form-group row' style={{width:'inherit'}}>
                     <label htmlFor='testBarcode' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Test Barcode</label>
                         <div className="col" >
                             <input type='text' className="form-control" id='testBarcode'  placeholder='Ex. 100' onChange={this.inputHandler}/>

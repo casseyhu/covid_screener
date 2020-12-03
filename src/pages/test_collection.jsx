@@ -20,20 +20,9 @@ class TestCollection extends Component {
     }
 
     componentDidMount() {
-        let labID = '';
-        /* Save the labID to local storage on the first load. */
-        if(this.props.location.labID){
-            localStorage.setItem('labID', JSON.stringify(this.props.location.labID));
-            labID = this.props.location.labID;
-        }
-        else {
-            labID = localStorage.getItem('labID');
-            if(labID) labID = JSON.parse(labID);
-        }
-
         axios.get('/tests/all').then((response) => {
             this.setState({
-                labID: labID,
+                labID: localStorage.getItem('labID'),
                 results: response.data
             })
         });

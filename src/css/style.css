@@ -81,7 +81,7 @@ button:focus {
     /* display: flex; */
     /* flex-flow: row wrap; */
     min-height: 100vh;
-    padding: 2rem;
+    padding: 2rem 0;
     background-color: var(--main-background);
     justify-content: center;
     align-content: center;

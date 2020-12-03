@@ -16,7 +16,8 @@ class WellTesting extends Component {
     constructor(props){
         super(props);
         this.state = {
-            newWell: []
+            labID: '',
+            refresh: false
         };
     }
     
@@ -29,19 +30,22 @@ class WellTesting extends Component {
     }
 
     componentDidMount(){ 
-        this.getWells();
+        this.setState({
+            labID: localStorage.getItem('labID')
+        })
     }
     
-    
-    newWellSubmission = (newWellValues) => {
-        console.log(newWellValues);
+    refresh = () => {
+        this.setState({
+            refresh: !this.state.refresh
+        })
     }
     
     render () {
         return (
             <div className='wellContainer'>
-                <WellConstructor parentCallback={this.newWellSubmission}/>
-                <WellTable newWell={this.state.newWell}/>
+                <WellConstructor refresh={this.refresh}/>
+                <WellTable refreshToggle={this.state.refresh}/>
             </div>   
         )
     }

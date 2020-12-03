@@ -3,7 +3,7 @@ import axios from 'axios';
 import * as Constants from '../constants'
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+
 
 class WellConstructor extends Component {
     constructor(props) {
@@ -19,7 +19,20 @@ class WellConstructor extends Component {
 
     // Adds the new well to the db
     submitHandler = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
+        console.log("Adding new well");
+        axios.post('/wells/add', {
+            wellBarcode: this.state.wellBarcode,
+            poolBarcode: this.state.poolBarcode,
+            result: this.state.result
+        }).then(() => {
+            this.setState({
+                wellBarcode: '', 
+                poolBarcode: '', 
+                result: ''
+            })
+            this.props.refresh();
+        })
     }
 
     inputHandler = (event) => {
@@ -40,25 +53,6 @@ class WellConstructor extends Component {
             result: e.target.id,
             selected: e.target.innerHTML
         })
-    }
-
-    newWellHandler = (event) => {
-        event.preventDefault();
-        console.log("Adding new well");
-        axios.post('/wells/add', {
-            wellBarcode: this.state.wellBarcode,
-            poolBarcode: this.state.poolBarcode,
-            result: this.state.result
-        }).then(() => {
-            //   Unsure if this works entirely. 
-            this.props.parentCallback([this.state])
-            this.setState({
-                wellBarcode: '', 
-                poolBarcode: '', 
-                result: ''
-            })
-        })
-
     }
 
     render() {
@@ -96,7 +90,7 @@ class WellConstructor extends Component {
                         </div>
                     </div>
                     <button className='btn btn-info' type='button' style={{marginBottom:'1rem', width:'20%'}}
-                    onClick={this.newWellHandler} value='add'>Add</button>
+                    onClick={this.submitHandler} value='add'>Add</button>
                 </form>
             </div>
         )
