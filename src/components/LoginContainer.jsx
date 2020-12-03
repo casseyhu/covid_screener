@@ -17,7 +17,7 @@ class LoginContainer extends Component {
             if ( response.data === '' ){
                 this.setState({error : 1});
             } else {
-                this.props.redirectPath(response.data[0].labID);
+                this.props.redirectPath(response);
             }
         })
     }
