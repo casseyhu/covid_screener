@@ -18,9 +18,9 @@ connection.connect(err => {
     if (err) return err
 });
 
-// checks if employee exists before adding
-app.get('/ping/:employeeID', (req, res) => {
-    connection.query('SELECT firstName FROM Employee WHERE employeeID = ?', req.params.employeeID, (err, result) => {
+// checks if barcode exists before adding
+app.get('/ping/:testBarcode', (req, res) => {
+    connection.query('SELECT testBarcode FROM EmployeeTest WHERE testBarcode = ?', req.params.testBarcode, (err, result) => {
         res.send(result)
     })
 })

@@ -299,6 +299,17 @@ button:focus {
     background-position: right;
 }
 
+.addBarcodeBtn {
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    transition: transform .2s;
+}
+.addBarcodeBtn:hover {
+    transform: scale(1.2,1.2);
+}
+
 /* ------------------- EMPLOYEE HOME STYLING ------------------- */
 .employeeBody {
     background-color: var(--main-background);

@@ -14,9 +14,11 @@ class PoolConstructor extends Component {
 
     // Can do some error check where each test barcode must be a number. 
     submitHandler = (event) => {
+        const { poolBarcode, barcodeSet } = this.state;
+        if (poolBarcode === '' || barcodeSet === []) return
         axios.post('/pools/add', {
-            poolBarcode: this.state.poolBarcode,
-            barcodeSet: this.state.barcodeSet
+            poolBarcode: poolBarcode,
+            barcodeSet: barcodeSet
         }).then(() => {
             this.setState({
                 poolBarcode: '',
@@ -49,9 +51,12 @@ class PoolConstructor extends Component {
     addTestBarcode = (event) => {
         event.preventDefault();
         console.log("Adding new test Barcode");
-        let newTestBarcodes = [...this.state.barcodeSet];
-        newTestBarcodes.push(this.state.testBarcode);
-        this.setState({barcodeSet: newTestBarcodes});
+        axios.get(`/ping/${this.state.testBarcode}`).then((response) => {
+            if (response.data.length > 0) {
+                let newTestBarcodes = [...this.state.barcodeSet, this.state.testBarcode];
+                this.setState({barcodeSet: newTestBarcodes});
+            }
+        })
     }
 
     render() {
@@ -70,7 +75,7 @@ class PoolConstructor extends Component {
                     <h4>Test Barcodes</h4>
 
                     <table className='form-group row' id='newPoolTable' style={{margin:'auto', marginBottom:'20px', width:'inherit', 
-                        borderTop: '2px solid #6bc2c5', borderBottom: '2px solid #6bc2c5', overflow:'scroll', maxHeight:'300px' }}>
+                        borderTop: '2px solid white', borderBottom: '2px solid white', overflow:'scroll', maxHeight:'300px' }}>
                         <tbody style={{textAlign:'left'}}>
                             {this.state.barcodeSet.map((res, index) => {
                                 return (
@@ -78,7 +83,7 @@ class PoolConstructor extends Component {
                                         <td style={{width:'100px'}}>{index+1}</td>
                                         <td style={{width:'250px'}}>{res}</td>
                                         <td style={{width:'50px'}}><button type='button' className='btn btn-danger' style={{backgroundColor:'transparent', border:'none', color:'red'}}
-                                            onClick={() => {this.deleteHandler(this.state.barcodeSet.indexOf(res))}}>{Constants.TRASH_ICON}</button></td> 
+                                            onClick={() => {this.deleteHandler(this.state.barcodeSet.indexOf(res))}}>{Constants.DELETE_ICON}</button></td> 
                                     </tr>
                                 )
                             })}
@@ -90,7 +95,7 @@ class PoolConstructor extends Component {
                         <div className="col" >
                             <input type='text' className="form-control" id='testBarcode'  placeholder='Ex. 100' onChange={this.inputHandler}/>
                         </div>
-                        <button type='button' onClick={this.addTestBarcode} className='btn btn-success' >Add</button>
+                        <button type='button' onClick={this.addTestBarcode} className='addBarcodeBtn'>{Constants.ADD_ICON}</button>
                     </div>
                 </form>
                 <input type="submit" form='poolAdditionForm' className="btn btn-info" style={{margin:'0 15px 15px 15px'}} 
