@@ -42,10 +42,4 @@ app.get('/labemployee', (req, res) => {
 })
 
 
-// app.get('/api/test', (req, res) => {
-//     connection.query('SELECT * FROM LabEmployee', (err, result) => {
-//         res.send(result);
-//     })
-// })
-
 module.exports = app;

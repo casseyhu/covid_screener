@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(session({
-	secret: 'secretkey',
+	secret: 'secret',
 	resave: true,
 	saveUninitialized: true
 }));

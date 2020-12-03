@@ -159,10 +159,10 @@ class TestCollection extends Component {
                         })}
                     </tbody>
                 </table>
-                <svg className="collectWave"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><defs><linearGradient id="labGrad"  x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#1D3397" /><stop offset="100%" stop-color="#031050" /></linearGradient>
-                </defs><path fill="url(#labGrad)"  fill-opacity="1" d="M0,256L40,224C80,192,160,128,240,96C320,64,400,64,480,58.7C560,53,640,43,720,42.7C800,43,880,53,960,48C1040,43,1120,21,1200,53.3C1280,85,1360,171,1400,213.3L1440,256L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path></svg>
-                <svg className="collectWave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><defs><linearGradient id="labGrad"  x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#03135F" /><stop offset="100%" stop-color="#031050" /></linearGradient>
-                </defs><path fill="url(#labGrad)" fill-opacity="1" d="M0,192L34.3,165.3C68.6,139,137,85,206,101.3C274.3,117,343,203,411,224C480,245,549,203,617,160C685.7,117,754,75,823,90.7C891.4,107,960,181,1029,213.3C1097.1,245,1166,235,1234,240C1302.9,245,1371,267,1406,277.3L1440,288L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"></path></svg>
+                <svg className="collectWave"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><defs><linearGradient id="labGrad"  x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#1D3397" /><stop offset="100%" stopColor="#031050" /></linearGradient>
+                </defs><path fill="url(#labGrad)"  fillOpacity="1" d="M0,256L40,224C80,192,160,128,240,96C320,64,400,64,480,58.7C560,53,640,43,720,42.7C800,43,880,53,960,48C1040,43,1120,21,1200,53.3C1280,85,1360,171,1400,213.3L1440,256L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path></svg>
+                <svg className="collectWave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><defs><linearGradient id="labGrad"  x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#03135F" /><stop offset="100%" stopColor="#031050" /></linearGradient>
+                </defs><path fill="url(#labGrad)" fillOpacity="1" d="M0,192L34.3,165.3C68.6,139,137,85,206,101.3C274.3,117,343,203,411,224C480,245,549,203,617,160C685.7,117,754,75,823,90.7C891.4,107,960,181,1029,213.3C1097.1,245,1166,235,1234,240C1302.9,245,1371,267,1406,277.3L1440,288L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"></path></svg>
             </div>
         )
     }
