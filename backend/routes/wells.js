@@ -4,12 +4,11 @@ const app = express();
 
 // Get all the well and pool mappings
 app.get('/all', (req, res) => {
-    const SELECT_RESULTS_QUERY = ``;
+    const SELECT_RESULTS_QUERY = `SELECT * FROM WellTesting`;
     connection.query(SELECT_RESULTS_QUERY, (err, result) => {
         if(err) {
             res.send(null)
         } else {
-            console.log("PoolMapping all results: ", result)
             res.send(result)
         }
     })

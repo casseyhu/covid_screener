@@ -32,6 +32,12 @@ class PoolTable extends Component {
     } 
 
     deletePool = (e) => {
+        // https://piazza.com/class/ke1ckdikw1kuz?cid=263
+        // Should we make an alertbox that tells the user that 
+        // Deleting 'x' set of pools would delete the corresponding wells
+        // in welltesting? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
         if (this.state.poolsToDelete.length === 0) return
         axios.delete('/pools/delete', { data: {
             poolsToDelete: this.state.poolsToDelete
