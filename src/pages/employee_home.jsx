@@ -10,9 +10,12 @@ class EmployeeHome extends Component {
     }
 
     componentDidMount() {
-        const { employeeid } = this.props.location
+        let { employeeid } = this.props.location
         if (employeeid){
             localStorage.setItem('employeeID', employeeid);
+        }
+        else {
+            employeeid = localStorage.getItem('employeeID');
         }
         axios.get('/tests/for', {params: {
             employeeID: employeeid

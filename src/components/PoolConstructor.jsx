@@ -72,6 +72,13 @@ class PoolConstructor extends Component {
                             <input type='text' className="form-control" id='poolBarcode' placeholder='Ex. POOL01' onChange={this.inputHandler}/>
                         </div>
                     </div>
+                    <div className='form-group row' style={{width:'inherit'}}>
+                    <label htmlFor='testBarcode' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Test Barcode</label>
+                        <div className="col" >  
+                            <input type='text' className="form-control" id='testBarcode'  placeholder='Ex. 100' onChange={this.inputHandler}/>
+                        </div>
+                        <button type='button' onClick={this.addTestBarcode} className='addBarcodeBtn'>{Constants.ADD_ICON}</button>
+                    </div>
                     <h4>Test Barcodes</h4>
 
                     <table className='form-group row' id='newPoolTable' style={{margin:'auto', marginBottom:'20px', width:'inherit', 
@@ -89,14 +96,6 @@ class PoolConstructor extends Component {
                             })}
                         </tbody>
                     </table>
-
-                    <div className='form-group row' style={{width:'inherit'}}>
-                    <label htmlFor='testBarcode' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Test Barcode</label>
-                        <div className="col" >  
-                            <input type='text' className="form-control" id='testBarcode'  placeholder='Ex. 100' onChange={this.inputHandler}/>
-                        </div>
-                        <button type='button' onClick={this.addTestBarcode} className='addBarcodeBtn'>{Constants.ADD_ICON}</button>
-                    </div>
                 </form>
                 <input type="submit" form='poolAdditionForm' className="btn btn-info" style={{margin:'0 15px 15px 15px'}} 
                     onClick={this.submitHandler} value="Submit Pool"></input>
