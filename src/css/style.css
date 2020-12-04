@@ -213,12 +213,13 @@ button:focus {
     /* c4adc9 */
     background-color: #142d70;
     color: white;
-    text-align: left;
+    /* text-align: left; */
     font-weight: bold;
 }
 .table-two-col th, td {
     padding: 10px 15px;
     vertical-align: middle;
+    /* float: left; */
 }
 .table-two-col tbody tr {
     border-bottom: 1px solid lightgrey;
@@ -237,6 +238,24 @@ button:focus {
     margin: 0 auto;
     color: black;
     border: 1px solid white;
+}
+
+.table-fixed .col2 {
+    width: 20%;
+}
+.table-fixed .col4 {
+    width: 40%;
+}
+.table-fixed .col2a {
+    width: 22%;
+}
+.table-fixed tbody {
+    display: block;
+    height: 55vh;
+    overflow-y: auto;
+}
+.table-fixed tr {
+    display: block;
 }
 
 

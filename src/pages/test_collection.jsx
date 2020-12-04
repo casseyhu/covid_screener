@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import * as Constants from '../constants';
 import axios from 'axios';
-import moment from 'moment';
 import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
+import CollectionConstructor from '../components/CollectionConstructor';
+
 
 class TestCollection extends Component {
     constructor(props) {
@@ -13,8 +11,6 @@ class TestCollection extends Component {
         this.state = {
             labID: '',
             results: [],
-            employeeID: '',
-            testBarcode: '',
             testsToDelete: []
         }
     }
@@ -28,21 +24,7 @@ class TestCollection extends Component {
         });
     }
 
-    inputHandler = (event) => {
-        switch (event.target.id) {
-            case ('employeeID'):
-                this.setState({employeeID: event.target.value});
-                break
-            case ('testBarcode'):
-                this.setState({testBarcode: event.target.value});
-                break
-            default:
-                break
-        }
-    }
-
     checkHandler = (event) => {
-        console.log(event.target.name)
         if (event.target.checked) {
             this.state.testsToDelete.push(event.target.name)
         } else {
@@ -52,26 +34,13 @@ class TestCollection extends Component {
         }
     }
 
-    /* Adding new Test Collection to EmployeeTest and display */
-    addTest = (event) => {
-        event.preventDefault();
-        axios.post('/tests/add', {
-            testBarcode: this.state.testBarcode,
-            employeeID: this.state.employeeID,
-            collectionTime: moment().format('YYYY-MM-DD hh:mm:ss'),
-            collectedBy: this.state.labID
-        }).then((response) => {
-            /* RELOAD AND RERENDER THE PAGE TO SHOW THE NEWLY ADDED TEST */
-            axios.get('/tests/all').then((response) => {
-                this.setState({
-                    results: response.data
-                })
-            });
+    setResult = (res) => {
+        this.setState({
+            results: res
         })
     }
 
     removeTest = (e) => {
-        console.log(this.state.testsToDelete)
         if (this.state.testsToDelete.length === 0) return
         axios.delete('/tests/delete', { data: {
             testsToDelete: this.state.testsToDelete
@@ -91,39 +60,24 @@ class TestCollection extends Component {
         return (
             <div className="testCollectionContainer">
                 <h2> Test Collection 🧪</h2>
-                <Form className='testCollectionForm verticalFlex'>
-                    <Form.Group as={Row}>
-                        <Form.Label column sm={5}>Employee ID</Form.Label>
-                        <Col sm={7}>
-                            <Form.Control type="text" placeholder='Ex. 100' id='employeeID' onChange={this.inputHandler}/>
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row}>
-                        <Form.Label column sm={5}>Test Barcode</Form.Label>
-                        <Col sm={7}>
-                            <Form.Control type="text" placeholder='Ex. 001' id='testBarcode' onChange={this.inputHandler}/>
-                        </Col>
-                    </Form.Group>
-                    <Button variant="outline-light" type="submit" onClick={this.addTest} style={{width:'100px'}}>
-                        Add
-                    </Button>
-                </Form>
-
-                <table className='table-two-col'>
+                <CollectionConstructor labID={this.state.labID} callback={this.setResult}/>
+                {/* table-two-col  */}
+                <table className='table-two-col table-fixed' style={{width:'60%', minWidth:'700px'}}>
                     <thead>
                         <tr>
                             <th>
-                                <button onClick={this.removeTest} style={{backgroundColor:'transparent', border:'none', color:'white'}}>
+                                <button onClick={this.removeTest} 
+                                style={{backgroundColor:'transparent', border:'none', color:'white'}}>
                                 {Constants.TRASH_ICON}
                                 </button>
                             </th>
-                            <th scope='col'>Employee ID</th>
-                            <th scope='col'>Test Barcode</th>
-                            <th scope='col'>Lab ID</th>
-                            <th scope='col'>Collection Time</th>
+                            <th className='col2'>Employee ID</th>
+                            <th className='col2'>Test Barcode</th>
+                            <th className='col2'>Lab ID</th>
+                            <th className='col4'>Collection Time</th>
                         </tr>
                     </thead>
-                    <tbody style={{'textAlign':'left'}}>
+                    <tbody style={{}}>
                         {results.map(res => {
                             const datetime = new Date(res.collectionTime);
                             const date = datetime.toLocaleDateString();
@@ -137,11 +91,11 @@ class TestCollection extends Component {
                                         onChange={this.checkHandler}
                                         style={{paddingLeft:'30px'}}
                                     /> </td>
-                                    <td>{res.employeeID}</td>
-                                    <td>{res.testBarcode}</td>
-                                    <td>{res.collectedBy}</td>
-                                    <td style={{whiteSpace:'pre-line'}}>
-                                    {(date.slice(0,-4) + date.slice(-2)).padStart(8, '0') + (time.slice(0,-6) + time.slice(-3)).padStart(12, "\u00a0")}
+                                    <td className='col2a'>{res.employeeID}</td>
+                                    <td className='col2'>{res.testBarcode}</td>
+                                    <td className='col2'>{res.collectedBy}</td>
+                                    <td className='col4' style={{whiteSpace:'pre-line'}}>
+                                    {(date.slice(0,-4) + date.slice(-2)).padStart(8, "\u00a0") + (time.slice(0,-6) + time.slice(-3)).padStart(12, "\u00a0")}
                                     </td>
                                 </tr>
                             )
