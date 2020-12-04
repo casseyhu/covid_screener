@@ -4,10 +4,6 @@ const app = express();
 
 
 // Get all test results for specific employee
-
-// TODO: Each EmployeeID can have multiple test barcodes. Fix!
-// https://piazza.com/class/ke1ckdikw1kuz?cid=258
-
 app.get('/for', (req, res) => {
     const SELECT_RESULTS_QUERY = 'SELECT E.collectionTime, W.result \
     FROM EmployeeTest E, PoolMap P, WellTesting W \
@@ -24,7 +20,7 @@ app.get('/for', (req, res) => {
 
 // Get all tests collected from the DB
 app.get('/all', (req, res) => {
-    const SELECT_RESULTS_QUERY = 'SELECT * FROM EmployeeTest';
+    const SELECT_RESULTS_QUERY = `SELECT * FROM EmployeeTest ORDER BY ${req.query.sortBy}`;
     connection.query(SELECT_RESULTS_QUERY, (err, result) => {
         if (err) res.send(null)
         else {
@@ -37,9 +33,9 @@ app.get('/all', (req, res) => {
 
 // Adds new test under user with labID
 app.post('/add', (req, res) => {
-    const ADD_TEST_QUERY = 'INSERT INTO EmployeeTest VALUES (?, ?, ?, ?)';
+    const ADD_TEST_QUERY = 'INSERT INTO EmployeeTest VALUES (?, ?, NOW(), ?)';
     connection.query(ADD_TEST_QUERY, [req.body.testBarcode, req.body.employeeID, 
-        req.body.collectionTime, req.body.collectedBy], (err, result) => {
+        req.body.collectedBy], (err, result) => {
         if (err) res.send(null)
         else res.send(result)
     })

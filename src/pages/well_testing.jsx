@@ -43,10 +43,13 @@ class WellTesting extends Component {
 
     render () {
         return (
-            <div className='wellContainer'>
-                <WellConstructor refresh={this.refresh} wellToEdit={this.state.wellToEdit}/>
-                <WellTable refreshToggle={this.state.refresh} editWell={this.editWell}/>
-            </div>   
+            <div className='wellOuterWrap'>
+                <h2>Well Testing 🧫</h2>
+                <div className='wellContainer'>
+                    <WellConstructor refresh={this.refresh} wellToEdit={this.state.wellToEdit}/>
+                    <WellTable refresh={this.refresh} refreshToggle={this.state.refresh} editWell={this.editWell}/>
+                </div>   
+            </div>
         )
     }
 }
