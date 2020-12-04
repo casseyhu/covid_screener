@@ -26,6 +26,13 @@ button:focus {
     border: none;
     outline: none;
 }
+button {
+    color: white;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
 
 
 /* ------------------- BACKGROUND STYLING ------------------- */
@@ -260,12 +267,13 @@ button:focus {
 .table-fixed .col4 {
     width: 40%;
 }
-.table-fixed .col2a {
+.table-fixed .cola {
+    padding-left: 30px;
     width: 22%;
 }
 .table-fixed tbody {
     display: block;
-    height: 55vh;
+    height: 50vh;
     overflow-y: auto;
 }
 .table-fixed tr {

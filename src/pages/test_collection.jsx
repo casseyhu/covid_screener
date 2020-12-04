@@ -11,14 +11,20 @@ class TestCollection extends Component {
         this.state = {
             labID: '',
             results: [],
+            sortBy: 'employeeID',
             testsToDelete: []
         }
     }
 
     componentDidMount() {
-        axios.get('/tests/all').then((response) => {
+        this.setState({
+            labID: localStorage.getItem('labID')
+        }, () => this.refreshTable())
+    }
+
+    refreshTable = () => {
+        axios.get('/tests/all', {params: { sortBy: this.state.sortBy } }).then((response) => {
             this.setState({
-                labID: localStorage.getItem('labID'),
                 results: response.data
             })
         });
@@ -34,10 +40,10 @@ class TestCollection extends Component {
         }
     }
 
-    setResult = (res) => {
+    handleSort = (e) => {
         this.setState({
-            results: res
-        })
+            sortBy: e.target.id
+        }, () => this.refreshTable())
     }
 
     removeTest = (e) => {
@@ -46,12 +52,9 @@ class TestCollection extends Component {
             testsToDelete: this.state.testsToDelete
         }}).then((response) => {
             console.log('deleted tests')
-            axios.get('/tests/all').then((response) => {
-                this.setState({
-                    results: response.data,
-                    testsToDelete: []
-                })
-            });
+            this.setState({
+                testsToDelete: []
+            }, () => this.refreshTable())
         })
     }
 
@@ -60,8 +63,8 @@ class TestCollection extends Component {
         return (
             <div className="testCollectionContainer">
                 <h2> Test Collection 🧪</h2>
-                <CollectionConstructor labID={this.state.labID} callback={this.setResult}/>
-                {/* table-two-col  */}
+                <CollectionConstructor labID={this.state.labID} sortBy={this.state.sortBy} 
+                refreshTable={this.refreshTable}/>
                 <table className='table-two-col table-fixed' style={{width:'60%', minWidth:'700px'}}>
                     <thead>
                         <tr>
@@ -71,13 +74,13 @@ class TestCollection extends Component {
                                 {Constants.TRASH_ICON}
                                 </button>
                             </th>
-                            <th className='col2'>Employee ID</th>
-                            <th className='col2'>Test Barcode</th>
-                            <th className='col2'>Lab ID</th>
-                            <th className='col4'>Collection Time</th>
+                            <th className='col2'><button id='employeeID' onClick={this.handleSort}>Employee ID</button></th>
+                            <th className='col2'><button id='testBarcode' onClick={this.handleSort}>Test Barcode</button></th>
+                            <th className='col2'><button id='collectedBy' onClick={this.handleSort}>Lab ID</button></th>
+                            <th className='col4'><button id='collectionTime' onClick={this.handleSort}>Collection Time</button></th>
                         </tr>
                     </thead>
-                    <tbody style={{}}>
+                    <tbody>
                         {results.map(res => {
                             const datetime = new Date(res.collectionTime);
                             const date = datetime.toLocaleDateString();
@@ -91,7 +94,7 @@ class TestCollection extends Component {
                                         onChange={this.checkHandler}
                                         style={{paddingLeft:'30px'}}
                                     /> </td>
-                                    <td className='col2a'>{res.employeeID}</td>
+                                    <td className='cola'>{res.employeeID}</td>
                                     <td className='col2'>{res.testBarcode}</td>
                                     <td className='col2'>{res.collectedBy}</td>
                                     <td className='col4' style={{whiteSpace:'pre-line'}}>

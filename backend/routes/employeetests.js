@@ -20,7 +20,7 @@ app.get('/for', (req, res) => {
 
 // Get all tests collected from the DB
 app.get('/all', (req, res) => {
-    const SELECT_RESULTS_QUERY = 'SELECT * FROM EmployeeTest ORDER BY EmployeeID';
+    const SELECT_RESULTS_QUERY = `SELECT * FROM EmployeeTest ORDER BY ${req.query.sortBy}`;
     connection.query(SELECT_RESULTS_QUERY, (err, result) => {
         if (err) res.send(null)
         else {

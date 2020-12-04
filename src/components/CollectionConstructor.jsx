@@ -19,14 +19,12 @@ const CollectionConstructor = (props) => {
             collectedBy: props.labID
         }).then((response) => {
             /* RELOAD AND RERENDER THE PAGE TO SHOW THE NEWLY ADDED TEST */
-            axios.get('/tests/all').then((response) => {
-                props.callback(response.data)
-            });
+            props.refreshTable()
         })
     }
 
     return (
-        <Form className='testCollectionForm verticalFlex' style={{width:'50%'}}>
+        <Form className='testCollectionForm verticalFlex' style={{width:'550px'}}>
             <Form.Group as={Row} style={{width:'60%'}}>
                 <Form.Label style={{width:'30%'}}>Employee ID</Form.Label>
                 <Col>
