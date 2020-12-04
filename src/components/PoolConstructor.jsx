@@ -92,7 +92,7 @@ class PoolConstructor extends Component {
 
                     <div className='form-group row' style={{width:'inherit'}}>
                     <label htmlFor='testBarcode' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Test Barcode</label>
-                        <div className="col" >
+                        <div className="col" >  
                             <input type='text' className="form-control" id='testBarcode'  placeholder='Ex. 100' onChange={this.inputHandler}/>
                         </div>
                         <button type='button' onClick={this.addTestBarcode} className='addBarcodeBtn'>{Constants.ADD_ICON}</button>

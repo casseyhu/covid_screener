@@ -29,8 +29,9 @@ app.post('/add', (req, res) => {
 
 // Delete well
 app.delete('/delete', (req, res) => {
-    const DELETE_QUERY = `DELETE FROM WellTesting WHERE wellBarcode = ?`;
-    connection.query(DELETE_QUERY, [req.body.wellBarcode], (err, result) => {
+    const WELLS_QUERY = req.body.wellsToDelete.map(p => `'${p}'`).join();
+    const DELETE_QUERY = `DELETE FROM WellTesting WHERE (wellBarcode) IN (${WELLS_QUERY})`;
+    connection.query(DELETE_QUERY, (err, result) => {
         if (err) res.send(err)
         else res.send(result)
     })

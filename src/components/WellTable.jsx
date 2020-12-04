@@ -32,11 +32,22 @@ class WellTable extends Component {
     } 
 
     deleteWell = (event) => {
-
+        if (this.state.wellsToDelete.length === 0) return
+        axios.delete('/wells/delete', { data: {
+            wellsToDelete: this.state.wellsToDelete
+        }}).then((response) => {
+            this.getWells()
+        })
     }
 
     checkHandler = (event) => {
-
+        if (event.target.checked) {
+            this.state.wellsToDelete.push(event.target.name)
+        } else {
+            this.setState({
+                wellsToDelete: this.state.wellsToDelete.filter(obj => obj !== event.target.name)
+            })
+        }
     }
 
     editWell = (e) => {
