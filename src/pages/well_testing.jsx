@@ -41,6 +41,7 @@ class WellTesting extends Component {
                     <WellConstructor refresh={this.refresh}/>
                     <WellTable refresh={this.refresh} refreshToggle={this.state.refresh}/>
                 </div>   
+                {Constants.POOL_WAVE}
             </div>
         )
     }

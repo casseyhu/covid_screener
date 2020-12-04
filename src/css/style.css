@@ -15,8 +15,8 @@ h2{
     text-align: center;
     font-weight: bold;
     font-size: 50px;
-    color: white;
     letter-spacing: 0.5px;
+    color: white;
 }
 p{
     font-size: 15px;
@@ -307,6 +307,7 @@ button {
     /* font-family: Heebo; */
     font-size: 50px;
     font-weight: 700;
+    color: black;
 }
 .footer{
     z-index: 1;
