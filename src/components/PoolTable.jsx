@@ -42,7 +42,6 @@ class PoolTable extends Component {
         }}).then((response) => {
             this.getPools()
         })
-
     }
 
     checkHandler = (event) => {

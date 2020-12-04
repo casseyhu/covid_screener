@@ -102,12 +102,12 @@ button:focus {
     border: 1px solid white;
     color: white;
 }
-.poolTableContainer {
+.poolTableContainer, .wellTableContainer{
     min-width: 500px;
     border: inherit;
     border-radius: 5px;
 }
-.poolTableContainer .table-two-col {
+.poolTableContainer .table-two-col, .wellTableContainer .table-two-col{
     border: 1px solid white;
     max-width: 70%;
     margin: 30px auto; 
@@ -124,6 +124,7 @@ button:focus {
 }
 .dropdown-toggle:focus {
     background: white;
+    color: black;
 }
 
 
