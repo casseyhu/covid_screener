@@ -129,9 +129,9 @@ button {
     border: inherit;
     border-radius: 5px;
 }
-.poolTableContainer .table-two-col, .wellTableContainer .table-two-col{
-    border: 1px solid white;
+.poolTableContainer .table-two-col, .wellTableContainer .table-two-col {
     margin: 30px auto; 
+    border: 1px solid white!important;
 }
 @media screen and (max-width: 1100px){
 /* ... */
@@ -304,9 +304,6 @@ button {
     background-position: right;
 }
 .loginBox h2 {
-    /* font-family: Heebo; */
-    font-size: 50px;
-    font-weight: 700;
     color: black;
 }
 .footer{
@@ -361,9 +358,7 @@ button {
     width: 100vw;
 }
 .employeeBody h2{
-    font-family: 'Heebo';
-    font-weight: bold;
-    font-size: 50px;
+    color: black;
 }
 .employeeWrapper {
     padding-top: 50px;
