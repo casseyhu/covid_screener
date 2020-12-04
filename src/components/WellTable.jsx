@@ -12,7 +12,6 @@ class WellTable extends Component {
         }
     }
 
-
     getWells() {
         axios.get('/wells/all').then((response) => { 
             this.setState({
@@ -25,6 +24,12 @@ class WellTable extends Component {
     componentDidMount(){
         this.getWells()
     }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.refreshToggle !== prevProps.refreshToggle) {
+            this.getWells();
+        }
+    } 
 
     deleteWell = (event) => {
 

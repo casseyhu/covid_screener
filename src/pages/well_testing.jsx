@@ -20,14 +20,6 @@ class WellTesting extends Component {
             refresh: false
         };
     }
-    
-    getWells() {
-        axios.get('/wells/all').then((response) => {
-            this.setState({
-                newWell: response.data
-            }, () => {console.log(this.state.newWell)})
-        })
-    }
 
     componentDidMount(){ 
         this.setState({
@@ -45,7 +37,7 @@ class WellTesting extends Component {
         return (
             <div className='wellContainer'>
                 <WellConstructor refresh={this.refresh}/>
-                <WellTable refreshToggle={this.state.refresh}/>
+                <WellTable refresh={this.refresh} refreshToggle={this.state.refresh}/>
             </div>   
         )
     }

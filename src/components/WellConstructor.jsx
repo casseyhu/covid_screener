@@ -11,7 +11,7 @@ class WellConstructor extends Component {
         this.state = {
             wellBarcode: '',
             poolBarcode: '', 
-            result: '',
+            result: 'in progress',
             selected: 'In Progress'
         }
     }
@@ -19,8 +19,6 @@ class WellConstructor extends Component {
 
     // Adds the new well to the db
     submitHandler = (event) => {
-        // event.preventDefault();
-        console.log("Adding new well");
         axios.post('/wells/add', {
             wellBarcode: this.state.wellBarcode,
             poolBarcode: this.state.poolBarcode,
@@ -29,7 +27,8 @@ class WellConstructor extends Component {
             this.setState({
                 wellBarcode: '', 
                 poolBarcode: '', 
-                result: ''
+                result: 'in progress',
+                selected:'In Progress'
             })
             this.props.refresh();
         })
@@ -49,6 +48,7 @@ class WellConstructor extends Component {
     }
 
     setResult = (e) => {
+        e.preventDefault();
         this.setState({
             result: e.target.id,
             selected: e.target.innerHTML
@@ -83,7 +83,7 @@ class WellConstructor extends Component {
                                 title={this.state.selected}
                                 id="dropdown"
                             >
-                            <Dropdown.Item href="#/action-1" id='inprogress' onClick={this.setResult}>In Progress</Dropdown.Item>
+                            <Dropdown.Item href="#/action-1" id='in progress' onClick={this.setResult}>In Progress</Dropdown.Item>
                             <Dropdown.Item href="#/action-2" id='positive' onClick={this.setResult}>Positive</Dropdown.Item>
                             <Dropdown.Item href="#/action-3" id='negative' onClick={this.setResult}>Negative</Dropdown.Item>
                             </DropdownButton>
