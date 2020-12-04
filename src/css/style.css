@@ -304,9 +304,6 @@ button {
     background-position: right;
 }
 .loginBox h2 {
-    /* font-family: Heebo; */
-    font-size: 50px;
-    font-weight: 700;
     color: black;
 }
 .footer{
@@ -361,9 +358,7 @@ button {
     width: 100vw;
 }
 .employeeBody h2{
-    font-family: 'Heebo';
-    font-weight: bold;
-    font-size: 50px;
+    color: black;
 }
 .employeeWrapper {
     padding-top: 50px;
