@@ -28,12 +28,16 @@ class PoolMapping extends Component {
 
     render() {
         return (
-            <div className='poolContainer' >
-                {/* <h2> Pool Mapping </h2> */}
-                <PoolConstructor refresh={this.refresh} />
-                <PoolTable refreshToggle={this.state.refresh} />
+            <>
+            <div className='poolOuterWrap'>
+                <h2>Pool Mapping 🗺</h2>
+                <div className='poolContainer'>
+                    <PoolConstructor refresh={this.refresh} />
+                    <PoolTable refreshToggle={this.state.refresh} />
+                </div>  
                 {Constants.POOL_WAVE}
-            </div>   
+            </div>
+            </> 
         )
     }
 }
