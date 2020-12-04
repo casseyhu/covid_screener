@@ -15,6 +15,28 @@ class WellConstructor extends Component {
             selected: 'In Progress'
         }
     }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.wellToEdit !== prevProps.wellToEdit) {
+            let select = 'In Progress';
+            switch(this.props.wellToEdit['result']) {
+                case('negative'):
+                    select = 'Negative'
+                    break;
+                case('positive'):
+                    select = 'Positive'
+                    break;
+            }
+            this.setState({
+                wellBarcode: this.props.wellToEdit['wellBarcode'],
+                poolBarcode: this.props.wellToEdit['poolBarcode'],
+                result: this.props.wellToEdit['result'],
+                selected: select
+            }, () => {
+                // Set the innerhtml of the textboxes, the dropbar. 
+            })
+        }
+    } 
     
 
     // Adds the new well to the db
@@ -33,6 +55,8 @@ class WellConstructor extends Component {
             this.props.refresh();
         })
     }
+
+    
 
     inputHandler = (event) => {
         switch (event.target.id) {
@@ -65,13 +89,13 @@ class WellConstructor extends Component {
                     <div className='form-group row' style={{width:'inherit'}}>
                         <label htmlFor='wellBarcode' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Well Barcode</label>
                         <div className="col" style={{paddingRight:'0'}}>
-                            <input type='text' className="form-control" id='wellBarcode' placeholder='Ex. WELL01' onChange={this.inputHandler}/>
+                            <input type='text' value={this.state.wellBarcode} className="form-control" id='wellBarcode' placeholder='Ex. WELL01' onChange={this.inputHandler}></input>
                         </div>
                     </div>
                     <div className='form-group row' style={{width:'inherit'}}>
                         <label htmlFor='poolBarcode' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Pool Barcode</label>
                         <div className="col" style={{paddingRight:'0'}}>
-                            <input type='text' className="form-control" id='poolBarcode' placeholder='Ex. POOL01' onChange={this.inputHandler}/>
+                            <input type='text' value={this.state.poolBarcode} className="form-control" id='poolBarcode' placeholder='Ex. POOL01' onChange={this.inputHandler}/>
                         </div>
                     </div>
                     <div className='form-group row' style={{width:'inherit'}}>

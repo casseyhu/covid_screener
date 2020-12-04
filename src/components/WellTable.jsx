@@ -50,8 +50,9 @@ class WellTable extends Component {
         }
     }
 
-    editWell = (e) => {
-
+    editWell(well) {
+        console.log(well);
+        this.props.editWell(well);        
     }
 
     render() {
@@ -88,7 +89,7 @@ class WellTable extends Component {
                                     <td>{res.result}</td>
                                     <td style={{alignContent:'center', alignItems:'center'}}>
                                         <button type='button' className='btn btn-info' style={{width:'inherit'}} value='Edit'
-                                            onClick={this.editWell}>Edit</button>
+                                            onClick={() => {this.editWell(res)}}>Edit</button>
                                     </td>
                                 </tr>
                             )}

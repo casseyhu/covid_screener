@@ -17,7 +17,8 @@ class WellTesting extends Component {
         super(props);
         this.state = {
             labID: '',
-            refresh: false
+            refresh: false,
+            wellToEdit: ''
         };
     }
 
@@ -33,11 +34,18 @@ class WellTesting extends Component {
         })
     }
     
+    editWell = (well) => {
+        console.log("Editing a well");
+        this.setState({
+            wellToEdit: well
+        })
+    }
+
     render () {
         return (
             <div className='wellContainer'>
-                <WellConstructor refresh={this.refresh}/>
-                <WellTable refresh={this.refresh} refreshToggle={this.state.refresh}/>
+                <WellConstructor refresh={this.refresh} wellToEdit={this.state.wellToEdit}/>
+                <WellTable refreshToggle={this.state.refresh} editWell={this.editWell}/>
             </div>   
         )
     }
