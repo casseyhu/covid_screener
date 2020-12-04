@@ -12,7 +12,8 @@ class WellConstructor extends Component {
             wellBarcode: '',
             poolBarcode: '', 
             result: 'in progress',
-            selected: 'In Progress'
+            selected: 'In Progress',
+            editing: 0
         }
     }
 
@@ -31,7 +32,8 @@ class WellConstructor extends Component {
                 wellBarcode: this.props.wellToEdit['wellBarcode'],
                 poolBarcode: this.props.wellToEdit['poolBarcode'],
                 result: this.props.wellToEdit['result'],
-                selected: select
+                selected: select,
+                editing: 1
             }, () => {
                 // Set the innerhtml of the textboxes, the dropbar. 
             })
@@ -79,6 +81,52 @@ class WellConstructor extends Component {
         })
     }
 
+    cancelEdit = (e) => {
+        this.setState({
+            wellBarcode: '', 
+            poolBarcode: '', 
+            result: 'in progress',
+            selected:'In Progress',
+            editing: 0
+        })
+    }
+
+    saveEdit = (e) => {
+        axios.put('/wells/update', {
+            result: this.state.result,
+            wellBarcode: this.state.wellBarcode,
+            poolBarcode: this.state.poolBarcode
+        }).then(() => {
+            this.setState({
+                wellBarcode: '', 
+                poolBarcode: '', 
+                result: 'in progress',
+                selected:'In Progress',
+                editing: 0
+            })
+            this.props.refresh();
+        })
+    }
+
+    editingRender = () => {
+        if(this.state.editing) {
+            return (
+                <div stlye={{width:'inherit', display:'flex', flexDirection:'space-evenly', margin:'0px'}}>
+                    <button className='btn btn-info' type='button' style={{width:'100px', margin:'0px 5px 1rem'}}
+                        onClick={this.cancelEdit} value='add'>Cancel</button> 
+                    <button className='btn btn-info' type='button' style={{width:'100px', margin:'0px 5px 1rem'}}
+                        onClick={this.saveEdit} value='add'>Save</button> 
+                </div>
+            )
+        }
+        else {
+            return (
+                <button className='btn btn-info' type='button' style={{marginBottom:'1rem', width:'20%'}}
+                    onClick={this.submitHandler} value='add'>Add</button> 
+            )
+        }
+    }
+
     render() {
         return (
             <div className='wellConstructor'>
@@ -113,8 +161,9 @@ class WellConstructor extends Component {
                             </DropdownButton>
                         </div>
                     </div>
-                    <button className='btn btn-info' type='button' style={{marginBottom:'1rem', width:'20%'}}
-                    onClick={this.submitHandler} value='add'>Add</button>
+                    {this.editingRender()}
+                    {/* <button className='btn btn-info' type='button' style={{marginBottom:'1rem', width:'20%'}}
+                    onClick={this.submitHandler} value='add'>{this.isEditing}</button> */}
                 </form>
             </div>
         )
