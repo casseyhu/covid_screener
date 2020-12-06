@@ -1,6 +1,6 @@
 /* ------------------- CONSTANT VARIABLES ------------------- */
 :root {
-    --main-background: #1a2149;
+    --main-background: #21274d;
     --login-background: #010a38;
     --login-gradient: linear-gradient(to right, #313a5e, #4049c7, #003cff);
     --button-gradient: linear-gradient(to right, #313a5e, #313bce, #003cff);
@@ -400,7 +400,7 @@ button {
     text-decoration: none;
 }
 #labHomeCont a:hover{
-    color: rgb(236, 231, 255);
+    color: #fff;
 }
 .labHomeWrap {
     position: relative;
