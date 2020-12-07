@@ -22,6 +22,7 @@ const LabHome = (props) => {
                 <Link to="/labtech/well" className="loginBtn" style={{margin:'10px'}}>Well Testing</Link>
             </div>
             {Constants.LAB_WAVE}
+            
         </div>   
         </>
     )
