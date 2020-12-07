@@ -34,7 +34,7 @@ class EmployeeHome extends Component {
             {Constants.EMPLOYEE_TOP}
             <div className="employeeWrapper">
                 <div className="employeeContainer">
-                    <h2>🔮</h2>
+                    <h2>📫</h2>
                     <h2>Employee Home</h2>
                     <p>Here are your test results.</p>
                     <p>Employee ID: {employeeID}</p>

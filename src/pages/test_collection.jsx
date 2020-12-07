@@ -62,10 +62,10 @@ class TestCollection extends Component {
         const { results } = this.state;
         return (
             <div className="testCollectionContainer">
-                <h2> Test Collection 🧪</h2>
+                <h2> Test Collection 📝</h2>
                 <CollectionConstructor labID={this.state.labID} sortBy={this.state.sortBy} 
                 refreshTable={this.refreshTable}/>
-                <table className='table-two-col table-fixed' style={{width:'60%', minWidth:'700px'}}>
+                <table className='table-two-col table-fixed'>
                     <thead>
                         <tr>
                             <th>

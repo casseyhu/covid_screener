@@ -80,7 +80,7 @@ class PoolTable extends Component {
                                     <td>{res.poolBarcode}</td>
                                     <td>{res.barcodes}</td>
                                     {/* <td style={{alignContent:'center', alignItems:'center'}}>
-                                        <button type='button' className='btn btn-info' style={{width:'inherit'}} value='Edit'>Edit</button>
+                                        <button type='button' className='btn btn-dark' style={{width:'inherit'}} value='Edit'>Edit</button>
                                     </td> */}
                                 </tr>
                             )
