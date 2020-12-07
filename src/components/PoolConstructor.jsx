@@ -97,7 +97,7 @@ class PoolConstructor extends Component {
                         </tbody>
                     </table>
                 </form>
-                <input type="submit" form='poolAdditionForm' className="btn btn-info" style={{margin:'0 15px 15px 15px'}} 
+                <input type="submit" form='poolAdditionForm' className="btn btn-dark" style={{margin:'0 15px 15px 15px'}} 
                     onClick={this.submitHandler} value="Submit Pool"></input>
             </div>
         )

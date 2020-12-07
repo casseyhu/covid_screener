@@ -30,7 +30,7 @@ class PoolMapping extends Component {
         return (
             <>
             <div className='poolOuterWrap'>
-                <h2>Pool Mapping 🗺</h2>
+                <h2>Pool Mapping 🕰</h2>
                 <div className='poolContainer'>
                     <PoolConstructor refresh={this.refresh} />
                     <PoolTable refreshToggle={this.state.refresh} />

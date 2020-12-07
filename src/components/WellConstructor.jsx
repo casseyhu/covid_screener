@@ -121,7 +121,7 @@ class WellConstructor extends Component {
         }
         else {
             return (
-                <button className='btn btn-info' type='button' style={{marginBottom:'1rem', width:'20%'}}
+                <button className='btn btn-dark' type='button' style={{marginBottom:'1rem', width:'20%'}}
                     onClick={this.submitHandler} value='add'>Add</button> 
             )
         }
