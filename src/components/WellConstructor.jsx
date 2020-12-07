@@ -98,16 +98,16 @@ class WellConstructor extends Component {
         if(this.state.editing) {
             return (
                 <div style={{display:'flex', width:'inherit', alignItems:'center'}}>
-                    <button className='btn btn-outline-light' type='button' style={{width:'45%', margin:'0 auto 1rem auto'}}
+                    <button className='btn btn-dark' type='button' style={{width:'45%', margin:'0 auto 1rem auto'}}
                         onClick={this.resetState} value='add'>Cancel</button> 
-                    <button className='btn btn-outline-light' type='button' style={{width:'45%', margin:'0 auto 1rem auto'}}
+                    <button className='btn btn-dark' type='button' style={{width:'45%', margin:'0 auto 1rem auto'}}
                         onClick={this.saveEdit} value='add'>Save</button> 
                 </div>
             )
         }
         else {
             return (
-                <button className='btn btn-dark' type='button' style={{marginBottom:'1rem', width:'20%'}}
+                <button className='btn btn-dark' type='button' style={{marginBottom:'1rem', width:'30%'}}
                     onClick={this.submitHandler} value='add'>Add</button> 
             )
         }
