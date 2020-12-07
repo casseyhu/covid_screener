@@ -28,7 +28,6 @@ class PoolMapping extends Component {
 
     render() {
         return (
-            <>
             <div className='poolOuterWrap'>
                 <h2>Pool Mapping 🕰</h2>
                 <div className='poolContainer'>
@@ -37,7 +36,6 @@ class PoolMapping extends Component {
                 </div>  
                 {Constants.POOL_WAVE}
             </div>
-            </> 
         )
     }
 }

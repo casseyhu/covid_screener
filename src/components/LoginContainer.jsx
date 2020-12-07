@@ -49,11 +49,11 @@ class LoginContainer extends Component {
                 <div className='LoginBackground background'/>
                 
                 {this.state.error === 1 && 
-                <div class="alert alert-danger alert-dismissible loginError" style={{width:'420px'}}>
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close" onClick={this.alertDismiss}>&times;</a>
+                <div className="alert alert-danger alert-dismissible loginError" style={{width:'420px'}}>
+                    <a href="return false" className="close" data-dismiss="alert" aria-label="close" onClick={this.alertDismiss}>&times;</a>
                     Invalid email or password.
                 </div>}
-
+                
                 <div className="loginBox">
                     <h2>{userType} Login</h2>
                     <form className='loginForm' onSubmit={this.login}>
@@ -63,7 +63,7 @@ class LoginContainer extends Component {
                             <button type='button' className='loginContBtn'
                                 onClick={this.backHandler}>Back</button>
                             <input type='submit' className='loginContBtn' value='Sign In' 
-                                style={{ 'margin-left':'20px'}}></input>
+                                style={{ 'marginLeft':'20px'}}></input>
                         </div>    
                     </form>
                 </div>

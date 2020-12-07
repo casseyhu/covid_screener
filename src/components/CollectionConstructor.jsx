@@ -18,7 +18,6 @@ const CollectionConstructor = (props) => {
             employeeID: employeeID,
             collectedBy: props.labID
         }).then((response) => {
-            /* RELOAD AND RERENDER THE PAGE TO SHOW THE NEWLY ADDED TEST */
             props.refreshTable()
         })
     }
@@ -37,7 +36,7 @@ const CollectionConstructor = (props) => {
                     <Form.Control type="text" placeholder='Ex. 001' id='testBarcode' onChange={(e) => setTestBarcode(e.target.value)}/>
                 </Col>
             </Form.Group>
-            <Button variant="outline-light" type="submit" onClick={addTest} style={{width:'100px'}}>
+            <Button variant="dark" type="submit" onClick={addTest} style={{width:'100px'}}>
                 Add
             </Button>
         </Form>

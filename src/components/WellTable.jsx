@@ -15,8 +15,8 @@ class WellTable extends Component {
     getWells() {
         axios.get('/wells/all').then((response) => { 
             this.setState({
-                wells:response.data,
-                wellsToDelete : []
+                wells: response.data,
+                wellsToDelete: []
             })
         })
     }
@@ -31,11 +31,11 @@ class WellTable extends Component {
         }
     } 
 
-    deleteWell = (event) => {
+    deleteWell = () => {
         if (this.state.wellsToDelete.length === 0) return
         axios.delete('/wells/delete', { data: {
             wellsToDelete: this.state.wellsToDelete
-        }}).then((response) => {
+        }}).then( () => {
             this.getWells()
         })
     }
@@ -51,7 +51,6 @@ class WellTable extends Component {
     }
 
     editWell(well) {
-        console.log(well);
         this.props.editWell(well);        
     }
 
@@ -88,8 +87,11 @@ class WellTable extends Component {
                                     <td>{res.poolBarcode}</td>
                                     <td>{res.result}</td>
                                     <td style={{alignContent:'center', alignItems:'center'}}>
-                                        <button type='button' className='btn btn-dark' style={{width:'inherit'}} value='Edit'
-                                            onClick={() => {this.editWell(res)}}>Edit</button>
+                                        <button onClick={() => {this.editWell(res)}} style={{backgroundColor:'transparent', border:'none', color:'navy'}}>
+                                        {Constants.EDIT_ICON}
+                                        </button>
+                                        {/* <button type='button' className='btn btn-dark' style={{width:'inherit'}} value='Edit'
+                                            onClick={() => {this.editWell(res)}}>Edit</button> */}
                                     </td>
                                 </tr>
                             )}

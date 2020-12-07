@@ -12,8 +12,8 @@ class PoolConstructor extends Component {
         }
     }
 
-    // Can do some error check where each test barcode must be a number. 
-    submitHandler = (event) => {
+
+    submitHandler = () => {
         const { poolBarcode, barcodeSet } = this.state;
         if (poolBarcode === '' || barcodeSet === []) return
         axios.post('/pools/add', {
@@ -24,8 +24,9 @@ class PoolConstructor extends Component {
                 poolBarcode: '',
                 testBarcode: '',
                 barcodeSet: [],
+            }, () => {
+                this.props.refresh()
             });
-            this.props.refresh();
         })
     }
 
@@ -50,16 +51,19 @@ class PoolConstructor extends Component {
 
     addTestBarcode = (event) => {
         event.preventDefault();
-        console.log("Adding new test Barcode");
         axios.get(`/ping/${this.state.testBarcode}`).then((response) => {
             if (response.data.length > 0) {
                 let newTestBarcodes = [...this.state.barcodeSet, this.state.testBarcode];
-                this.setState({barcodeSet: newTestBarcodes});
+                this.setState({
+                    testBarcode: '',
+                    barcodeSet: newTestBarcodes
+                });
             }
         })
     }
 
     render() {
+        const { poolBarcode, testBarcode } = this.state;
         return(
             <div className='poolConstructor'>
                 <div className='divTitle'>
@@ -69,17 +73,18 @@ class PoolConstructor extends Component {
                     <div className='form-group row' style={{width:'inherit'}}>
                         <label htmlFor='poolBarcode' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Pool Barcode</label>
                         <div className="col" style={{paddingRight:'0'}}>
-                            <input type='text' className="form-control" id='poolBarcode' placeholder='Ex. POOL01' onChange={this.inputHandler}/>
+                            <input type='text' className="form-control" id='poolBarcode' value={poolBarcode}
+                                placeholder='Ex. POOL01' onChange={this.inputHandler}/>
                         </div>
                     </div>
                     <div className='form-group row' style={{width:'inherit'}}>
                     <label htmlFor='testBarcode' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Test Barcode</label>
                         <div className="col" >  
-                            <input type='text' className="form-control" id='testBarcode'  placeholder='Ex. 100' onChange={this.inputHandler}/>
+                            <input type='text' className="form-control" id='testBarcode' value={testBarcode} 
+                                placeholder='Ex. 100' onChange={this.inputHandler}/>
                         </div>
                         <button type='button' onClick={this.addTestBarcode} className='addBarcodeBtn'>{Constants.ADD_ICON}</button>
                     </div>
-                    <h4>Test Barcodes</h4>
 
                     <table className='form-group row' id='newPoolTable' style={{margin:'auto', marginBottom:'20px', width:'inherit', 
                         borderTop: '2px solid white', borderBottom: '2px solid white', overflow:'scroll', maxHeight:'300px' }}>
@@ -87,10 +92,10 @@ class PoolConstructor extends Component {
                             {this.state.barcodeSet.map((res, index) => {
                                 return (
                                     <tr key={`${res} ${index}`}>
-                                        <td style={{width:'100px'}}>{index+1}</td>
-                                        <td style={{width:'250px'}}>{res}</td>
-                                        <td style={{width:'50px'}}><button type='button' className='btn btn-danger' style={{backgroundColor:'transparent', border:'none', color:'red'}}
-                                            onClick={() => {this.deleteHandler(this.state.barcodeSet.indexOf(res))}}>{Constants.DELETE_ICON}</button></td> 
+                                        <td style={{width:'100px', padding:'2px'}}>{index+1}</td>
+                                        <td style={{width:'250px', padding:'2px'}}>{res}</td>
+                                        <td style={{width:'50px', padding:'2px'}}><button type='button' className='btn btn-danger' style={{backgroundColor:'transparent', border:'none', color:'red'}}
+                                            onClick={() => {this.deleteHandler(index)}}>{Constants.DELETE_ICON}</button></td> 
                                     </tr>
                                 )
                             })}
