@@ -1,6 +1,5 @@
 import React, { Component } from 'react'; 
 import axios from 'axios';
-import * as Constants from '../constants'
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
@@ -13,19 +12,22 @@ class WellConstructor extends Component {
             poolBarcode: '', 
             result: 'in progress',
             selected: 'In Progress',
-            editing: 0
+            editing: false
         }
     }
 
     componentDidUpdate(prevProps) {
         if(this.props.wellToEdit !== prevProps.wellToEdit) {
-            let select = 'In Progress';
-            switch(this.props.wellToEdit['result']) {
-                case('negative'):
+            let select = '';
+            switch (this.props.wellToEdit['result']) {
+                case ('negative'):
                     select = 'Negative'
                     break;
-                case('positive'):
+                case ('positive'):
                     select = 'Positive'
+                    break;
+                default:
+                    select = 'In Progress';
                     break;
             }
             this.setState({
@@ -33,32 +35,33 @@ class WellConstructor extends Component {
                 poolBarcode: this.props.wellToEdit['poolBarcode'],
                 result: this.props.wellToEdit['result'],
                 selected: select,
-                editing: 1
-            }, () => {
-                // Set the innerhtml of the textboxes, the dropbar. 
+                editing: true
             })
         }
     } 
     
+    resetState = () => {
+        this.setState({
+            wellBarcode: '', 
+            poolBarcode: '', 
+            result: 'in progress',
+            selected:'In Progress',
+            editing: false
+        }, () => {
+            this.props.refresh()
+        })
+    }
 
     // Adds the new well to the db
-    submitHandler = (event) => {
+    submitHandler = () => {
         axios.post('/wells/add', {
             wellBarcode: this.state.wellBarcode,
             poolBarcode: this.state.poolBarcode,
             result: this.state.result
         }).then(() => {
-            this.setState({
-                wellBarcode: '', 
-                poolBarcode: '', 
-                result: 'in progress',
-                selected:'In Progress'
-            })
-            this.props.refresh();
+            this.resetState();
         })
     }
-
-    
 
     inputHandler = (event) => {
         switch (event.target.id) {
@@ -81,53 +84,37 @@ class WellConstructor extends Component {
         })
     }
 
-    cancelEdit = (e) => {
-        this.setState({
-            wellBarcode: '', 
-            poolBarcode: '', 
-            result: 'in progress',
-            selected:'In Progress',
-            editing: 0
-        })
-    }
-
     saveEdit = (e) => {
         axios.put('/wells/update', {
             result: this.state.result,
             wellBarcode: this.state.wellBarcode,
             poolBarcode: this.state.poolBarcode
         }).then(() => {
-            this.setState({
-                wellBarcode: '', 
-                poolBarcode: '', 
-                result: 'in progress',
-                selected:'In Progress',
-                editing: 0
-            })
-            this.props.refresh();
+            this.resetState();
         })
     }
 
     editingRender = () => {
         if(this.state.editing) {
             return (
-                <div stlye={{width:'inherit', display:'flex', flexDirection:'space-evenly', margin:'0px'}}>
-                    <button className='btn btn-info' type='button' style={{width:'100px', margin:'0px 5px 1rem'}}
-                        onClick={this.cancelEdit} value='add'>Cancel</button> 
-                    <button className='btn btn-info' type='button' style={{width:'100px', margin:'0px 5px 1rem'}}
+                <div style={{display:'flex', width:'inherit', alignItems:'center'}}>
+                    <button className='btn btn-outline-light' type='button' style={{width:'45%', margin:'0 auto 1rem auto'}}
+                        onClick={this.resetState} value='add'>Cancel</button> 
+                    <button className='btn btn-outline-light' type='button' style={{width:'45%', margin:'0 auto 1rem auto'}}
                         onClick={this.saveEdit} value='add'>Save</button> 
                 </div>
             )
         }
         else {
             return (
-                <button className='btn btn-info' type='button' style={{marginBottom:'1rem', width:'20%'}}
+                <button className='btn btn-outline-light' type='button' style={{margin:'0 auto 1rem auto', width:'45%'}}
                     onClick={this.submitHandler} value='add'>Add</button> 
             )
         }
     }
 
     render() {
+        const { wellBarcode, poolBarcode } = this.state;
         return (
             <div className='wellConstructor'>
                 <div className='divTitle'>
@@ -137,20 +124,19 @@ class WellConstructor extends Component {
                     <div className='form-group row' style={{width:'inherit'}}>
                         <label htmlFor='wellBarcode' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Well Barcode</label>
                         <div className="col" style={{paddingRight:'0'}}>
-                            <input type='text' value={this.state.wellBarcode} className="form-control" id='wellBarcode' placeholder='Ex. WELL01' onChange={this.inputHandler}></input>
+                            <input type='text' value={wellBarcode} className="form-control" id='wellBarcode' placeholder='Ex. WELL01' onChange={this.inputHandler}/>
                         </div>
                     </div>
                     <div className='form-group row' style={{width:'inherit'}}>
                         <label htmlFor='poolBarcode' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Pool Barcode</label>
                         <div className="col" style={{paddingRight:'0'}}>
-                            <input type='text' value={this.state.poolBarcode} className="form-control" id='poolBarcode' placeholder='Ex. POOL01' onChange={this.inputHandler}/>
+                            <input type='text' value={poolBarcode} className="form-control" id='poolBarcode' placeholder='Ex. POOL01' onChange={this.inputHandler}/>
                         </div>
                     </div>
                     <div className='form-group row' style={{width:'inherit'}}>
                         <label htmlFor='dropdown' className="form-label" style={{minWidth:'20%', paddingTop:'5px'}}>Select Status</label>
                         <div className="col" style={{paddingRight:'0'}}>
                             <DropdownButton
-                                // variant='info'
                                 menuAlign="right"
                                 title={this.state.selected}
                                 id="dropdown"
@@ -162,8 +148,6 @@ class WellConstructor extends Component {
                         </div>
                     </div>
                     {this.editingRender()}
-                    {/* <button className='btn btn-info' type='button' style={{marginBottom:'1rem', width:'20%'}}
-                    onClick={this.submitHandler} value='add'>{this.isEditing}</button> */}
                 </form>
             </div>
         )
