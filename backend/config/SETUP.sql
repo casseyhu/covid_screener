@@ -80,6 +80,8 @@ INSERT INTO Employee VALUES ('104', 'sponge@gmail.com', 'f0e2e750791171b0391b682
 INSERT INTO Employee VALUES ('105', 'melanie@gmail.com', 'dfef5e53f9848472560a3e680a310d097ecc75919740646df38d31cab7aa07ac', 'melanie', 'cheeto');
 INSERT INTO Employee VALUES ('106', 'paul@gmail.com', '29ebbcb9b217a3b14aa29e320d91d23840e5ae3fbb62c0a4660ccc23863ed9b8', 'paul', 'fodor');
 INSERT INTO Employee VALUES ('107', 'kevin@gmail.com', '85f5e10431f69bc2a14046a13aabaefc660103b6de7a84f75c4b96181d03f0b5', 'kevin', 'mcd');
+INSERT INTO Employee VALUES ('108', 'steven@gmail.com', 'c7c084318b6f1bece6f74ffce1ea53596070345272dee8040037497c7d4cbffe', 'steven', 'skiena');
+INSERT INTO Employee VALUES ('109', 'aruna@gmail.com', 'e338b772ab3dd07c55a914950fed57da374128474df13db7408ef6320c42741f', 'aruna', 'balasub');
 
 
 -- LAB EMPLOYEES/COLLECTORS: (SAME PASSWORDS: admin)
@@ -96,16 +98,16 @@ INSERT INTO EmployeeTest VALUES ('002', '102', '2020-09-20 12:15:30', '200');
 INSERT INTO EmployeeTest VALUES ('003', '102', '2020-11-06 17:40:40', '201');
 INSERT INTO EmployeeTest VALUES ('004', '103', '2020-10-30 15:25:00', '201');
 INSERT INTO EmployeeTest VALUES ('005', '104', '2020-10-30 05:56:20', '201');
-INSERT INTO EmployeeTest VALUES ('006', '101', '2020-09-30 11:25:00', '202');
-INSERT INTO EmployeeTest VALUES ('007', '104', '2020-10-30 05:56:20', '202');
-INSERT INTO EmployeeTest VALUES ('008', '106', '2020-10-30 11:25:00', '203');
-INSERT INTO EmployeeTest VALUES ('009', '105', '2020-09-30 08:56:20', '203');
-INSERT INTO EmployeeTest VALUES ('010', '101', '2020-10-30 10:25:00', '204');
-INSERT INTO EmployeeTest VALUES ('011', '105', '2020-09-30 08:56:20', '204');
-INSERT INTO EmployeeTest VALUES ('012', '102', '2020-10-29 10:25:00', '202');
-INSERT INTO EmployeeTest VALUES ('013', '105', '2020-09-12 12:56:20', '201');
-INSERT INTO EmployeeTest VALUES ('014', '102', '2020-09-12 12:56:20', '203');
-INSERT INTO EmployeeTest VALUES ('015', '102', '2020-09-12 12:56:20', '204');
+-- INSERT INTO EmployeeTest VALUES ('006', '101', '2020-09-30 11:25:00', '202');
+-- INSERT INTO EmployeeTest VALUES ('007', '104', '2020-10-30 05:56:20', '202');
+-- INSERT INTO EmployeeTest VALUES ('008', '106', '2020-10-30 11:25:00', '203');
+-- INSERT INTO EmployeeTest VALUES ('009', '105', '2020-09-30 08:56:20', '203');
+-- INSERT INTO EmployeeTest VALUES ('010', '101', '2020-10-30 10:25:00', '204');
+-- INSERT INTO EmployeeTest VALUES ('011', '105', '2020-09-30 08:56:20', '204');
+-- INSERT INTO EmployeeTest VALUES ('012', '102', '2020-10-29 10:25:00', '202');
+-- INSERT INTO EmployeeTest VALUES ('013', '105', '2020-09-12 12:56:20', '201');
+-- INSERT INTO EmployeeTest VALUES ('014', '102', '2020-09-12 12:56:20', '203');
+-- INSERT INTO EmployeeTest VALUES ('015', '102', '2020-09-12 12:56:20', '204');
 
 -- POOLS
 INSERT INTO Pool VALUES ('POOL01');
@@ -123,18 +125,18 @@ INSERT INTO PoolMap VALUES ('002', 'POOL03');
 INSERT INTO PoolMap VALUES ('003', 'POOL03');
 INSERT INTO PoolMap VALUES ('004', 'POOL01');
 INSERT INTO PoolMap VALUES ('005', 'POOL01');
-INSERT INTO PoolMap VALUES ('006', 'POOL02');
-INSERT INTO PoolMap VALUES ('007', 'POOL03');
-INSERT INTO PoolMap VALUES ('008', 'POOL03');
-INSERT INTO PoolMap VALUES ('009', 'POOL01');
-INSERT INTO PoolMap VALUES ('010', 'POOL01');
-INSERT INTO PoolMap VALUES ('011', 'POOL02');
-INSERT INTO PoolMap VALUES ('012', 'POOL01');
-INSERT INTO PoolMap VALUES ('013', 'POOL02');
+-- INSERT INTO PoolMap VALUES ('006', 'POOL02');
+-- INSERT INTO PoolMap VALUES ('007', 'POOL03');
+-- INSERT INTO PoolMap VALUES ('008', 'POOL03');
+-- INSERT INTO PoolMap VALUES ('009', 'POOL01');
+-- INSERT INTO PoolMap VALUES ('010', 'POOL01');
+-- INSERT INTO PoolMap VALUES ('011', 'POOL02');
+-- INSERT INTO PoolMap VALUES ('012', 'POOL01');
+-- INSERT INTO PoolMap VALUES ('013', 'POOL02');
 
 -- A well contains a single pool
 INSERT INTO WellTesting VALUES ('POOL01', 'WELL01', '2020-11-01 00:00:00', '2020-11-01 23:00:00', 'negative');
-INSERT INTO WellTesting VALUES ('POOL02', 'WELL02', '2020-11-02 01:00:00', '2020-11-02 10:50:00', 'in progress');
+-- INSERT INTO WellTesting VALUES ('POOL02', 'WELL02', '2020-11-02 01:00:00', '2020-11-02 10:50:00', 'in progress');
 INSERT INTO WellTesting VALUES ('POOL03', 'WELL03', '2020-11-05 02:10:00', '2020-11-05 23:50:00', 'positive');
 
 
@@ -184,25 +186,4 @@ DELETE FROM WellTesting WHERE wellBarcode = 'WELL04';
 
 -- update well result
 UPDATE WellTesting SET testingEndTime = NOW(), result = 'negative' WHERE poolBarcode = 'POOL05' AND wellBarcode = 'WELL04';
-
-
-
-
-
-
-USE covidscreen;
-SELECT * FROM PoolMap;
-SELECT * FROM Pool;
-SELECT * FROM Well;
-SELECT * FROM WellTesting;
-SELECT * FROM EmployeeTest;
-
-
-INSERT INTO Pool VALUES ('POOL4');
-INSERT INTO PoolMap VALUES ('120', 'POOL4');
-
-
-SELECT * FROM Employee WHERE employeeID = "101";
-SELECT COUNT(*) FROM EmployeeTest WHERE EmployeeID = '101';
-
 

@@ -6,7 +6,7 @@ const LabLogin = (props) => {
     const redirectPath = (response) => {
         props.history.push({
             pathname: '/labtech/home',
-            labid: response.data[0].labId
+            labid: response.data[0].labID
         })
     }
 

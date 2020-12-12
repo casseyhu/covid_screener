@@ -27,7 +27,6 @@ class WellTesting extends Component {
     }
     
     editWell = (well) => {
-        console.log("Editing a well");
         this.setState({
             wellToEdit: well
         })
